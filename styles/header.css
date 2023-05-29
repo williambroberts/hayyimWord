@@ -182,6 +182,7 @@ width: 100%;
     box-shadow: var(--box-shadow-1);
 }
 .chapter-grid {
+    margin: 1rem 0rem;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto;
@@ -191,9 +192,12 @@ width: 100%;
     position: relative;
 }
 .book-item {
-    display: inline-block;
+    display: flex;
     width: 100%;
     box-sizing: border-box;
+    align-items: center;
+    flex-direction: column;
+    justify-content: flex-start;
     
 }
 
@@ -205,10 +209,17 @@ width: 100%;
 }
 .chapters-container {
     height: 0px;
-    display: inline-block;
+    display: flex;
     transition: var(--transition-1);
+    overflow: hidden;
+    width: 100%;
+    flex-wrap: wrap;
 }
 
 .chapters-container.open {
     height: min-content;
+}
+
+.chapter-item {
+    color: var(--white);
 }
