@@ -9,6 +9,7 @@ import { Inter } from 'next/font/google'
 import IsAUserLoggedInProvider from "@/contexts/authContext"
 import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
+import BookProvider from "@/contexts/books"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -22,9 +23,12 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
       <ProviderForTheme>
         <IsAUserLoggedInProvider>
-          <Header/>
+          <BookProvider>
+             <Header/>
             {children}
             <Footer/>
+          </BookProvider>
+         
         </IsAUserLoggedInProvider>
       </ProviderForTheme>
       

@@ -53,7 +53,7 @@ const SignUpForm = () => {
            <label  htmlFor='sign-up-password' className='auth-label'>Password</label>
             <input type='password' name="sign-up-password" className='auth-input'
              placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
-             <label  htmlFor='sign-up-confirm-password' className='auth-label'>Password</label>
+             <label  htmlFor='sign-up-confirm-password' className='auth-label'>Confirm password</label>
             <input type='password' name="sign-up-confirm-password" className='auth-input'
              placeholder='Password'  required onChange={(e)=>setConfirmPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
