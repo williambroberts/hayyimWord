@@ -1,0 +1,205 @@
+:root { 
+  --invert:0;
+    --bg-1:#FFFFFF; 
+    --bg-2:#fdfdfc;
+   --bg-3: #f5f5f5;
+    --bg-4:#90909040;
+    
+  
+    --t-1:#313547;
+    --t-2:#38393B;
+    --t-3:#898E96;
+    --t-4:#989EA6;
+    /* cedric */
+    /* --bg-1:#161616;
+    --bg-2:#1c1c1c;
+    --bg-3:#2b2b2b;
+    --bg-4:#282828;
+
+    --t-1:#ffffff;
+    --t-2:#f2f2f2;
+    --t-3:#7d8084;
+    --t-4:#7c7f82; */
+    --bg-b:#fffffff2;
+  }
+  [data-theme='dark'] {
+    --invert:0;
+
+/* cedric */
+    --bg-1:#161616;
+    --bg-2:#1c1c1c;
+    --bg-3:#2b2b2b;
+    --bg-4:#393939;
+
+    --t-1:#ffffff;
+    --t-2:#f2f2f2;
+    --t-3:#7d8084;
+    --t-4:#7c7f82;
+
+    
+    --bg-b:#1c1c1cf2;
+  } 
+  
+  *  {
+    padding:0px;
+    margin:0px;
+    --themecolor:#f7aa35;
+    --themecolor2:#802c6e;
+    --white:#ffffff;
+    --hover:#f8f8f8;
+    --purple:#c8bff7;
+    --purple-2:#D1A7E5;
+    --purple3:#802c6e;
+    --paleblue:#bfe3f7;
+    --skyblue:#2edbe3;
+    --lightskyblue:#2edae30f;
+    --orange:#f7d4bf;
+    --orange2:#f7aa35;
+    --pink:#f7bfee;
+    --palepink: #ffe8db;
+    --palegreen:#d9f7bf;
+    --verypalegreen:#d9f7bf50;
+    --coral:#f7bfbf;
+    --khaki:#f7f0bf;
+    --darkblue:#bacfff;
+    --seagreen:#baeed2;
+    --css:#3863d9;
+    scroll-behavior: smooth;
+    --scrollbar-size: 8px;
+    --darkgrey:#6d7175;
+    --darkgreen:#286d1d;
+    --sunset:#ebaf26;
+    --red:#ff7842; 
+    --verypalered: #ff78424b;
+    --red-2:#dc2626;
+   --yellow:#ffd908;
+   --yellow2:#FFF36D;
+   --verypaleyellow2:#fff36d44;
+    --bg-dt:#1c1c1cf2;
+    --frenchred:#f0695f;
+   --navy:#0C2365;
+   --grid:rgba(215, 225, 242, 0.234);
+   --grid2:rgba(255, 42, 42, 0.098);
+    --blue:#2563eb;
+    --blue2:#0066cc;
+   --neongreen:#08ffbd; 
+   --verypalepink:#fffdfd;
+    --leetcodeorange:#d16c06;
+    --leetcodeorange2:#ffa116;
+      --green:#00a33c;
+      --box-shadow-1:0px 2px 3px 0px rgba(0,0,0,0.1);
+      --box-shadow-2:0 4px 4px rgba(0,0,0,0.1);
+      --box-shadow-3:1.95px 1.95px 2.6px rgba(0, 0, 0, 0.15);
+      --box-shadow-4: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      --transition-1:all 0.25s ease;
+      --transition-2:all 0.5s ease;
+    
+     --one:1;
+     --zero:0;
+  
+     --scrollbarBG:#fdfdfc ;
+    --thumbBG:#f5f5f5;
+    --bg-radial:radial-gradient(ellipse at center,#192d38 0,#211f2f 100%);
+    --bg-blur:rgba(56, 57, 59,0.8);
+  
+  }
+  
+  
+  
+  html {
+    filter: invert(var(--invert));
+    background-color:var(--bg-1);
+    color:var(--text-primary); 
+    scroll-behavior: smooth;
+    /* font-family: Arial,sans-serif; */
+    width: 100vw;
+    min-height: 100dvh;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    
+    overflow-x: hidden;
+    overflow-y: scroll;
+  
+    --font-size-11:11px;
+    --font-size-12-14: clamp(0.75rem, 0.664rem + 0.4587vw, 0.875rem);
+    --font-size-14:14px;
+    --font-size-15:15px;
+    --font-size-16:clamp(0.9375rem, 0.9239rem + 0.0725vw, 1rem);
+     --font-size-20:clamp(1rem, 0.9457rem + 0.2899vw, 1.25rem);
+     --font-size-24:clamp(1.0625rem, 0.9674rem + 0.5072vw, 1.5rem);
+     --font-size-36:clamp(1.5rem, 1.3913rem + 0.5797vw, 2rem);
+     --font-size-48:clamp(2.5rem, 1.875rem + 2vw, 3rem);
+     --font-size-76:clamp(2.75rem, 2.3152rem + 2.3188vw, 4.75rem);
+  
+     --line-height-56:clamp(3rem, 2.375rem + 2vw, 3.5rem);
+  
+     --margin-24:clamp(1rem, 0.375rem + 2vw, 1.5rem);
+  
+  
+    
+    
+  }
+  
+
+  
+  body {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 100%;
+   flex: 1 1 auto;
+    background-color:var(--bg-1);
+    display: flex;
+    flex-direction: column;
+    padding:0px 0px;
+    position: relative;
+    color:var(--text-primary);
+    border: none;
+  }
+  
+  
+  
+  /* media for phone CHECK! */
+  @media (width < 736px) {
+    body {
+      overflow-x: hidden;
+    }
+  }
+  
+  ::-webkit-scrollbar {
+    width: 18px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbarBG);
+    /* border-radius: 10px; */
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: var(--thumbBG);
+    
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--bg-3);
+  }
+  
+  main {
+    
+    margin: 0px 0px 0px 0px;
+    position:relative;
+    top:0px;
+    flex:1 1 auto;
+    width: 100%;
+    background-color: var(--bg-1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 80px;
+    
+    
+    
+    
+  }

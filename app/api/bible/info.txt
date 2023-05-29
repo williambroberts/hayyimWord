@@ -1,0 +1,6 @@
+https://getbible.net/api
+https://www.rkeplin.com/the-holy-bible-open-source-rest-api/
+
+
+
+https://api.biblesupersearch.com/

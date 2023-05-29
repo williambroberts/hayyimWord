@@ -1,0 +1,26 @@
+.footer {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 1rem;
+    background-color: var(--bg-1);
+    border-top: 1px solid var(--bg-4);
+}
+.footer-nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+.footer-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-decoration: none;
+    color: var(--t-3);
+    font-size: var(--font-size-14);
+    position: relative;
+    gap: 0.25rem;
+}
