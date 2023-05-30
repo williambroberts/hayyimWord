@@ -1,5 +1,5 @@
 .display {
-
+    position: relative;
 }
 
 .text-paragraph {
@@ -7,4 +7,44 @@
     color: var(--t-1);
     font-size: var(--font-size-16);
     line-height: 1.5rem;
+}
+
+.turner-left {
+    display: flex;
+    position: fixed;
+    bottom: 4rem;
+    padding: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    color:var(--t-1);
+    aspect-ratio: 1/1;
+    width: 40px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-1);
+    background-color: var(--bg-1);
+    transition: var(--transition-1);
+}
+
+.turner-left:hover, .turner-right:hover {
+    background-color: var(--bg-2);
+}
+
+.turner-right {
+    display: flex;
+    position: sticky;
+    bottom: 4rem;
+    right: 0rem;
+    left: 100%;
+    padding: 0.25rem;
+    align-items: center;
+    justify-content: center;
+    cursor:pointer;
+    color:var(--t-1);
+    aspect-ratio: 1/1;
+    width: 40px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow-1);
+    background-color: var(--bg-1);
+    transition: var(--transition-1);
 }

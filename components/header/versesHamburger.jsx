@@ -11,7 +11,7 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
         startVerse,setStartVerse,theText,setTheText
         } = useContext(BookContext)
 
-    console.log(numberOfVerses,"num of veres in open chapter in open book")
+    //console.log(numberOfVerses,"num of veres in open chapter in open book")
     const versesList = Array(numberOfVerses).fill(0)
     const handleFetchChapter = async (index)=>{
         console.log("fetchign...",openBookIndex,openChapterIndex,index,"b,c,v")

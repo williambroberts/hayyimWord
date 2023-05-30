@@ -3,7 +3,7 @@ import React,{useState,useContext} from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import { BookContext } from '@/contexts/books';
 const ChaptersHamburger = ({item}) => {
-    console.log(item,item?.id,item?.name,"this is open book chapters list")
+   // console.log(item,item?.id,item?.name,"this is open book chapters list")
     const chaptersList=Array(item?.chapters).fill(0)
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,
