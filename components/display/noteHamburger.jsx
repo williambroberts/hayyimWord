@@ -23,7 +23,11 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
         setIsNote(false)
         setIsHighlight(false)
     }
-
+    useEffect(()=>{
+        if (!isNote) {
+            setIsHighlight(false)
+        }
+    },[isNote])
     const handleHighlight =(color)=>{
         setColor(color)
         setUpdateHighlight((prev)=>!prev)
@@ -36,7 +40,7 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
             }
             const userHighlightRef = doc(firestore, 'notes', user?.uid);
             try {
-                await updateDoc(userHighlightRef,{ "favourites": arrayUnion({color:pk})})
+                await updateDoc(userHighlightRef,{ "favourites": arrayUnion({pk:pk,color:color})})
                 console.log("added highlight ",color)
                     
                 }catch (err){
