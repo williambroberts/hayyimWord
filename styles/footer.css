@@ -3,7 +3,7 @@
     align-items: center;
     width: 100%;
     box-sizing: border-box;
-    padding: 1rem;
+    padding: 0.5rem;
     background-color: var(--bg-1);
     border-top: 1px solid var(--bg-4);
 }

@@ -32,7 +32,7 @@ const SignUpForm = () => {
             console.log(result)
             try {
                 setDoc(doc(firestore, 'notes', result.user.uid), {
-                    notes: [],favourites: {"orange":[],"yellow":[],"green":[],"blue":[],"purple":[]},
+                    notes: [],favourites: {"red":[],"orange":[],"yellow":[],"green":[],"blue":[],"purple":[]},
                   });
                }catch (err){
                 console.log(err,"err")

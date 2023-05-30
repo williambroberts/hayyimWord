@@ -9,7 +9,7 @@ const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     const [isNote,setIsNote]=useState(false)
-    
+    const [pk,setPk]=useState(undefined)
     const [clickedVerse,setClickedVerse]=useState(-1)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
         openChapterIndex,setOpenChapterIndex,globalFontSize,
@@ -83,12 +83,16 @@ const Display = () => {
     }
     
     const handleClick = (index) =>{
+      console.log(theText[index].pk,index,", pk, index")
       if (index===clickedVerse){
         setClickedVerse(-1)
+        setIsNote(false)
       }else{
         setClickedVerse(index)
+        setIsNote(true)
+        setPk(theText[index].pk)
       }
-      setIsNote((prev)=>!prev)
+     
     }
     
   return (
@@ -113,9 +117,9 @@ const Display = () => {
     
     
     
-    <div className={`note-blur ${isNote? "open":""}`}>
-    </div>
-    <NoteHamburger isNote={isNote} setIsNote={setIsNote}/>
+    {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
+    </div> */}
+    <NoteHamburger isNote={isNote} setIsNote={setIsNote} pk={pk}/>
     </div>
   )
 }

@@ -10,6 +10,7 @@ import IsAUserLoggedInProvider from "@/contexts/authContext"
 import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
 import BookProvider from "@/contexts/books"
+import DataProvider from "@/contexts/dataContext"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -23,12 +24,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
       <ProviderForTheme>
         <IsAUserLoggedInProvider>
+          <DataProvider>
           <BookProvider>
              <Header/>
             {children}
             <Footer/>
           </BookProvider>
-         
+          </DataProvider>
         </IsAUserLoggedInProvider>
       </ProviderForTheme>
       

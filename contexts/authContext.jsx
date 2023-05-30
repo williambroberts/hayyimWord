@@ -12,7 +12,7 @@ const auth = getAuth(firebase_app)
 const IsAUserLoggedInProvider = ({children}) => {
     const [user,setUser]=useState(null)
     const [isLoading,setisLoading]=useState(true)
-    const [userData,setuserData]=useState()
+   
     useEffect(()=>{
         const isUser = onAuthStateChanged(auth, (person)=>{
             if (person){
@@ -29,24 +29,11 @@ const IsAUserLoggedInProvider = ({children}) => {
          return ()=> isUser()
     },[])
 
-    useEffect(()=>{
-        if (user!==null){
-            try{
-            const Snapshotoftheusersdata = onSnapshot(doc(firestore, "notes", `${user?.uid}`), (doc) => {
-                        setuserData(doc.data())
-                    console.log(doc.data())
-                    })
-        }catch(err){
-            console.log(err)
-        }
-        }
-        
-        
-    },[user?.email])
+    
 
 
   return (
-   <IsAUserLoggedInContext.Provider value={{user,setUser,userData}}>
+   <IsAUserLoggedInContext.Provider value={{user,setUser}}>
         {isLoading? <span>Loading...</span>: children }
    </IsAUserLoggedInContext.Provider>
   )
