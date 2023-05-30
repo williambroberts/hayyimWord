@@ -7,6 +7,7 @@ import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import Hamburger from './hamburger'
 import Search from './search'
 import { BookContext } from '@/contexts/books'
+import IconMagnify from '../icons/action/mag'
 const Header = () => {
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,
@@ -34,7 +35,7 @@ const Header = () => {
     <span className='header-book' onClick={()=>handleOpenToChapter()}
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> 
     <span className='header-theme'><ThemeButton/></span>
-    <span className='header-search' onClick={()=>setIsSearch((prev)=>true)}>S</span>
+    <span className='header-search' onClick={()=>setIsSearch((prev)=>true)}><IconMagnify/></span>
     </nav>
     <div className={`hamburger-blur ${isHamburger? 'open':''} ${isSearch? "open":""}`} onClick={()=>handleMenu()}></div>
     

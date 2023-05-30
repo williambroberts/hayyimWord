@@ -5,7 +5,7 @@ import { BookContext } from '@/contexts/books';
 import { v4 as uuidv4 } from 'uuid';
 const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
     const {setOpenBookIndex,openBookIndex,
-        openChapterIndex,setOpenChapterIndex,
+        openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,
         isChaptersMenuOpen,setIsChaptersMenuOpen,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle
@@ -14,7 +14,7 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
     //console.log(numberOfVerses,"num of veres in open chapter in open book")
     const versesList = Array(numberOfVerses).fill(0)
     const handleFetchChapter = async (index)=>{
-        console.log("fetchign...",openBookIndex,openChapterIndex,index,"b,c,v")
+        //console.log("fetchign...",openBookIndex,openChapterIndex,index,"b,c,v")
         const data = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
         setStartVerse(index)
         setIsChaptersMenuOpen(false)
@@ -22,6 +22,7 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
         setIsHamburger(false)
         setTheText(data)
         setDisplayTitle([openBookIndex,openChapterIndex])
+        setScrollChangeNeeded((prev)=>!prev)
         
     }
     const highlightStyles ={

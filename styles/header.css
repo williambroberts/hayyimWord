@@ -36,7 +36,8 @@
     display: flex;
     color: var(--theme);
     font-weight: 400;
-    font-size: var(--font-size-16);
+    font-size: var(--font-size-24);
+    align-items: center;
 }
 .hamburger {
     --hamburger-width:320px;
@@ -84,6 +85,12 @@
 }
 .header-search {
     cursor: pointer;
+    color: var(--theme);
+    font-weight: 600;
+    font-size: var(--font-size-24);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .search {
     position: absolute;
@@ -108,6 +115,15 @@
 .search.open {
     transform: translate(0%,0%);
 }
+.search-back {
+    font-size: var(--font-size-16);
+    color: var(--t-3);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
 .search-form {
     position: sticky;
     top: 0;
@@ -119,6 +135,24 @@
     border-bottom: 1px solid var(--bg-4);
     width: 320px;
     padding: 1rem;
+    align-items: center;
+    gap: 1rem;
+}
+input[type="text"].search-input {
+    color:var(--t-2);
+    padding: 4px 6px;
+    font-size: var(--font-size-16);
+    border: none;
+    outline: none;
+    background-color: var(--bg-1);
+}
+.search-button {
+    color: var(--t-1);
+    font-size: var(--font-size-24);
+    font-weight: 600;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
 }
 .search-results {
     margin-top: 0px;
@@ -210,11 +244,13 @@ width: 100%;
 .chapters-new, .chapters-old {
     width:auto;
     height: min-content;
-   
+    margin: 0.5rem;
     display: flex;
     align-items: center;
     flex-wrap:wrap;
     justify-content: flex-start;
+    width: 300px;
+    background-color: var(--bg-1);
 }
 .chapters-new > div:nth-child(even), .chapters-old > div:nth-child(even){
     background-color: var(--bg-2);

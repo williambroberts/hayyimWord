@@ -6,7 +6,7 @@ import { BookContext } from '@/contexts/books'
 const SearchResultItem = ({item,setIsSearch}) => {
     const {setOpenBookIndex,openBookIndex,
       openChapterIndex,setOpenChapterIndex,
-      isChaptersMenuOpen,setIsChaptersMenuOpen,
+      isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,
       isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
       startVerse,setStartVerse,theText,setTheText
       } = useContext(BookContext)
@@ -41,6 +41,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
         setOpenChapterIndex(item.chapter-1)
         const data = await getChapter(bollsTranslation,parseInt(item.book),parseInt(item.chapter))
         setTheText(data)
+        setScrollChangeNeeded((prev)=>!prev)
     }
   return (
     <div className='search-result-item' onClick={()=>handleGoto()}>

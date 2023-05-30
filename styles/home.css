@@ -9,7 +9,16 @@
     font-size: var(--font-size-16);
     line-height: 1.5rem;
 }
-
+.text-paragraph-verse-number {
+    color: var(--blue2);
+    font-weight: 500;
+    font-size: var(--font-size-16);
+    white-space: pre-wrap;
+}
+.text-paragraph-verse-text {
+    color: var(--t-1);
+    font-weight: 400;
+}
 .turner-left {
     display: flex;
     position: fixed;

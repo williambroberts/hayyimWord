@@ -3,6 +3,8 @@ import { SearchBible } from '@/app/api/bible/searchBible'
 import React, { useState,useEffect } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import SearchResultItem from './searchResult';
+import IconArrowLeft from '../icons/navigation/arrowLeft';
+import IconMagnify from '../icons/action/mag';
 const Search = ({setIsSearch,isSearch}) => {
     const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
@@ -52,14 +54,16 @@ const Search = ({setIsSearch,isSearch}) => {
   return (
     <div className={`search ${isSearch? "open":""}`}>
 
-        <form className='search-form' onClick={handleSubmit}>
+        <form className='search-form' >
+          <span className='search-back'onClick={()=>setIsSearch(false)}><IconArrowLeft/></span>
       <input type="text"
       placeholder='Search...'
       value={searchInput}
       name='search-input'
+      className='search-input'
       onChange={(e)=>setSearchInput(e.target.value)}
       />
-    <button type="submit">S</button>
+    <button type="submit" onClick={(e)=>handleSubmit(e)} className='search-button'><IconMagnify/></button>
     
     </form>
     <div className='search-results'>

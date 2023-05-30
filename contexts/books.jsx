@@ -16,8 +16,9 @@ const BookProvider = ({children}) => {
     const [isSettings,setIsSettings]=useState(false)
    const [displayTitle,setDisplayTitle]=useState([0,0])
    const [globalFontSize,setGlobalFontSize]=useState(16)
+   const [scrollChangeNeeded,setScrollChangeNeeded]=useState(false)
   return (
-   <BookContext.Provider value={{setOpenBookIndex,openBookIndex,
+   <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
     openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,
     isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,

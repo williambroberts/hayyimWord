@@ -11,7 +11,7 @@ const ChaptersHamburger = ({item}) => {
         isVersesMenuOpen,setIsVersesMenuOpen, startVerse,setStartVerse,
         } = useContext(BookContext)
     const handleVerseMenu = (num) =>{
-        console.log("opening chapter ",num)
+        //console.log("opening chapter ",num)
         setIsVersesMenuOpen(true)
         setOpenChapterIndex(num)
     }

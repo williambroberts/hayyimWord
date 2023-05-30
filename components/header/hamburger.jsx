@@ -25,7 +25,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
     useEffect(()=>{
  const versesObject = chaptersAndVerses[openBookIndex].chapter_verses
       const numOfVerses = Object.entries(versesObject).filter(([k,v])=> parseInt(k)===openChapterIndex+1)[0][1]
-      console.log("num of veres in new open chapter",numOfVerses)
+      //console.log("num of veres in new open chapter",numOfVerses)
       SetNumOfVersesInOpenChapter(numOfVerses)
     },[openChapterIndex])
  

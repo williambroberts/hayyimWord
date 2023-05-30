@@ -13,7 +13,7 @@ const BookItem = ({item}) => {
   
   const handleBook = (index) =>{
     setIsChaptersMenuOpen((prev)=>true)
-    console.log("open book index",index)
+   // console.log("open book index",index)
     setOpenBookIndex((prev)=>index)
   }
   
