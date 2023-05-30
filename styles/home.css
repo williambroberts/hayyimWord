@@ -58,3 +58,8 @@
     background-color: var(--bg-1);
     transition: var(--transition-1);
 }
+
+.note-container {
+    display: flex;
+    
+}

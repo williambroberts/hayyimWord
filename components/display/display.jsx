@@ -4,10 +4,13 @@ import { BookContext } from '@/contexts/books'
 import React,{useContext,useEffect,useState} from 'react'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { v4 as uuidv4 } from 'uuid';
+import NoteHamburger from './noteHamburger'
 const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     const [isNote,setIsNote]=useState(false)
+    
+    const [clickedVerse,setClickedVerse]=useState(-1)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
         openChapterIndex,setOpenChapterIndex,globalFontSize,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -51,6 +54,9 @@ const Display = () => {
         
     }
     const handleLeft = async ()=>{
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
       //console.log(openBookIndex,openChapterIndex,"old")
       if (openChapterIndex===0){
         setOpenBookIndex((prev)=>{return Math.max(0,openBookIndex-1)})
@@ -63,6 +69,7 @@ const Display = () => {
     }
 
     const handleRight = ()=>{
+      window.scrollTo({ top: 0, behavior: 'smooth' });
      // console.log(openBookIndex,openChapterIndex,"old")
       if (openChapterIndex===chaptersAndVerses[openBookIndex].chapters-1){
         setOpenBookIndex((prev)=>Math.min(prev+1,65))
@@ -74,19 +81,25 @@ const Display = () => {
       //console.log(openBookIndex,openChapterIndex,"new") 
       setReFetch((prev)=>!prev)
     }
-
-    const handleClick = () =>{
-
+    
+    const handleClick = (index) =>{
+      if (index===clickedVerse){
+        setClickedVerse(-1)
+      }else{
+        setClickedVerse(index)
+      }
+      setIsNote((prev)=>!prev)
     }
+    
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`}}
+        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse} </span>
       
-      <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick()}> 
+      <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick(index)}> 
       {(item.text.replace(/<br\s*\/?>/gi, ". "))}</span>
        
         </span>
@@ -100,9 +113,9 @@ const Display = () => {
     
     
     
-    <div className='note-container'>
-    
+    <div className={`note-blur ${isNote? "open":""}`}>
     </div>
+    <NoteHamburger isNote={isNote} setIsNote={setIsNote}/>
     </div>
   )
 }
