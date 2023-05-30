@@ -15,13 +15,14 @@ export async function getChapter(translation,book,chapter) {
     };
       console.log("here fetching chapter")
     console.log(url)
-    //  const res = await fetch(url,options);
+     const res = await fetch(url,options);
     
-    //  if (!res.ok) {
+     if (!res.ok) {
        
-    //    throw new Error('Failed to fetch data');
-    //  }
+       throw new Error('Failed to fetch data');
+     }
      
-    //  return res.json();
+     return res.json();
+   
    }
  

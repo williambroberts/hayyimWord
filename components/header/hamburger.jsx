@@ -63,7 +63,8 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
 
       <div className={`chapters-menu-blur ${isVersesMenuOpen? "open": ""}`} onClick={()=>handleVersesMenu()} 
       ></div>
-      <VersesHamburger numberOfVerses={numOfVersesInOpenChapter}/>
+      <VersesHamburger setIsHamburger={setIsHamburger}
+       numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/>
     </div>
   )
 }

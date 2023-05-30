@@ -1,9 +1,15 @@
 "use client"
-import React, {useEffect,useState} from 'react'
-
+import React, {useContext, useEffect,useState} from 'react'
+import { getChapter } from '@/app/api/bible/getChapter'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
+import { BookContext } from '@/contexts/books'
 const SearchResultItem = ({item,setIsSearch}) => {
-
+    const {setOpenBookIndex,openBookIndex,
+      openChapterIndex,setOpenChapterIndex,
+      isChaptersMenuOpen,setIsChaptersMenuOpen,
+      isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
+      startVerse,setStartVerse,theText,setTheText
+      } = useContext(BookContext)
     const book = chaptersAndVerses.filter((obj)=> obj.id===item.book)[0]
     const [formattedStr, setFormattedStr] = useState('');
     const [isLoading,setisLoading]=useState(true)
@@ -27,9 +33,14 @@ const SearchResultItem = ({item,setIsSearch}) => {
     if (isLoading){
       return null
     }
-    const handleGoto = ()=>{
+    const handleGoto =async ()=>{
         setIsSearch((prev)=>false)
-        // search api boollls
+        console.log(book,"here will",item)
+        setOpenBookIndex(item.book-1)
+        setStartVerse(item.verse)
+        setOpenChapterIndex(item.chapter-1)
+        const data = await getChapter(bollsTranslation,parseInt(item.book),parseInt(item.chapter))
+        setTheText(data)
     }
   return (
     <div className='search-result-item' onClick={()=>handleGoto()}>

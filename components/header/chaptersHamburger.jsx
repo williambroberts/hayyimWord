@@ -17,6 +17,7 @@ const ChaptersHamburger = ({item}) => {
     }
   return (
     <div className={`chapters-hamburger ${isChaptersMenuOpen? "open":""}`}>
+        <div className='chapters-hamburger-title'>{item.name}</div>
         {chaptersList.map((item,index)=>(<span className='chapter-item' onClick={()=>handleVerseMenu(parseInt(index))}
         key={uuidv4()}>{index+1}</span>))}
     </div>

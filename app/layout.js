@@ -1,6 +1,6 @@
 import ProviderForTheme from "@/components/theme/themeProvider"
 import "../styles/globals.css"
-
+import "../styles/home.css"
 import "../styles/auth.css"
 import "../styles/misc.css"
 import "../styles/footer.css"
