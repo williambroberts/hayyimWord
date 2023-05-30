@@ -8,9 +8,9 @@ const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     const {setOpenBookIndex,openBookIndex,
-        openChapterIndex,setOpenChapterIndex,
+        openChapterIndex,setOpenChapterIndex,globalFontSize,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
-        isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText
+        isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
 
     // useEffect(()=>{
@@ -28,6 +28,7 @@ const Display = () => {
         const text = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
         setTheText(text)
         console.log(text,"fetched the text another time")
+        setDisplayTitle([openBookIndex,openChapterIndex])
    }
    fetchAnotherTime()
     },[reFetch])
@@ -44,6 +45,7 @@ const Display = () => {
       //console.log(openBookIndex,openChapterIndex,"old")
       if (openChapterIndex===0){
         setOpenBookIndex((prev)=>{return Math.max(0,openBookIndex-1)})
+        
       }else{
         setOpenChapterIndex((prev)=>{return prev-1})
       }
@@ -56,6 +58,7 @@ const Display = () => {
       if (openChapterIndex===chaptersAndVerses[openBookIndex].chapters-1){
         setOpenBookIndex((prev)=>Math.min(prev+1,65))
         setOpenChapterIndex(0)
+        
       }else{
         setOpenChapterIndex((prev)=>prev+1)
       }
@@ -64,11 +67,11 @@ const Display = () => {
     }
   return (
     <div className='display'>
-      <span className='text-title'>{chaptersAndVerses[openBookIndex].name} {openChapterIndex+1}</span>
-        <p className='text-paragraph'>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>RemoveHighlight()}
+      <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
+        <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
+        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`}}
         > 
-      <span className='text-paragraph-verse-number'>{item.verse}</span>
+      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}</span>
       <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}> 
       {(item.text.replace(/<br\s*\/?>/gi, ". "))}</span>
        

@@ -8,17 +8,19 @@ const ChaptersHamburger = ({item}) => {
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,
         isChaptersMenuOpen,setIsChaptersMenuOpen,
-        isVersesMenuOpen,setIsVersesMenuOpen,
+        isVersesMenuOpen,setIsVersesMenuOpen, startVerse,setStartVerse,
         } = useContext(BookContext)
     const handleVerseMenu = (num) =>{
         console.log("opening chapter ",num)
         setIsVersesMenuOpen(true)
         setOpenChapterIndex(num)
     }
+    
   return (
     <div className={`chapters-hamburger ${isChaptersMenuOpen? "open":""}`}>
         <div className='chapters-hamburger-title'>{item.name}</div>
-        {chaptersList.map((item,index)=>(<span className='chapter-item' onClick={()=>handleVerseMenu(parseInt(index))}
+        {chaptersList.map((item,index)=>(<span className='chapter-item' 
+        onClick={()=>handleVerseMenu(parseInt(index))}
         key={uuidv4()}>{index+1}</span>))}
     </div>
   )

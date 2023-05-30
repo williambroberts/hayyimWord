@@ -8,7 +8,7 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
         openChapterIndex,setOpenChapterIndex,
         isChaptersMenuOpen,setIsChaptersMenuOpen,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
-        startVerse,setStartVerse,theText,setTheText
+        startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
 
     //console.log(numberOfVerses,"num of veres in open chapter in open book")
@@ -21,12 +21,17 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
         setIsVersesMenuOpen(false)
         setIsHamburger(false)
         setTheText(data)
+        setDisplayTitle([openBookIndex,openChapterIndex])
         
+    }
+    const highlightStyles ={
+      color: "red",
     }
   return (  
     <div className={`chapters-hamburger ${isVersesMenuOpen? "open": ""}`}>
         <span className='chapters-hamburger-title'>{book.name} Chapter: {openChapterIndex+1} </span>
- {versesList.map((item,index)=>(<span className='chapter-item' onClick={()=>handleFetchChapter(parseInt(index)+1)}
+ {versesList.map((item,index)=>(<span className='chapter-item' style={index+1===startVerse && book.id===openBookIndex+1? {...highlightStyles}:{}}
+ onClick={()=>handleFetchChapter(parseInt(index)+1)}
         key={uuidv4()}>{index+1}</span>))}
     </div>
   )

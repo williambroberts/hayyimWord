@@ -1,5 +1,6 @@
 .display {
     position: relative;
+    max-width: 680px;
 }
 
 .text-paragraph {

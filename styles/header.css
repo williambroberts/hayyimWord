@@ -34,7 +34,7 @@
 .header-menu {
     cursor: pointer;
     display: flex;
-    color: var(--t-1);
+    color: var(--theme);
     font-weight: 400;
     font-size: var(--font-size-16);
 }
@@ -73,7 +73,15 @@
     font-size: var(--font-size-16);
     text-decoration: none;
 }
-
+.header-book {
+    color: var(--theme);
+    font-size: var(--font-size-16);
+    font-weight: 500;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%,0);
+    cursor: pointer;
+}
 .header-search {
     cursor: pointer;
 }
@@ -184,8 +192,9 @@ width: 100%;
     z-index: 1;
     background-color: var(--navy);
     box-shadow: var(--box-shadow-1);
-    padding: 0rem var(--hamburger-x-padding);
+    padding: 0.5rem var(--hamburger-x-padding);
     box-sizing: border-box;
+    margin-bottom: 1rem;
 }
 .chapter-grid {
     margin: 1rem 0rem;
@@ -279,4 +288,144 @@ width: 100%;
 
 .chapters-hamburger-title {
     width: 100%;
+}
+
+.settings-name {
+    color: var(--white);
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.settings {
+    z-index: 1;
+    display: flex;
+    background-color: var(--bg-1);
+    width: var(--hamburger-width);
+    height: 100dvh;
+    position: absolute;
+    transform: translate(-100%,0);
+    transition: var(--transition-1);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.settings.open {
+    transform: translate(0%);
+}
+.settings-header {
+    display: flex;
+    position: fixed;
+    width: var(--hamburger-width);
+    height: 80px;
+    background-color: var(--bg-1);
+    box-sizing: border-box;
+    padding: 1rem 2rem;
+    z-index: 1;
+    border-bottom: 1px solid var(--bg-4);
+    box-shadow: var(--box-shadow-1);
+    align-items: center;
+    
+}
+
+.settings-back {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--t-3);
+    font-size: var(--font-size-16);
+    font-weight: 600;
+}
+.settings-title {
+    transform: translate(-50%,0);
+    position: absolute;
+    left: 50%;
+color: var(--theme);
+font-weight: 500;
+font-size: var(--font-size-16);
+}
+.settings-header ~ p{
+    box-shadow: var(--box-shadow-1);
+    color: var(--t-1);
+    font-weight: 400;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    margin-top: 88px;
+    border-radius: 8px;
+    height: 160px;
+    overflow: hidden;
+}
+.font-size-container {
+    box-sizing: border-box;
+    display: flex;
+    padding: 0.5rem;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--bg-4);
+    color: var(--t-1);
+}
+.font-size-input {
+    cursor: pointer;
+    width:100px;
+
+}
+.font-size-input-name, .font-size-span {
+    
+    color: var(--t-1);
+    font-size: var(--font-size-14);
+
+}
+.font-size-mag {
+    color: var(--theme);
+    font-size: var(--font-size-14);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+.color-theme-container {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+    justify-content:flex-start;
+    flex-direction: column;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    gap: 0.5rem;
+    color: var(--t-1);
+    border-bottom: 1px solid var(--bg-4);
+}
+.theme-button-light {
+    width:50px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--blue2);
+    color: var(--bg-dt);
+    background-color: var(--white);
+    font-size: var(--font-size-14);
+    cursor: pointer;
+}
+.theme-button-dark{
+    width:50px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--bg-4);
+    color: var(--white);
+    background-color: var(--bg-dt);
+    font-size: var(--font-size-14);
+    cursor: pointer;
+}
+.theme-button-light.checked-light {
+    outline: 3px solid var(--paleblue);
+}
+.theme-button-dark.checked-dark {
+    outline: 3px solid var(--theme);
 }

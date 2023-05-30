@@ -10,14 +10,16 @@ import BookItem from './BookItem';
 import { BookContext } from '@/contexts/books';
 import ChaptersHamburger from './chaptersHamburger';
 import VersesHamburger from './versesHamburger';
+import SettingsHamburger from './settingsHamburger';
 
 const Hamburger = ({setIsHamburger,isHamburger}) => {
   const {user} = useContext(IsAUserLoggedInContext)
   const [numOfVersesInOpenChapter,SetNumOfVersesInOpenChapter]=useState(1)
+ 
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,
     isChaptersMenuOpen,setIsChaptersMenuOpen,
-    isVersesMenuOpen,setIsVersesMenuOpen,
+    isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
     } = useContext(BookContext)
 
     useEffect(()=>{
@@ -46,7 +48,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
        {user!==null? <HamburgerItem link={"/favourites"} text={"Favourites"} icon={""} setIsHamburger={setIsHamburger}/>
         :<HamburgerItem link={"/signup"} text={"Sign up"} icon={""} setIsHamburger={setIsHamburger}/> }
          
-          
+          <div className='settings-name' onClick={()=>setIsSettings(true)}>Settings</div>
         </div>
      
        <div className='chapters-old'>
@@ -65,6 +67,8 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
       ></div>
       <VersesHamburger setIsHamburger={setIsHamburger}
        numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/>
+
+       <SettingsHamburger isSettings={isSettings} setIsSettings={setIsSettings}/>
     </div>
   )
 }
