@@ -1,0 +1,7 @@
+.logout-button {
+    color: var(--white);
+    font-size: var(--font-size-16);
+    font-weight: inheret;
+    cursor: pointer;
+
+}   

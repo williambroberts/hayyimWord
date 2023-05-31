@@ -56,9 +56,13 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         
     }
     const highlightVerse2 =async ()=>{
-        //runtransaction   
+        //runtransaction  
+      
         if (user===null){
             console.log("no user, log in alert")
+            return
+        }
+        if (color===null){
             return
         }
         const useHighlightsRef = doc(firestore, 'notes', user?.uid);
@@ -92,7 +96,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message})})
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1})})
             console.log("added note ",message)
                 
             }catch (err){

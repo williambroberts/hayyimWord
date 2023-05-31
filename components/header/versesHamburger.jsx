@@ -3,7 +3,11 @@ import { getChapter } from '@/app/api/bible/getChapter';
 import React,{useContext,useEffect,useState} from 'react'
 import { BookContext } from '@/contexts/books';
 import { v4 as uuidv4 } from 'uuid';
+import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
+  const pathname=usePathname()
+  const router = useRouter()
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,
         isChaptersMenuOpen,setIsChaptersMenuOpen,
@@ -23,6 +27,10 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
         setTheText(data)
         setDisplayTitle([openBookIndex,openChapterIndex])
         setScrollChangeNeeded((prev)=>!prev)
+        console.log(pathname)
+        if (pathname!=="/"){
+          router.push("/")
+        }
         
     }
     const highlightStyles ={

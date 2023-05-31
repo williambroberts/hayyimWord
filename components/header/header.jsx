@@ -10,6 +10,7 @@ import { BookContext } from '@/contexts/books'
 import IconMagnify from '../icons/action/mag'
 const Header = () => {
   const pathname = usePathname()
+  console.log(pathname,"pathname")
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,
     isChaptersMenuOpen,setIsChaptersMenuOpen,
@@ -35,7 +36,7 @@ const Header = () => {
     <span className='header-menu' onClick={()=>setIsHamburger((prev)=>true)}>☰</span>  
 
    {pathname==="/"? <span className='header-book' onClick={()=>handleOpenToChapter()}
-    >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {`${pathname.slice(1,2).toUpperCase+pathname.slice(2).toLowerCase}`}</span>}
+    >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}
 
     <span className='header-theme'><ThemeButton/></span>
     <span className='header-search' onClick={()=>setIsSearch((prev)=>true)}><IconMagnify/></span>

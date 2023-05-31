@@ -1,4 +1,61 @@
 .highlight-item {
     display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
     flex-direction: column;
+    box-sizing: border-box;
+    width: 300px;
+    transition: var(--transition-1);
+    cursor: pointer;
+    padding: 0.5rem 0rem;
+    border-bottom: 1px solid var(--bg-4);
+}
+.highlight-item:hover {
+    background-color: var(--bg-2);
+}
+.page-flex {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-items: flex-start;
+    width: 100%;
+}
+.highlight-result-item-text {
+    height: 60px;
+    overflow-y: hidden;
+}
+.page-stats {
+    color: var(t-3);
+    font-size: var(--font-size-14);
+
+}
+
+.note-item{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 300px;
+    transition: var(--transition-1);
+    cursor: pointer;
+    padding: 0.5rem 0rem;
+    border-bottom: 1px solid var(--bg-4);
+}
+
+.note-item:hover{
+    background-color: var(--bg-2);
+}
+.note-title {
+    font-size: var(--font-size-16);
+    color: var(--t-1);
+    font-weight: 400;
+    display:flex;
+    align-items: center;
+    width: 100% ;
+}
+.note-item-text {
+    font-size: var(--font-size-14);
+    color: var(--t-1);
 }
