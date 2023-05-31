@@ -9,7 +9,7 @@ import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,updateDoc
 import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
-const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite}) => {
+const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite,text}) => {
     const [isHighlight,setIsHighlight]=useState(false)
    
     const [message,setMessage]=useState(null)
@@ -37,36 +37,63 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const handleHighlight =(color)=>{
         setColor(color)
         setUpdateHighlight((prev)=>!prev)
-    }
-    useEffect(()=>{
-        const highlightVerse = async()=>{
-            if (user===null){
-                console.log("no user, log in alert")
-                return
-            }
-            const userHighlightRef = doc(firestore, 'notes', user?.uid);
-            try {
-                await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color})})
-                console.log("added highlight ",color)
-                    
-                }catch (err){
-                console.log(err)
-                }
-         console.log(firebaseHighlights?.length,"fb highlights,",firebaseHighlights)       
-        }
-        highlightVerse()
-        
-    },[updateHighlight])
 
-    const handleSubmit =async ()=>{
+    }
+    const highlightVerse = async()=>{
+           
         if (user===null){
             console.log("no user, log in alert")
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
+            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1})})
+            console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text}`)
+                
+            }catch (err){
+            console.log(err)
+            }
+        
+    }
+    const highlightVerse2 =async ()=>{
+        //runtransaction   
+        if (user===null){
+            console.log("no user, log in alert")
+            return
+        }
+        const useHighlightsRef = doc(firestore, 'notes', user?.uid);
+     try {
+          await runTransaction(firestore, async (transaction) => {
+            const docSnapshot = await transaction.get(useHighlightsRef);
+           const highlights = [...docSnapshot.data().highlights]
+            console.log(highlights,"pre delete notes")
+         
+          let updatedHighlights = highlights.filter((item,index)=>item.pk!==pk)
+          updatedHighlights.push({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1})
+          transaction.update(useHighlightsRef, { highlights: updatedHighlights })
+          console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text}`)
+          })
+      
+          
+        } catch (error) {
+          console.error('Error rehighlightig/highlighting : ', error);
+        } 
+    }
+    useEffect(()=>{
+        highlightVerse2()
+       // highlightVerse()
+        
+    },[updateHighlight])
+
+    const handleSubmit =async ()=>{
+        if (user===null){   
+            console.log("no user, log in alert")
+            return
+        }
+        const userHighlightRef = doc(firestore, 'notes', user?.uid);
+        try {
             await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message})})
-            console.log("added highlight ",message)
+            console.log("added note ",message)
                 
             }catch (err){
             console.log(err)
@@ -76,7 +103,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     }
 
     useEffect(()=>{
-        console.log(pk,"changed pk")
+        //console.log(pk,"changed pk")
         if (user!==null) {
             let notesPks = []
             let firebaseMessages = []
@@ -90,13 +117,75 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             }else{
                 setMessage("")
             }
-            console.log(firebaseNotes,"hifrebase notes")
+            //console.log(firebaseNotes,"hifrebase notes")
             // set message to firebase note if there is one
         }else {
             setMessage("")
         }
     },[pk])
+    const handleDelete2 = async ()=>{
+        if (user===null){
+            console.log("no user, log in alert")
+            return
+        }
+        const userNoteRef = doc(firestore, 'notes', user?.uid);
+     try {
+          await runTransaction(firestore, async (transaction) => {
+            const docSnapshot = await transaction.get(userNoteRef);
+           const notes = [...docSnapshot.data().notes]
+            console.log(notes,"pre delete notes")
+         
+          let updatedNotes = notes.filter((item,index)=>item.pk!==pk)
+          transaction.update(userNoteRef, { notes: updatedNotes })
+           console.log("deleted that note",message) 
+          })
+      
+          
+        } catch (error) {
+          console.error('Error deleting note: ', error);
+        }
+        setIsWrite(false)
+        setMessage("")
+      }
 
+    const handleDelete = async ()=>{
+        if (user===null){
+            console.log("no user, log in alert")
+            return
+        }
+        const userHighlightRef = doc(firestore, 'notes', user?.uid);
+        try {
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:""})})
+            console.log("delted note ",message)
+                
+            }catch (err){
+            console.log(err)
+            }
+        setIsWrite(false)
+        setMessage("")
+    }
+    const handleDeleteHighlight =async ()=>{
+        if (user===null){
+            console.log("no user, log in alert")
+            return
+        }
+        const userNoteRef = doc(firestore, 'notes', user?.uid);
+     try {
+          await runTransaction(firestore, async (transaction) => {
+            const docSnapshot = await transaction.get(userNoteRef);
+           const highlights = [...docSnapshot.data().highlights]
+            console.log(highlights,"pre delete highlights")
+         
+          let updatedHighlights = highlights.filter((item,index)=>item.pk!==pk)
+          transaction.update(userNoteRef, { highlights: updatedHighlights })
+           console.log("deleted that highlight",pk,color) 
+          })
+      
+          
+        } catch (error) {
+          console.error('Error deleting highlight: ', error);
+        }
+    }
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
@@ -124,7 +213,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             <div className={`highlight-container ${isHighlight? "open":""}`}>
                 <span onClick={()=>setIsHighlight(false)} className='highlight-close'>❮</span>
                 <div className='highlight-colors'>
-                    <span className='highlight-none' onClick={()=>handleHighlight(null)}></span>
+                    <span className='highlight-none' onClick={()=>handleDeleteHighlight()}></span>
                     <span className='highlight-red' onClick={()=>handleHighlight("#ff78424b")}></span>
                     <span className='highlight-orange'onClick={()=>handleHighlight("#f7aa3572")}></span>
                     <span className='highlight-yellow'onClick={()=>handleHighlight("#FFF36D")}></span>
@@ -134,7 +223,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
                 </div>
             </div>
             <div className={`highlight-container ${isWrite? "open":""}`}>
-                <span className='note-span'>Delete</span>
+                <span className='note-span' onClick={()=>handleDelete2()}>Delete</span>
                 <span className='note-span' onClick={()=>setIsWrite(false)}>Cancel</span>
                 <span className='note-span' onClick={()=>handleSubmit()}>Save</span>
             </div>

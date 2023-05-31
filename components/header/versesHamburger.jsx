@@ -30,8 +30,8 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
     }
   return (  
     <div className={`chapters-hamburger ${isVersesMenuOpen? "open": ""}`}>
-        <span className='chapters-hamburger-title'>{book.name} Chapter: {openChapterIndex+1} </span>
- {versesList.map((item,index)=>(<span className='chapter-item' style={index+1===startVerse && book.id===openBookIndex+1? {...highlightStyles}:{}}
+        <span className='chapters-hamburger-title'>{book?.name} Chapter: {openChapterIndex+1} </span>
+ {versesList?.map((item,index)=>(<span className='chapter-item' style={index+1===startVerse && book?.id===openBookIndex+1? {...highlightStyles}:{}}
  onClick={()=>handleFetchChapter(parseInt(index)+1)}
         key={uuidv4()}>{index+1}</span>))}
     </div>

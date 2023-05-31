@@ -1,12 +1,14 @@
 export async function getChapter(translation,book,chapter) {
    
     console.log(book,chapter)
-    if (book===undefined){
-      book = 1;
+    if (book===undefined || book===NaN){
+      return 
     }
     if (chapter===undefined){
       chapter = 1
     }
+
+    console.log(book,chapter)
     const url = `https://bolls.life/get-text/${translation}/${book}/${chapter}/`;
     const options = {
       method: 'GET',

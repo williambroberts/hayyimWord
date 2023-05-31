@@ -167,7 +167,7 @@ const Display = () => {
         onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
-      {notePks.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:""}</span>
+      {notePks?.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
       <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick(index)}> 
       {(item.text.replace(/<br\s*\/?>/gi, ". "))}</span>
@@ -185,7 +185,7 @@ const Display = () => {
     
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
-    <NoteHamburger isWrite={isWrite} setIsWrite={setIsWrite}
+    <NoteHamburger isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
     isNote={isNote} setIsNote={setIsNote} pk={pk} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
     </div>
   )

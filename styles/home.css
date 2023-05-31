@@ -291,6 +291,8 @@
     display: inline;
     font-size: inherit;
     cursor: pointer;
+    white-space:pre-wrap;
+
     /* align-items: center;
     font-size:inherit; */
 }
