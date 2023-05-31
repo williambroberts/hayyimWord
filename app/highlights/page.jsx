@@ -2,7 +2,7 @@
 import React,{useContext,useEffect} from 'react'
 import { useRouter } from 'next/navigation'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
-const FavouritesPage = () => {
+const HighlightsPage = () => {
     const {user,setUser}=useContext(IsAUserLoggedInContext)
   const router=useRouter()
   useEffect(()=>{
@@ -20,4 +20,4 @@ const FavouritesPage = () => {
   )
 }
 
-export default FavouritesPage
+export default HighlightsPage

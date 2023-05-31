@@ -16,7 +16,7 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
-    const {firebaseFavs,setFirebaseFavs} = useContext(DataContext)
+    const {firebaseHighlights,setFirebaseHighlights} = useContext(DataContext)
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
     const handleClose = ()=>{
@@ -35,17 +35,18 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
     useEffect(()=>{
         const highlightVerse = async()=>{
             if (user===null){
-                console.log("no user")
+                console.log("no user, log in alert")
                 return
             }
             const userHighlightRef = doc(firestore, 'notes', user?.uid);
             try {
-                await updateDoc(userHighlightRef,{ "favourites": arrayUnion({pk:pk,color:color})})
+                await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color})})
                 console.log("added highlight ",color)
                     
                 }catch (err){
                 console.log(err)
                 }
+         console.log(firebaseHighlights?.length,"fb highlights,",firebaseHighlights)       
         }
         highlightVerse()
         
@@ -63,12 +64,12 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
                 <span onClick={()=>setIsHighlight(false)} className='highlight-close'>❮</span>
                 <div className='highlight-colors'>
                     <span className='highlight-none' onClick={()=>handleHighlight(null)}></span>
-                    <span className='highlight-red' onClick={()=>handleHighlight("red")}></span>
-                    <span className='highlight-orange'onClick={()=>handleHighlight("orange")}></span>
-                    <span className='highlight-yellow'onClick={()=>handleHighlight("yellow")}></span>
-                    <span className='highlight-green' onClick={()=>handleHighlight("green")}></span>
-                    <span className='highlight-blue' onClick={()=>handleHighlight("blue")}></span>
-                    <span className='highlight-purple'onClick={()=>handleHighlight("purple")}></span>
+                    <span className='highlight-red' onClick={()=>handleHighlight("#ff78424b")}></span>
+                    <span className='highlight-orange'onClick={()=>handleHighlight("#f7aa3572")}></span>
+                    <span className='highlight-yellow'onClick={()=>handleHighlight("#FFF36D")}></span>
+                    <span className='highlight-green' onClick={()=>handleHighlight("#abff32")}></span>
+                    <span className='highlight-blue' onClick={()=>handleHighlight("#2edae30f")}></span>
+                    <span className='highlight-purple'onClick={()=>handleHighlight("#c8bff7")}></span>
                 </div>
             </div>
             <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span>

@@ -1,17 +1,20 @@
 "use client"
 import React,{createContext,useContext,useEffect,useState} from 'react'
 import { IsAUserLoggedInContext } from './authContext'
+import { doc,onSnapshot } from 'firebase/firestore';
+import { firestore } from '@/firebase/firebaseConfig';
 export const  DataContext = createContext()
 const DataProvider = ({children}) => {
-    const [firebaseFavs,setFirebaseFavs]=useState(null)
+    const [firebaseHighlights,setfirebaseHighlights]=useState(null)
     const [firebaseNotes,setFirebaseNotes]=useState(null)
     const {user}=useContext(IsAUserLoggedInContext)
     useEffect(()=>{
+        console.log("try snapshot")
         if (user!==null){
             try{
-            const liveFavs = onSnapshot(doc(firestore, "favorites", `${user?.uid}`), (doc) => {
-                        setFirebaseFavs(doc.data()?.favourites)
-                  
+            const liveHighlights = onSnapshot(doc(firestore, "notes", `${user?.uid}`), (doc) => {
+                        setfirebaseHighlights(doc.data()?.highlights)
+                        console.log("doc.data()",doc.data())
                     })
         }catch(err){
             console.log(err)
@@ -29,7 +32,7 @@ const DataProvider = ({children}) => {
         
     },[user?.uid])
   return (
-    <DataContext.Provider value={{firebaseFavs,setFirebaseFavs,firebaseNotes,setFirebaseNotes}}>
+    <DataContext.Provider value={{firebaseHighlights,setfirebaseHighlights,firebaseNotes,setFirebaseNotes}}>
         {children}
     </DataContext.Provider>
   )

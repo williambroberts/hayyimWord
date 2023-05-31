@@ -5,34 +5,77 @@ import React,{useContext,useEffect,useState} from 'react'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { v4 as uuidv4 } from 'uuid';
 import NoteHamburger from './noteHamburger'
+import { DataContext } from '@/contexts/dataContext'
+import { IsAUserLoggedInContext } from '@/contexts/authContext'
 const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     const [isNote,setIsNote]=useState(false)
     const [pk,setPk]=useState(undefined)
     const [clickedVerse,setClickedVerse]=useState(-1)
+    const [highlights,setHighlights] = useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
         openChapterIndex,setOpenChapterIndex,globalFontSize,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
+        const {user}=useContext(IsAUserLoggedInContext)
+        const {firebaseHighlights,setFirebaseHighlights} = useContext(DataContext)
 
         useEffect(()=>{
-          console.log("scroll changed needed",startVerse)
+          //console.log("scroll changed needed",startVerse)
           const verseSpans = document.querySelectorAll('.text-paragraph-verse-number');
-          console.log(verseSpans)
+          //console.log(verseSpans)
           for (const span of verseSpans) {
-            console.log(span.textContent)
+           // console.log(span.textContent)
             if (span.textContent.includes(startVerse)) {
               const elemPosition = span.getBoundingClientRect()
               const elemPositionY = elemPosition.top + window.pageYOffset;
-              console.log(elemPosition,"elemPos",elemPositionY,"y")
+              //console.log(elemPosition,"elemPos",elemPositionY,"y")
               window.scrollTo({ top: elemPositionY-136, behavior: 'smooth' });
               break; 
             }
           }
       
         },[scrollChangeNeeded])
+
+        useEffect(()=>{
+          
+          
+          if (theText!==null && user!==null){
+            let firebasePks = []
+            let firebaseColors = []
+          if (firebaseHighlights?.length===0){
+            return
+          }
+          try {
+
+          
+            for (let item of firebaseHighlights){
+              firebasePks.push(item.pk)
+              firebaseColors.push(item.color)
+            }
+
+            const newHighlights =Array(theText.length).fill("white")
+            for (let i=0; i<theText.length; i++){
+              if (firebasePks.includes(theText[i].pk)){
+                let index = firebasePks.lastIndexOf(theText[i].pk)
+                newHighlights[i]=firebaseColors[index]
+              }
+            }
+            
+
+            setHighlights(newHighlights)
+            console.log("new highlight",newHighlights)
+          }catch(err){
+            console.log(err)
+          }
+        }
+
+         
+
+        },[firebaseHighlights])
+
 
     useEffect(()=>{
       const fetchAnotherTime = async ()=>{
@@ -99,7 +142,7 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":""}}
+        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse} </span>
       

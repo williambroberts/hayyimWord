@@ -182,6 +182,46 @@
     aspect-ratio: 1/1;
     border: 1px solid var(--white);
     border-radius: 4px;
-    background-color: var(--red);
+    background-color:var(--red);
+    cursor: pointer;
+}
+.highlight-orange {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    background-color:var(--orange2);
+    cursor: pointer;
+}
+.highlight-yellow {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    background-color: var(--yellow2);
+    cursor: pointer;
+}
+.highlight-green {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    background-color:var(--palegreen) ;
+    cursor: pointer;
+}
+.highlight-blue {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    background-color:var(--paleblue) ;
+    cursor: pointer;
+}
+.highlight-purple {
+    height: 100%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--white);
+    border-radius: 4px;
+    background-color:var(--purple);
     cursor: pointer;
 }
