@@ -38,10 +38,7 @@ const Display = () => {
           }
       
         },[scrollChangeNeeded])
-
-        useEffect(()=>{
-          
-          
+        const reHighlight = ()=>{
           if (theText!==null && user!==null){
             let firebasePks = []
             let firebaseColors = []
@@ -71,12 +68,14 @@ const Display = () => {
             console.log(err)
           }
         }
-
-         
-
+        }
+        useEffect(()=>{
+          reHighlight()
         },[firebaseHighlights])
 
-
+        useEffect(()=>{
+          reHighlight()
+        },[theText])
     useEffect(()=>{
       const fetchAnotherTime = async ()=>{
         
@@ -84,8 +83,10 @@ const Display = () => {
         setTheText(text)
         console.log(text,"fetched the text another time")
         setDisplayTitle([openBookIndex,openChapterIndex])
+         
    }
    fetchAnotherTime()
+  
     },[reFetch])
 
     const highlightedVerseStyles = {
