@@ -3,7 +3,11 @@ import React, {useContext, useEffect,useState} from 'react'
 import { getChapter } from '@/app/api/bible/getChapter'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { BookContext } from '@/contexts/books'
+import { useRouter } from 'next/navigation'
+import { usePathname } from 'next/navigation'
 const SearchResultItem = ({item,setIsSearch}) => {
+  const router = useRouter()
+  const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex,
       openChapterIndex,setOpenChapterIndex,
       isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,
@@ -42,6 +46,9 @@ const SearchResultItem = ({item,setIsSearch}) => {
         const data = await getChapter(bollsTranslation,parseInt(item.book),parseInt(item.chapter))
         setTheText(data)
         setScrollChangeNeeded((prev)=>!prev)
+        if (pathname!=="/"){
+          router.push("/")
+        }
     }
   return (
     <div className='search-result-item' onClick={()=>handleGoto()}>

@@ -24,6 +24,8 @@
 .highlight-result-item-text {
     height: 60px;
     overflow-y: hidden;
+    font-size: var(--font-size-14);
+    line-height: 1.25rem;
 }
 .page-stats {
     color: var(t-3);
@@ -53,9 +55,17 @@
     font-weight: 400;
     display:flex;
     align-items: center;
-    width: 100% ;
+    width: 100% ; 
+    gap: 0.25rem;
 }
 .note-item-text {
     font-size: var(--font-size-14);
     color: var(--t-1);
+}
+.highlight-indicator {
+    height:16px;
+    display: inline-block;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--bg-4);
+    border-radius: 50%;
 }
