@@ -56,11 +56,14 @@
       box-sizing: border-box;
       padding: 0rem 0.0rem;
       overflow-y: hidden;
-      --hamburger-x-padding:0.5rem;
+      --hamburger-x-padding:1rem;
       box-shadow: var(--box-shadow-1);
 
     }
-    
+ .hamburger-hr {
+    width: 300px;
+    color: var(--grey2);
+ }   
 .hamburger.open {
     transform: translate(0%,0%);
 }
@@ -76,6 +79,8 @@
     display: flex;
     align-items: center;
     gap: 0.25rem;
+    width: 100%;
+    box-sizing: border-box;
 }
  .hamburger-item-icon {
     font-size: var(--font-size-16);
@@ -90,6 +95,7 @@
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--grey2);
+    flex: 1 1 auto;
 }
 .hamburger-title {
     color:var(--grey2);
@@ -99,7 +105,8 @@
     border-bottom: 1px solid var(--);
     width: 100%;
     box-sizing: border-box;
-    text-align: left;
+    z-index: 0;
+    position: relative;
 }
 .header-book {
     color: var(--theme);
@@ -351,6 +358,8 @@ width: 100%;
 
 .chapters-hamburger-title {
     width: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .settings-name {
@@ -494,4 +503,36 @@ font-size: var(--font-size-16);
 }
 .theme-button-dark.checked-dark {
     outline: 3px solid var(--theme);
+}
+
+.close-menu {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    color: var(--theme);
+    font-size: var(--font-size-16);
+    cursor: pointer;
+}
+.translation-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+    border-bottom: 1px solid var(--bg-4);
+}
+.search-select {
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    color: var(--t-1);
+}
+.translation-select {
+    background-color: var(--bg-2);
+    font-size: var(--font-size-14);
+    margin-left: auto;
+    border: 1px solid var(--bg-4);
+    border-radius: 4px; 
+    padding: 0.25rem;
+    cursor: pointer;
+    width: 116px;
 }

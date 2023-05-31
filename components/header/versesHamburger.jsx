@@ -5,7 +5,8 @@ import { BookContext } from '@/contexts/books';
 import { v4 as uuidv4 } from 'uuid';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
+import IconCrossCircled from '../icons/action/cross';
+const VersesHamburger = ({numberOfVerses,book,setIsHamburger,handleVersesMenu}) => {
   const pathname=usePathname()
   const router = useRouter()
     const {setOpenBookIndex,openBookIndex,
@@ -38,7 +39,7 @@ const VersesHamburger = ({numberOfVerses,book,setIsHamburger}) => {
     }
   return (  
     <div className={`chapters-hamburger ${isVersesMenuOpen? "open": ""}`}>
-        <span className='chapters-hamburger-title'>{book?.name} Chapter: {openChapterIndex+1} </span>
+        <span className='chapters-hamburger-title'>{book?.name} Chapter: {openChapterIndex+1} <span className="close-menu" onClick={()=>handleVersesMenu()}><IconCrossCircled/></span></span>
  {versesList?.map((item,index)=>(<span className='chapter-item' style={index+1===startVerse && book?.id===openBookIndex+1? {...highlightStyles}:{}}
  onClick={()=>handleFetchChapter(parseInt(index)+1)}
         key={uuidv4()}>{index+1}</span>))}

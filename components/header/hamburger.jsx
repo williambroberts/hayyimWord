@@ -57,7 +57,8 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
          
           <div className='settings-name' onClick={()=>setIsSettings(true)}> <IconSettingsSharp/> Settings</div>
         </div>
-     
+        <span className='hamburger-title'>Books of the bible</span>
+        <hr className='hamburger-hr'/>
        <div className='chapters-old'>
       {chaptersAndVerses.slice(0,39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
         </div>
@@ -68,11 +69,11 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
 
       <div className={`chapters-menu-blur ${isChaptersMenuOpen? "open": ""}`} onClick={()=>handleChaptersMenu()} 
       ></div>
-      <ChaptersHamburger item={chaptersAndVerses[openBookIndex]}/>
+      <ChaptersHamburger item={chaptersAndVerses[openBookIndex]} handleChaptersMenu={handleChaptersMenu}/>
 
       <div className={`chapters-menu-blur ${isVersesMenuOpen? "open": ""}`} onClick={()=>handleVersesMenu()} 
       ></div>
-      <VersesHamburger setIsHamburger={setIsHamburger}
+      <VersesHamburger setIsHamburger={setIsHamburger} handleVersesMenu={handleVersesMenu}
        numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/>
 
        <SettingsHamburger isSettings={isSettings} setIsSettings={setIsSettings}/>

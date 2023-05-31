@@ -5,6 +5,9 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconMagnifyPlusOutline from '../icons/action/magnify'
 import IconMagnifyMinusOutline from '../icons/action/magnifysmall'
+import BollsTranslations from "../../app/api/bible/translationsBolls.json"
+import SearchTranslations from "../../app/api/bible/translationsSearch.json"
+import LogOutButton from '../auth/LogOutButton'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
     const { theme, setTheme } = useTheme()
 
@@ -33,11 +36,21 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                     <span className={`theme-button-light ${theme==="light"? "checked-light":""}`} onClick={()=>setTheme("light")}>Light</span>
                     <span className={`theme-button-dark  ${theme==="dark"? "checked-dark":""}`} onClick={()=>setTheme("dark")}>Dark</span>
                 </FlexRow>
+
             </div>
-           {/* font-size */}
-           {/* theme */}
-           {/* transltaion search */}
-           {/* translation bolls */}
+           <div className='translation-container'>
+            <label htmlFor='bolls-select'>Text translation</label>
+                <select className='translation-select' name='bolls-select'>
+                    {BollsTranslations.map((item)=> (<option value={item} className='translation-option'>{item}</option>) )}
+                </select>
+           </div>
+           <div className='translation-container'>
+            <label htmlFor='search-select'>Search translation</label>
+                <select className='translation-select' name='search-select'>
+                    {SearchTranslations.map((item)=> (<option value={item[0]} className='translation-option'>{item[1].shortname}</option>) )}
+                </select>
+           </div>
+           
     </div>
   )
 }

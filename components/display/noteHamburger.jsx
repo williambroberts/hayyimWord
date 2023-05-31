@@ -5,7 +5,8 @@ import { DataContext } from '@/contexts/dataContext'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import { firestore } from '@/firebase/firebaseConfig'
 import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,updateDoc,runTransaction,arrayUnion } from "firebase/firestore";
-
+import { Inter } from 'next/font/google'
+const inter =Inter({subsets:["latin"]})
 import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
@@ -194,13 +195,14 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
             <FlexRow width={"100%"}>
-                <span className='note-note-title'>{book} {chapter} {verse+1}</span>
+                <span className='note-note-title'><strong>{book} {chapter}:{verse+1}</strong></span>
                 <span className='note-close' onClick={()=>setIsWrite(false)}><IconArrowLeft/></span>
 
             </FlexRow>
             
                 <form className='note-form'>
-                    <textarea name="message" id="frm-message" rows={4} onChange={(e)=>setMessage(e.target.value)} value={message}>
+                    <textarea name="message" placeholder='Type note here...' className={inter.className}
+                    id="frm-message" rows={4} onChange={(e)=>setMessage(e.target.value)} value={message}>
 
                     </textarea>
                 </form>

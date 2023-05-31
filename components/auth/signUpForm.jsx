@@ -44,18 +44,18 @@ const SignUpForm = () => {
     }
   return (
     <div className='auth-form-container'>
-        <Title text={"Sign up"}/>
+        <Title text={"Hayyim Word"}/>
         <form onSubmit={(e)=>handleSubmit(e)} className='auth-form'>
 
         <label  htmlFor='sign-up-email' className='auth-label'>Email</label>
-            <input type='email' name="sign-up-email" placeholder='Email' className='auth-input'
+            <input type='email' name="sign-up-email" placeholder='E-mail address' className='auth-input'
              required onChange={(e)=>setEmail(e.target.value)}/>
            <label  htmlFor='sign-up-password' className='auth-label'>Password</label>
             <input type='password' name="sign-up-password" className='auth-input'
              placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
              <label  htmlFor='sign-up-confirm-password' className='auth-label'>Confirm password</label>
             <input type='password' name="sign-up-confirm-password" className='auth-input'
-             placeholder='Password'  required onChange={(e)=>setConfirmPassword(e.target.value)}/>
+             placeholder='Confirm password'  required onChange={(e)=>setConfirmPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
         </form>
         <span className='auth-span'>

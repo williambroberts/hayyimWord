@@ -28,7 +28,7 @@ const LoginForm = () => {
     }
   return (
     <div className='auth-form-container'>
-        <Title text={"Log in "}/>
+        <Title text={"Hayyim Word"}/>
         <form onSubmit={(e)=>handleSubmit(e)} className='auth-form'>
 
             <label  htmlFor='login-email' className='auth-label'>Email</label>

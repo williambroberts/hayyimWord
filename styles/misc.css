@@ -32,7 +32,7 @@
 }
 .title {
     font-size: var(--font-size-24);
-    color: var(--t-1);
+    color: var(--theme);
     font-weight: 600;
     white-space: normal;
 }
