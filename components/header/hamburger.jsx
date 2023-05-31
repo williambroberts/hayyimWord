@@ -11,6 +11,12 @@ import { BookContext } from '@/contexts/books';
 import ChaptersHamburger from './chaptersHamburger';
 import VersesHamburger from './versesHamburger';
 import SettingsHamburger from './settingsHamburger';
+import IconNotes from '../icons/note2';
+import IconLogin from '../icons/pages/login';
+import IconHighlight from '../icons/pages/highlights';
+import IconCreate from '../icons/pages/signup';
+import IconHome from '../icons/pages/home';
+import IconSettingsSharp from '../icons/pages/settings';
 
 const Hamburger = ({setIsHamburger,isHamburger}) => {
   const {user} = useContext(IsAUserLoggedInContext)
@@ -38,17 +44,18 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
   }
   return (
     <div className={`hamburger ${isHamburger? "open":""} `}>
+      <span className='hamburger-title'>Hayyim Word</span>
         <div className='hamburger-link-div'>
        
-          <HamburgerItem link={"/"} text={"Home"} icon={""} setIsHamburger={setIsHamburger}/>
+          <HamburgerItem link={"/"} text={"Home"} icon={<IconHome/>} setIsHamburger={setIsHamburger}/>
           
         {user!==null?<LogOutButton/>:""}
-        {user!==null? <HamburgerItem link={"/notes"} text={"Notes"} icon={""} setIsHamburger={setIsHamburger}/>
-        :<HamburgerItem link={"/login"} text={"Login"} icon={""} setIsHamburger={setIsHamburger}/> }
-       {user!==null? <HamburgerItem link={"/highlights"} text={"Highlights"} icon={""} setIsHamburger={setIsHamburger}/>
-        :<HamburgerItem link={"/signup"} text={"Sign up"} icon={""} setIsHamburger={setIsHamburger}/> }
+        {user!==null? <HamburgerItem link={"/notes"} text={"Notes"} icon={<IconNotes/>} setIsHamburger={setIsHamburger}/>
+        :<HamburgerItem link={"/login"} text={"Login"} icon={<IconLogin/>} setIsHamburger={setIsHamburger}/> }
+       {user!==null? <HamburgerItem link={"/highlights"} text={"Highlights"} icon={<IconHighlight/>} setIsHamburger={setIsHamburger}/>
+        :<HamburgerItem link={"/signup"} text={"Sign up"} icon={<IconCreate/>} setIsHamburger={setIsHamburger}/> }
          
-          <div className='settings-name' onClick={()=>setIsSettings(true)}>Settings</div>
+          <div className='settings-name' onClick={()=>setIsSettings(true)}> <IconSettingsSharp/> Settings</div>
         </div>
      
        <div className='chapters-old'>
