@@ -10,7 +10,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
   const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex,
       openChapterIndex,setOpenChapterIndex,
-      isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,
+      isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,displayTitle,setDisplayTitle,
       isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
       startVerse,setStartVerse,theText,setTheText
       } = useContext(BookContext)
@@ -46,13 +46,15 @@ const SearchResultItem = ({item,setIsSearch}) => {
         const data = await getChapter(bollsTranslation,parseInt(item.book),parseInt(item.chapter))
         setTheText(data)
         setScrollChangeNeeded((prev)=>!prev)
+        setDisplayTitle([item.book-1,item.chapter-1])
+
         if (pathname!=="/"){
           router.push("/")
         }
     }
   return (
     <div className='search-result-item' onClick={()=>handleGoto()}>
-        <span className='search-result-item-title'>{book.name} {item.chapter}:{item.verse}
+        <span className='search-result-item-title'>{book?.name} {item?.chapter}:{item?.verse}
         <span className='search-result-icon'>&#8250;</span> 
         </span>
        {/* <span className='search-result-item-text'>{item.text}</span> */}

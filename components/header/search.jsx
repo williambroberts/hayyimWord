@@ -25,9 +25,9 @@ const Search = ({setIsSearch,isSearch}) => {
         console.log("searchinput,",searchInput)
         try {
             const data = await SearchBible(searchTranslation,searchInput)
-        console.log(data, "search result")
+        console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
         
-        setSearchData((prev)=> {return data?.results?.net} )
+        setSearchData((prev)=> {return  Object.values(data?.results)[0]} )
         }catch(err){
             console.log(err)
         }
