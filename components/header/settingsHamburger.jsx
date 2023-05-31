@@ -40,13 +40,13 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
             </div>
            <div className='translation-container'>
             <label htmlFor='bolls-select'>Text translation</label>
-                <select className='translation-select' name='bolls-select'>
+                <select className='translation-select' name='bolls-select' onChange={(e)=>setBollsTranslation(e.target.value)}>
                     {BollsTranslations.map((item)=> (<option value={item} className='translation-option'>{item}</option>) )}
                 </select>
            </div>
            <div className='translation-container'>
             <label htmlFor='search-select'>Search translation</label>
-                <select className='translation-select' name='search-select'>
+                <select className='translation-select' name='search-select' onChange={(e)=>setSearchTranslation(e.target.value)}>
                     {SearchTranslations.map((item)=> (<option value={item[0]} className='translation-option'>{item[1].shortname}</option>) )}
                 </select>
            </div>

@@ -1,16 +1,18 @@
 "use client"
 import { SearchBible } from '@/app/api/bible/searchBible'
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, useContext } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import SearchResultItem from './searchResult';
 import IconArrowLeft from '../icons/navigation/arrowLeft';
 import IconMagnify from '../icons/action/mag';
+import { BookContext } from '@/contexts/books';
 const Search = ({setIsSearch,isSearch}) => {
     const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [searchData,setSearchData]=useState(null)
-    // ADD EXTRA TRANSLATIONS WILL !!!!!!!!🏳️‍🌈🏳️‍🌈
+    const {searchTranslation,setSearchTranslation}=useContext(BookContext)
+   
    const handleSubmit = (e)=>{
     e.preventDefault()
     setSearch((prev)=> !prev)
@@ -22,7 +24,7 @@ const Search = ({setIsSearch,isSearch}) => {
       const fetchData = async (searchInput)=> {
         console.log("searchinput,",searchInput)
         try {
-            const data = await SearchBible("net",searchInput)
+            const data = await SearchBible(searchTranslation,searchInput)
         console.log(data, "search result")
         
         setSearchData((prev)=> {return data?.results?.net} )
