@@ -45,7 +45,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
         {user!==null?<LogOutButton/>:""}
         {user!==null? <HamburgerItem link={"/notes"} text={"Notes"} icon={""} setIsHamburger={setIsHamburger}/>
         :<HamburgerItem link={"/login"} text={"Login"} icon={""} setIsHamburger={setIsHamburger}/> }
-       {user!==null? <HamburgerItem link={"/favourites"} text={"Highlight"} icon={""} setIsHamburger={setIsHamburger}/>
+       {user!==null? <HamburgerItem link={"/favourites"} text={"Highlights"} icon={""} setIsHamburger={setIsHamburger}/>
         :<HamburgerItem link={"/signup"} text={"Sign up"} icon={""} setIsHamburger={setIsHamburger}/> }
          
           <div className='settings-name' onClick={()=>setIsSettings(true)}>Settings</div>

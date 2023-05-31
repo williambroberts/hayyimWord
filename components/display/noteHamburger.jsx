@@ -7,8 +7,12 @@ import { firestore } from '@/firebase/firebaseConfig'
 import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,updateDoc,runTransaction,arrayUnion } from "firebase/firestore";
 
 import { BookContext } from '@/contexts/books'
-const NoteHamburger = ({isNote,setIsNote,pk}) => {
+import FlexRow from '../setup/flexRow'
+import IconArrowLeft from '../icons/navigation/arrowLeft'
+const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite}) => {
     const [isHighlight,setIsHighlight]=useState(false)
+   
+    const [message,setMessage]=useState(null)
     const {user}=useContext(IsAUserLoggedInContext)
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,
@@ -16,12 +20,14 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
-    const {firebaseHighlights,setFirebaseHighlights} = useContext(DataContext)
+    const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
     const handleClose = ()=>{
         setIsNote(false)
         setIsHighlight(false)
+        setIsWrite(false)
+        setMessage(null)
     }
     useEffect(()=>{
         if (!isNote) {
@@ -51,11 +57,66 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
         highlightVerse()
         
     },[updateHighlight])
+
+    const handleSubmit =async ()=>{
+        if (user===null){
+            console.log("no user, log in alert")
+            return
+        }
+        const userHighlightRef = doc(firestore, 'notes', user?.uid);
+        try {
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message})})
+            console.log("added highlight ",message)
+                
+            }catch (err){
+            console.log(err)
+            }
+     //console.log(firebaseNotes?.length,"fb notes,",firebaseNotes)    
+     setIsWrite(false)
+    }
+
+    useEffect(()=>{
+        console.log(pk,"changed pk")
+        if (user!==null) {
+            let notesPks = []
+            let firebaseMessages = []
+            for (let i=0;i<firebaseNotes?.length;i++) {
+                notesPks.push(firebaseNotes[i].pk)
+                firebaseMessages.push(firebaseNotes[i].message)
+            }
+            if (notesPks.includes(pk)){
+                let index = notesPks.lastIndexOf(pk)
+                setMessage(firebaseMessages[index])
+            }else{
+                setMessage("")
+            }
+            console.log(firebaseNotes,"hifrebase notes")
+            // set message to firebase note if there is one
+        }else {
+            setMessage("")
+        }
+    },[pk])
+
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
-        <div className={`note-options ${isHighlight? "":"open"}`}>
+        <div className={`note-note ${isWrite? "open":""}`}>
+            <FlexRow width={"100%"}>
+                <span className='note-note-title'>{book} {chapter} {verse+1}</span>
+                <span className='note-close' onClick={()=>setIsWrite(false)}><IconArrowLeft/></span>
+
+            </FlexRow>
+            
+                <form className='note-form'>
+                    <textarea name="message" id="frm-message" rows={4} onChange={(e)=>setMessage(e.target.value)} value={message}>
+
+                    </textarea>
+                </form>
+
+        </div>
+        <div className='note-options-wrapper'>
+           <div className={`note-options ${isHighlight? "":isWrite? "":"open"}`}>
             <span className='note-span'>Copy</span>
-            <span  className='note-span'>Note</span>
+            <span  className='note-span' onClick={()=>setIsWrite(true)}>Note</span>
             <span  className='note-span' onClick={()=>setIsHighlight(true)}>Highlight</span>
              
         </div>
@@ -72,7 +133,14 @@ const NoteHamburger = ({isNote,setIsNote,pk}) => {
                     <span className='highlight-purple'onClick={()=>handleHighlight("#c8bff7")}></span>
                 </div>
             </div>
-            <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span>
+            <div className={`highlight-container ${isWrite? "open":""}`}>
+                <span className='note-span'>Delete</span>
+                <span className='note-span' onClick={()=>setIsWrite(false)}>Cancel</span>
+                <span className='note-span' onClick={()=>handleSubmit()}>Save</span>
+            </div>
+            <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span> 
+        </div>
+        
     </div>
   )
 }

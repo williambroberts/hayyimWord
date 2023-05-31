@@ -7,11 +7,14 @@ import { v4 as uuidv4 } from 'uuid';
 import NoteHamburger from './noteHamburger'
 import { DataContext } from '@/contexts/dataContext'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
+import IconBasic_notebook from '../icons/note'
+import IconNotes from '../icons/note2'
 const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     const [isNote,setIsNote]=useState(false)
     const [pk,setPk]=useState(undefined)
+    const [isWrite,setIsWrite]=useState(false)
     const [clickedVerse,setClickedVerse]=useState(-1)
     const [highlights,setHighlights] = useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
@@ -20,8 +23,21 @@ const Display = () => {
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)
-        const {firebaseHighlights,setFirebaseHighlights} = useContext(DataContext)
+        const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
+        
+        const [notePks,setNotePks]=useState(null)
+        useEffect(()=>{
+          let newpks= []
+          for (let i=0;i<firebaseNotes?.length;i++){
+            if (!newpks.includes[firebaseNotes[i].pk]){
+              newpks.push(firebaseNotes[i].pk)
+            }
 
+          }
+          setNotePks(newpks)
+          console.log(newpks,"new pks")
+
+        },[firebaseNotes])
         useEffect(()=>{
           //console.log("scroll changed needed",startVerse)
           const verseSpans = document.querySelectorAll('.text-paragraph-verse-number');
@@ -127,7 +143,7 @@ const Display = () => {
     }
     
     const handleClick = (index) =>{
-      console.log(theText[index].pk,index,", pk, index")
+     // console.log(theText[index].pk,index,", pk, index")
       if (index===clickedVerse){
         setClickedVerse(-1)
         setIsNote(false)
@@ -138,14 +154,20 @@ const Display = () => {
       }
      
     }
-    
+    const handleNoteOpen = (index)=>{
+      setIsNote(true)
+      setIsWrite(true)
+      setClickedVerse(index)
+      setPk(theText[index].pk)
+    }
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
         onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
        > 
-      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse} </span>
+      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
+      {notePks.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:""}</span>
       
       <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick(index)}> 
       {(item.text.replace(/<br\s*\/?>/gi, ". "))}</span>
@@ -163,7 +185,8 @@ const Display = () => {
     
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
-    <NoteHamburger isNote={isNote} setIsNote={setIsNote} pk={pk}/>
+    <NoteHamburger isWrite={isWrite} setIsWrite={setIsWrite}
+    isNote={isNote} setIsNote={setIsNote} pk={pk} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
     </div>
   )
 }
