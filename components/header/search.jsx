@@ -6,28 +6,47 @@ import SearchResultItem from './searchResult';
 import IconArrowLeft from '../icons/navigation/arrowLeft';
 import IconMagnify from '../icons/action/mag';
 import { BookContext } from '@/contexts/books';
-const Search = ({setIsSearch,isSearch}) => {
+import IconDelete from '../icons/action/delete';
+const Search = ({setIsSearch,isSearch,setSearchData,searchData}) => {
     const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
-    const [searchData,setSearchData]=useState(null)
-    const {searchTranslation,setSearchTranslation}=useContext(BookContext)
    
+    const {searchTranslation,setSearchTranslation}=useContext(BookContext)
+    const [recentSearches,setRecentSearches]=useState(null)
+
    const handleSubmit = (e)=>{
     e.preventDefault()
     setSearch((prev)=> !prev)
     console.log("submitted")
+    let gotSearchesRaw = localStorage.getItem("recentSearches")
+    let gotSearches = JSON.parse(gotSearchesRaw)
+    if (gotSearches===null){
+      console.log("no recent searches")
+      localStorage.setItem("recentSearches",JSON.stringify([searchInput]))
+      setRecentSearches([searchInput])
+    }else {
+      if (!gotSearches.includes(searchInput)){
+         console.log(gotSearches,"recent searches",typeof(gotSearches))
+      gotSearches.push(searchInput)
+      localStorage.setItem("recentSearches",JSON.stringify(gotSearches))
+      setRecentSearches(gotSearches)
+      }
+     
+    }
    }
 
     useEffect(()=> {
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
       const fetchData = async (searchInput)=> {
-        console.log("searchinput,",searchInput)
+        //console.log("searchinput,",searchInput)
         try {
             const data = await SearchBible(searchTranslation,searchInput)
-        console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+        //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+        if (data!==undefined){
+          setSearchData((prev)=> {return Object.values(data?.results)[0]} )
+        }
         
-        setSearchData((prev)=> {return  Object.values(data?.results)[0]} )
         }catch(err){
             console.log(err)
         }
@@ -40,6 +59,7 @@ const Search = ({setIsSearch,isSearch}) => {
     useEffect(()=>{
         if (isSearch===false){
             setSearchInput("")
+            setSearchData(null)
         }
     },[isSearch])
 
@@ -52,7 +72,14 @@ const Search = ({setIsSearch,isSearch}) => {
     if (loading){
       return <>Loading....</>
     }
-
+    const ClearLocalStorage = ()=>{
+      try {
+        localStorage.removeItem("recentSearches")
+        setRecentSearches(null)
+      }catch(err){
+        console.log(err)
+      }
+    }
   return (
     <div className={`search ${isSearch? "open":""}`}>
 
@@ -71,6 +98,12 @@ const Search = ({setIsSearch,isSearch}) => {
     <div className='search-results'>
     <span className='search-number'>{searchInput===""? "word search" : searchData? `Found ${searchData.length} verses.` : "No word search results."}</span>
     {/* chart of results */}
+    {searchData? "": <div className='recent-searches'>
+    <span className='recent-span'>Recent searches:
+    <span className='recent-clear' onClick={()=>ClearLocalStorage()}><IconDelete/></span>
+    </span>
+    {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>setSearchInput(item)}>{item}</span>))}
+    </div>}
     {searchData?.map((item,index)=> (<SearchResultItem key={uuidv4()} item={item} setIsSearch={setIsSearch}/>) )}
     </div>
    

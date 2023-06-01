@@ -1,6 +1,10 @@
+.home-main {
+    
+}
 .display {
     position: relative;
     max-width: 680px;
+    padding-top: 1rem;
 }
 
 .text-paragraph {

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import { useTheme } from 'next-themes'
 import { BookContext } from '@/contexts/books'
@@ -14,7 +14,9 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
 
     const {globalFontSize,setGlobalFontSize,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
-
+        useEffect(()=>{
+            console.log(searchTranslation,"s trans")
+        },[searchTranslation])
         const handlePlus = ()=>{
             // console.log("mag",globalFontSize)
             // if (globalFontSize===24){
@@ -59,13 +61,13 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
            <div className='translation-container'>
             <label htmlFor='bolls-select'>Text translation</label>
                 <select className='translation-select' name='bolls-select' onChange={(e)=>setBollsTranslation(e.target.value)}>
-                    {BollsTranslations.map((item)=> (<option value={item} key={uuidv4()} className='translation-option'>{item}</option>) )}
+                    {BollsTranslations.map((item)=> (<option value={item} key={uuidv4()} className='translation-option' selected={item===bollsTranslation}>{item}</option>) )}
                 </select>
            </div>
            <div className='translation-container'>
             <label htmlFor='search-select'>Search translation</label>
                 <select className='translation-select' name='search-select' onChange={(e)=>setSearchTranslation(e.target.value)}>
-                    {SearchTranslations.map((item)=> (<option value={item[0]} key={uuidv4()} className='translation-option'>{item[1].shortname}</option>) )}
+                    {SearchTranslations.map((item)=> (<option value={item[0]} key={uuidv4()} className='translation-option' selected={item[0]===searchTranslation}>{item[1].shortname}</option>) )}
                 </select>
            </div>
            

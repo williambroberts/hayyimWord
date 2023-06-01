@@ -13,7 +13,7 @@ const BookProvider = ({children}) => {
     const [openChapterIndex,setOpenChapterIndex]=useState(0)
     const [openBookIndex,setOpenBookIndex]=useState(0)
     const [bollsTranslation,setBollsTranslation]=useState(BollsTranslations[0])
-    const [searchTranslation,setSearchTranslation]=useState(SearchTranslations[0])
+    const [searchTranslation,setSearchTranslation]=useState(SearchTranslations[0][0])
     const [isChaptersMenuOpen,setIsChaptersMenuOpen]=useState(false)
     const [isVersesMenuOpen,setIsVersesMenuOpen]=useState(false)
    const [startVerse,setStartVerse]=useState(-1)
