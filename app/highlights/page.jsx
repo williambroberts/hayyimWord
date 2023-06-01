@@ -19,7 +19,7 @@ const HighlightsPage = () => {
   },[user,router])
   return (
    <main>
-    <span className='page-stats'>Showing {firebaseHighlights?.length} {firebaseHighlights?.length >1? "highlights":"highlight"}</span>
+    <span className='page-stats'>Showing {firebaseHighlights?.length} {firebaseHighlights?.length!==1? "highlights":"highlight"} of {firebaseHighlights?.length}</span>
     <div className='page-flex'>
       {firebaseHighlights?.map((item)=> (<HightlightItem key={uuidv4()} item={item}/>) )}
     </div>

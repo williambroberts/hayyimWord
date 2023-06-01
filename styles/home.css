@@ -14,15 +14,17 @@
     font-weight: 500;
     font-size: var(--font-size-16);
     white-space: pre-wrap;
+    cursor: pointer;
 }
 .text-paragraph-verse-text {
     color: var(--t-1);
     font-weight: 400;
+    cursor: pointer;
 }
 .turner-left {
     display: flex;
-    position: fixed;
-    bottom: 5rem;
+    position: relative;
+    /* bottom: 5rem; */
     padding: 0.25rem;
     align-items: center;
     justify-content: center;
@@ -35,6 +37,7 @@
     background-color: var(--bg-1);
     transition: var(--transition-1);
     /* z-index: 1; */
+    transform: translate(50%,0);
 }
 
 .turner-left:hover, .turner-right:hover {
@@ -43,10 +46,10 @@
 
 .turner-right {
     display: flex;
-    position: sticky;
-    bottom: 5rem;
-    right: 0rem;
-    left: 100%;
+    position: relative;
+    /* bottom: 5rem; */
+    /* right: 0rem; */
+    /* left: 100%; */
     padding: 0.25rem;
     align-items: center;
     justify-content: center;
@@ -60,19 +63,18 @@
     transition: var(--transition-1);
     /* z-index: 1; */
     transform: translate(-50%,0);
+    margin-left: auto;
 }
-/* .note-blur {
-    background-color: transparent;
-    width: 100vw;
+.turner-container {
     position: fixed;
-    height:100dvh;
-    top: 0px;
-    left: 0px;
-    display: none;
+   max-width: 100vw;
+   width: 680px;
+    display: flex;
+    align-items: center;
+    bottom: 7rem;
+    height:0px;
+    background-color: aliceblue;
 }
-.note-blur.open {
-    display: block;
-} */
 .note-menu {
     color: var(--white);
     background-color: var(--black2);
@@ -80,12 +82,13 @@
     opacity: 0;
     align-items: center;
     flex-direction: column;
-    width: 100%;
-    position: sticky;
+    max-width: 100vw;
+   width: 680px;
+    position: fixed;
     /* left: 50%;
     transform: translate(-50%,0%); */
     transition: var(--transition-1);
-    bottom: 0rem;
+    bottom: 0;
     z-index: -1;  
     padding: 0rem;
     height: 40px;
@@ -97,7 +100,7 @@
     /* transform: translate(-50%,0%); */
   
     opacity: 1;
-    z-index: 0;
+    z-index: 1;
    
    
 }
@@ -178,6 +181,9 @@
     border-radius: 4px;
     background-color: transparent;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .highlight-red {
     height: 100%;
@@ -297,6 +303,7 @@
     margin: 0 auto;
     padding: 0.5rem;
     font-size: var(--font-size-16);
+    color: var(--white);
 }
 textarea::placeholder {
     color:var(--grey2)

@@ -19,7 +19,7 @@ const NotesPage = () => {
   },[user,router])
   return (
    <main>
-    <span className='page-stats'>Showing {firebaseNotes?.length} {firebaseNotes?.length>1? "notes":"note"}</span>
+    <span className='page-stats'>Showing {firebaseNotes?.length} {firebaseNotes?.length!==1? "notes":"note"} of {firebaseNotes?.length}</span>
     <div classNmae="page-flex">
  {firebaseNotes?.map((item)=><NoteItem key={uuidv4()} item={item}/>)}
     </div>

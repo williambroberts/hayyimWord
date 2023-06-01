@@ -10,9 +10,14 @@ const inter =Inter({subsets:["latin"]})
 import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
+import IconDelete from '../icons/action/delete'
 const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite,text}) => {
     const [isHighlight,setIsHighlight]=useState(false)
-   
+    const thedate = new Date()
+    const theDay=thedate.getDate()
+    const theYear = thedate.getFullYear()
+    const theMonth=thedate.getMonth()+1
+    const fulldate = theDay+"/"+theMonth+"/"+theYear
     const [message,setMessage]=useState(null)
     const {user}=useContext(IsAUserLoggedInContext)
     const {setOpenBookIndex,openBookIndex,
@@ -48,8 +53,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1})})
-            console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text}`)
+            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
+            console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
                 
             }catch (err){
             console.log(err)
@@ -74,9 +79,9 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             console.log(highlights,"pre delete notes")
          
           let updatedHighlights = highlights.filter((item,index)=>item.pk!==pk)
-          updatedHighlights.push({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1})
+          updatedHighlights.push({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
           transaction.update(useHighlightsRef, { highlights: updatedHighlights })
-          console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text}`)
+          console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
           })
       
           
@@ -97,7 +102,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1})})
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
             console.log("added note ",message)
                 
             }catch (err){
@@ -128,7 +133,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             setMessage("")
         }
     },[pk])
-    const handleDelete2 = async ()=>{
+
+     const handleDelete2 = async ()=>{
         if (user===null){
             console.log("no user, log in alert")
             return
@@ -219,11 +225,11 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             <div className={`highlight-container ${isHighlight? "open":""}`}>
                 <span onClick={()=>setIsHighlight(false)} className='highlight-close'>❮</span>
                 <div className='highlight-colors'>
-                    <span className='highlight-none' onClick={()=>handleDeleteHighlight()}></span>
+                    <span className='highlight-none' onClick={()=>handleDeleteHighlight()}><IconDelete/></span>
                     <span className='highlight-red' onClick={()=>handleHighlight("#ff78424b")}></span>
                     <span className='highlight-orange'onClick={()=>handleHighlight("#f7aa3572")}></span>
                     <span className='highlight-yellow'onClick={()=>handleHighlight("#FFF36D")}></span>
-                    <span className='highlight-green' onClick={()=>handleHighlight("#abff32")}></span>
+                    <span className='highlight-green' onClick={()=>handleHighlight("#d9f7bf50")}></span>
                     <span className='highlight-blue' onClick={()=>handleHighlight("#2edae30f")}></span>
                     <span className='highlight-purple'onClick={()=>handleHighlight("#c8bff7")}></span>
                 </div>

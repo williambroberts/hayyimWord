@@ -106,11 +106,13 @@ const Display = () => {
     },[reFetch])
 
     const highlightedVerseStyles = {
-        color: "red",
+        color: "var(--red)",
         cursor:"pointer",
+       // backgroundColor:"#FFF36D"
     }
     const RemoveHighlight = ()=>{
         setStartVerse(-1)
+        console.log("removed highlight")
         
     }
     const handleLeft = async ()=>{
@@ -143,8 +145,11 @@ const Display = () => {
     }
     
     const handleClick = (index) =>{
-     // console.log(theText[index].pk,index,", pk, index")
-      if (index===clickedVerse){
+      if (startVerse!==-1){
+        setStartVerse(-1)
+        return
+      }
+      if (isNote && clickedVerse!==-1) {
         setClickedVerse(-1)
         setIsNote(false)
       }else{
@@ -152,6 +157,8 @@ const Display = () => {
         setIsNote(true)
         setPk(theText[index].pk)
       }
+     // console.log(theText[index].pk,index,", pk, index")
+     
      
     }
     const handleNoteOpen = (index)=>{
@@ -175,11 +182,13 @@ const Display = () => {
         </span>
         
         )}</p>
-
-        <span className='turner-left' onClick={()=>handleLeft()} 
+        <div className='turner-container'>
+           <span className='turner-left' onClick={()=>handleLeft()} 
         style={{display:` ${openBookIndex+openChapterIndex===0? "none":"flex"}  `}}>❮</span>
         <span className='turner-right'onClick={()=>handleRight()} 
         style={{display:` ${openBookIndex===65 && openChapterIndex===21? "none":"flex"}  `}}>❯</span>
+        </div>
+       
     
     
     

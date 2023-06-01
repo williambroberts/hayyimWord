@@ -60,9 +60,11 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
         <span className='hamburger-title'>Books of the bible</span>
         <hr className='hamburger-hr'/>
        <div className='chapters-old'>
+        <span className='testament-title'>Old Testament</span>
       {chaptersAndVerses.slice(0,39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
         </div>
      <div className='chapters-new'>
+     <span className='testament-title'>New Testament</span>
       {chaptersAndVerses.slice(39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
         </div>
       

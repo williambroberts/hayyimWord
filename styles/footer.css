@@ -6,6 +6,7 @@
     padding: 0.5rem;
     background-color: var(--bg-1);
     border-top: 1px solid var(--bg-4);
+    height: 40px;
 }
 .footer-nav {
     width: 100%;
