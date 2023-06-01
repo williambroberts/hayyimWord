@@ -56,7 +56,7 @@ const NoteItem = ({item}) => {
 
   return (
     <div  className='note-wrapper'>
-      <div className='note-delete' onClick={()=>handleDelete2()}><IconDelete/></div>
+      
      <div className='note-item' onClick={()=>handleGoto()}>
        <span className='note-title'>{item.book} {item.chapter}:{item.verse}
     <span className='note-date'>{item.date}</span>

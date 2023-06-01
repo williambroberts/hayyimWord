@@ -69,7 +69,7 @@ const Display = () => {
               firebaseColors.push(item.color)
             }
 
-            const newHighlights =Array(theText.length).fill("white")
+            const newHighlights =Array(theText.length).fill("var(--bg-1)")
             for (let i=0; i<theText.length; i++){
               if (firebasePks.includes(theText[i].pk)){
                 let index = firebasePks.lastIndexOf(theText[i].pk)

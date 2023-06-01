@@ -331,7 +331,7 @@ width: 100%;
     width: 100%;
     transform: translate(-100%,0%);
     transition: all 0.13s ease-in-out ;
-    background-color: var(--white);
+    background-color: var(--bg-2);
     color: var(--t-1);
     position:absolute ;
     top: 30%;
@@ -348,7 +348,7 @@ width: 100%;
     background-color: var(--bg-1);
 }
 .chapters-hamburger > span:nth-child(odd){
-    background-color: var(--bg-2);
+    background-color: var(--bg-3);
 }
 
 .chapter-item {
@@ -358,10 +358,13 @@ width: 100%;
 }
 
 .chapters-hamburger-title {
-    width: 100%;
+    width: 300px;
     display: flex;
     align-items: center;
     padding: 0.125rem 0rem;
+    color: var(--t-2);
+    background-color: var(--bg-2);
+    margin: 0.25rem 0rem;
 }
 
 .settings-name {
@@ -514,6 +517,8 @@ font-size: var(--font-size-16);
     color: var(--theme);
     font-size: var(--font-size-16);
     cursor: pointer;
+    font-weight: 600;
+    padding-right: 0.25rem;
 }
 .translation-container {
     display: flex;
