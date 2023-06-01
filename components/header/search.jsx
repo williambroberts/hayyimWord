@@ -107,7 +107,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData}) => {
     {/* chart of results */}
     {searchData? "": <div className='recent-searches'>
     <span className='recent-span'>Recent searches:
-    <span className='recent-clear' onClick={()=>ClearLocalStorage()}><IconDelete/></span>
+    <abbr className='recent-clear' title="Clear search history" onClick={()=>ClearLocalStorage()}><IconDelete/></abbr>
     </span>
     {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>handleResearch(item)}>{item}</span>))}
     </div>}
