@@ -3,6 +3,7 @@ import IconArrowLeft from '../icons/navigation/arrowLeft'
 import { useTheme } from 'next-themes'
 import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
+import { v4 as uuidv4 } from 'uuid'
 import IconMagnifyPlusOutline from '../icons/action/magnify'
 import IconMagnifyMinusOutline from '../icons/action/magnifysmall'
 import BollsTranslations from "../../app/api/bible/translationsBolls.json"
@@ -58,13 +59,13 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
            <div className='translation-container'>
             <label htmlFor='bolls-select'>Text translation</label>
                 <select className='translation-select' name='bolls-select' onChange={(e)=>setBollsTranslation(e.target.value)}>
-                    {BollsTranslations.map((item)=> (<option value={item} className='translation-option'>{item}</option>) )}
+                    {BollsTranslations.map((item)=> (<option value={item} key={uuidv4()} className='translation-option'>{item}</option>) )}
                 </select>
            </div>
            <div className='translation-container'>
             <label htmlFor='search-select'>Search translation</label>
                 <select className='translation-select' name='search-select' onChange={(e)=>setSearchTranslation(e.target.value)}>
-                    {SearchTranslations.map((item)=> (<option value={item[0]} className='translation-option'>{item[1].shortname}</option>) )}
+                    {SearchTranslations.map((item)=> (<option value={item[0]} key={uuidv4()} className='translation-option'>{item[1].shortname}</option>) )}
                 </select>
            </div>
            
