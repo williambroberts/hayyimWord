@@ -12,13 +12,13 @@ const ThemeButton = () => {
   const { theme, setTheme } = useTheme()
 
  
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  // useEffect(() => {
+  //   setMounted(true)
+  // }, [])
 
-  if (!mounted) {
-    return null
-  }
+  // if (!mounted) {
+  //   return null
+  // }
   const themeChange = ()=>{
     setTheme(theme==="light"?"dark":"light")
     let myHtml = document.querySelector('html')
