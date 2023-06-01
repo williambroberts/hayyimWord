@@ -35,7 +35,10 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData}) => {
      
     }
    }
-
+   const handleResearch = (item)=>{
+    setSearchInput(item)
+    setSearch((prev)=> !prev)
+   }
     useEffect(()=> {
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
       const fetchData = async (searchInput)=> {
@@ -67,7 +70,11 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData}) => {
     setLoading(false)
    },[])
     
-
+   useEffect(()=>{
+    if (searchInput.length<1){
+      setSearchData(null)
+    }
+   },[searchInput])
 
     if (loading){
       return <>Loading....</>
@@ -102,7 +109,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData}) => {
     <span className='recent-span'>Recent searches:
     <span className='recent-clear' onClick={()=>ClearLocalStorage()}><IconDelete/></span>
     </span>
-    {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>setSearchInput(item)}>{item}</span>))}
+    {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>handleResearch(item)}>{item}</span>))}
     </div>}
     {searchData?.map((item,index)=> (<SearchResultItem key={uuidv4()} item={item} setIsSearch={setIsSearch}/>) )}
     </div>
