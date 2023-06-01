@@ -8,6 +8,7 @@ import NoteHamburger from './noteHamburger'
 import { DataContext } from '@/contexts/dataContext'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import IconBasic_notebook from '../icons/note'
+import Link from 'next/link'
 import IconNotes from '../icons/note2'
 const Display = () => {
     const [chapter,setChapter]=useState(null)
@@ -210,7 +211,7 @@ const Display = () => {
     isNote={isNote} setIsNote={setIsNote} pk={pk} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
    <div className={`display-alert ${noUserALert? "open":""}`}>
-      Please <span>log in</span> to {alertText}
+      Please <Link href={"/login"}>log in</Link> to {alertText}
    </div>
     </div>
   )

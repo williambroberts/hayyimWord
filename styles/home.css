@@ -338,10 +338,11 @@ textarea::placeholder {
 
 
 }
-.display-alert >span {
+.display-alert >a {
     color: var(--blue2);
     font-size: inherit;
     font-weight: inherit;
+    text-decoration: underline;
 }
 .display-alert.open{
     display: flex;
