@@ -3,6 +3,9 @@
     font-size: var(--font-size-16);
     font-weight: inheret;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
 }   
 

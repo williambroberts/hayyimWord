@@ -17,6 +17,8 @@ const Display = () => {
     const [isWrite,setIsWrite]=useState(false)
     const [clickedVerse,setClickedVerse]=useState(-1)
     const [highlights,setHighlights] = useState(null)
+    const [noUserALert,setNoUserAlert]=useState(false)
+    const [alertText,setAlertText]=useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
         openChapterIndex,setOpenChapterIndex,globalFontSize,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -79,7 +81,7 @@ const Display = () => {
             
 
             setHighlights(newHighlights)
-            console.log("new highlight",newHighlights)
+            //console.log("new highlight",newHighlights)
           }catch(err){
             console.log(err)
           }
@@ -167,6 +169,15 @@ const Display = () => {
       setClickedVerse(index)
       setPk(theText[index].pk)
     }
+    useEffect(()=>{
+      if (noUserALert===true){
+
+        setTimeout(()=>{
+          console.log("alert no user")
+          setNoUserAlert(false)
+        },3000)
+      }
+    },[noUserALert])
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
@@ -177,7 +188,7 @@ const Display = () => {
       {notePks?.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
       <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick(index)}> 
-      {(item.text.replace(/<br\s*\/?>/gi, ". "))}</span>
+      {item.text.replace(/<br\s*\/?>/gi, ". ").replace(/<i>|<\/i>/g, '')}</span>
        
         </span>
         
@@ -194,8 +205,13 @@ const Display = () => {
     
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
-    <NoteHamburger isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
+    <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText}
+    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
     isNote={isNote} setIsNote={setIsNote} pk={pk} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
+   
+   <div className={`display-alert ${noUserALert? "open":""}`}>
+      Please <span>log in</span> to {alertText}
+   </div>
     </div>
   )
 }

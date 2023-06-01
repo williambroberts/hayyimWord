@@ -320,3 +320,29 @@ textarea::placeholder {
     /* align-items: center;
     font-size:inherit; */
 }
+.display-alert {
+    color: var(--t-1);
+    font-weight: 400;
+    font-size: var(--font-size-16);
+    display: none;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: var(--bg-1);
+    box-sizing: border-box;
+    box-shadow: var(--box-shadow-3);
+    position: fixed;
+    top: 6rem;
+    left: 50%;
+    transform: translate(-50%,0);
+    gap: 0.25rem;
+
+
+}
+.display-alert >span {
+    color: var(--blue2);
+    font-size: inherit;
+    font-weight: inherit;
+}
+.display-alert.open{
+    display: flex;
+}

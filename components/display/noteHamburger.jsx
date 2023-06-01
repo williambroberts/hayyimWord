@@ -11,7 +11,7 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import IconDelete from '../icons/action/delete'
-const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite,text}) => {
+const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert}) => {
     const [isHighlight,setIsHighlight]=useState(false)
     const thedate = new Date()
     const theDay=thedate.getDate()
@@ -29,6 +29,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
+    
     const handleClose = ()=>{
         setIsNote(false)
         setIsHighlight(false)
@@ -45,10 +46,13 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         setUpdateHighlight((prev)=>!prev)
 
     }
+
     const highlightVerse = async()=>{
            
         if (user===null){
             console.log("no user, log in alert")
+            setNoUserAlert((prev)=>true)
+
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
@@ -66,6 +70,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
       
         if (user===null){
             console.log("no user, log in alert")
+            setNoUserAlert((prev)=>true)
+            setAlertText("highlight a verse.")
             return
         }
         if (color===null){
@@ -98,6 +104,9 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const handleSubmit =async ()=>{
         if (user===null){   
             console.log("no user, log in alert")
+           
+            setNoUserAlert((prev)=>true)
+             setAlertText("to take a note.")
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
@@ -137,6 +146,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
      const handleDelete2 = async ()=>{
         if (user===null){
             console.log("no user, log in alert")
+            setNoUserAlert((prev)=>true)
+            setAlertText("to delete a note.")
             return
         }
         const userNoteRef = doc(firestore, 'notes', user?.uid);
@@ -162,6 +173,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const handleDelete = async ()=>{
         if (user===null){
             console.log("no user, log in alert")
+            setNoUserAlert((prev)=>true)
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
@@ -178,6 +190,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const handleDeleteHighlight =async ()=>{
         if (user===null){
             console.log("no user, log in alert")
+            setNoUserAlert((prev)=>true)
+            setAlertText("to delete a highlight.")
             return
         }
         const userNoteRef = doc(firestore, 'notes', user?.uid);
@@ -242,6 +256,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
             <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span> 
         </div>
         
+
     </div>
   )
 }

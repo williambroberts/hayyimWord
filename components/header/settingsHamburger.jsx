@@ -13,6 +13,23 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
 
     const {globalFontSize,setGlobalFontSize,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
+
+        const handlePlus = ()=>{
+            // console.log("mag",globalFontSize)
+            // if (globalFontSize===24){
+            //     setGlobalFontSize(24)
+            // }else{
+            //     setGlobalFontSize((prev)=>prev+1)
+            // }
+        }
+
+        const handleMinus = ()=>{
+            // if (globalFontSize===12){
+            //     return
+            // }else{
+            //     setGlobalFontSize((prev)=>prev-1)
+            // }
+        }
   return (
     <div className={`settings ${isSettings? "open" : ""}`}>
         <nav className='settings-header'>
@@ -24,11 +41,11 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                
                 <label htmlFor='font-size-input' className='font-size-input-name'>Font Size:</label>
                 <span className='font-size-span'>{globalFontSize}(px)</span>
-                <span className='font-size-mag'><IconMagnifyMinusOutline/></span>
+                <span className='font-size-mag' onClick={()=>handleMinus()}><IconMagnifyMinusOutline/></span>
                 <input type='range' max="24" min="12" 
                 className='font-size-input'
                 name="font-size-input" value={globalFontSize} onChange={(e)=>setGlobalFontSize(e.target.value)}/>
-                <span className='font-size-mag'><IconMagnifyPlusOutline/></span>
+                <span className='font-size-mag'  onClick={()=>handlePlus()}><IconMagnifyPlusOutline/></span>
             </div>
             <div className='color-theme-container'>
                 <span>Color Theme</span>

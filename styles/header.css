@@ -452,6 +452,9 @@ font-size: var(--font-size-16);
     width:100px;
 
 }
+input[type="range"]{
+        
+}
 .font-size-input-name, .font-size-span {
     
     color: var(--t-1);
@@ -464,6 +467,7 @@ font-size: var(--font-size-16);
     font-weight: 600;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .color-theme-container {
     display: flex;
@@ -527,6 +531,11 @@ font-size: var(--font-size-16);
     box-sizing: border-box;
     padding: 0.5rem;
     border-bottom: 1px solid var(--bg-4);
+}
+.translation-container > label {
+    color: var(--t-1);
+    font-weight: 400;
+    font-size: var(--font-size-16);
 }
 .search-select {
     font-size: var(--font-size-16);
