@@ -4,7 +4,7 @@
 .display {
     position: relative;
     max-width: 680px;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0.0rem;
     
 }
 
@@ -13,6 +13,7 @@
     color: var(--t-1);
     font-size: var(--font-size-16);
     line-height: 1.5rem;
+    padding: 0rem 0.5rem;
 }
 .text-paragraph-verse-number {
     color: var(--blue2);
@@ -76,7 +77,7 @@
    width: 680px;
     display: flex;
     align-items: center;
-    bottom: 7rem;
+    bottom: 6rem;
     height:0px;
     background-color: aliceblue;
 }
@@ -276,6 +277,11 @@
     border-top-left-radius: 4px;
     border-top-right-radius:4px ;
 
+}
+.text-title {
+    padding: 0rem 0.5rem;
+    color: var(--t-1);
+    font-size: var(--font-size-16);
 }
 .note-note-title {
     color: var(--white);
