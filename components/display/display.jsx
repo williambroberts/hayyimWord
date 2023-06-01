@@ -13,7 +13,7 @@ import IconNotes from '../icons/note2'
 const Display = () => {
     const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
-    const [isNote,setIsNote]=useState(false)
+    
     const [pk,setPk]=useState(undefined)
     const [isWrite,setIsWrite]=useState(false)
     const [clickedVerse,setClickedVerse]=useState(-1)
@@ -21,7 +21,7 @@ const Display = () => {
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
-        openChapterIndex,setOpenChapterIndex,globalFontSize,
+        openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)

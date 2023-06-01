@@ -23,11 +23,11 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
   const [numOfVersesInOpenChapter,SetNumOfVersesInOpenChapter]=useState(1)
  
   const {setOpenBookIndex,openBookIndex,
-    openChapterIndex,setOpenChapterIndex,
+    openChapterIndex,setOpenChapterIndex,isNote,setIsNote,
     isChaptersMenuOpen,setIsChaptersMenuOpen,
     isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
     } = useContext(BookContext)
-
+    
     useEffect(()=>{
  const versesObject = chaptersAndVerses[openBookIndex].chapter_verses
       const numOfVerses = Object.entries(versesObject).filter(([k,v])=> parseInt(k)===openChapterIndex+1)[0][1]

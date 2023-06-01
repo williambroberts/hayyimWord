@@ -13,7 +13,7 @@ const Header = () => {
   console.log(pathname,"pathname")
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,
-    isChaptersMenuOpen,setIsChaptersMenuOpen,
+    isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     } = useContext(BookContext)
@@ -26,11 +26,34 @@ const Header = () => {
     setIsSearch(false)
     setIsSettings(false)
   }
+
+ 
  const handleOpenToChapter = ()=>{
   setIsChaptersMenuOpen(true)
   setIsHamburger(true)
   
  }
+ useEffect(()=>{
+  let myHtml = document.querySelector("html")
+  if (isSearch){
+    setIsNote(false)
+    myHtml.style.overflowY="hidden"
+  }else{
+    myHtml.style.overflowY="scroll"
+  }
+
+ },[isSearch])
+ useEffect(()=>{
+
+  let myHtml = document.querySelector("html")
+  if (isHamburger){
+    setIsNote(false)
+    myHtml.style.overflowY="hidden"
+  }else{
+    myHtml.style.overflowY="scroll"
+  }
+
+ },[isHamburger])
   return (
   <header className='header'>
     <nav className='header-nav'>
