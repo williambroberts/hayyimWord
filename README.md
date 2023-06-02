@@ -1,5 +1,5 @@
 
-# Hsayyim Word
+# Hayyim Word
 
 ## Site link 
   [https://hayyim-word.vercel.app/](https://hayyim-word.vercel.app/)
