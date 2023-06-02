@@ -575,6 +575,9 @@ input[type="range"]{
     font-size: var(--font-size-14);
     cursor: pointer;
 }
+.theme-button-sepia.checked-light {
+    outline: 3px solid var(--red);
+}
 .theme-button-light.checked-light {
     outline: 3px solid var(--paleblue);
 }

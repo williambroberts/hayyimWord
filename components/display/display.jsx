@@ -20,6 +20,7 @@ const Display = () => {
     const [highlights,setHighlights] = useState(null)
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
+    const [mounted,setMounted]=useState(false)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -91,7 +92,9 @@ const Display = () => {
         useEffect(()=>{
           reHighlight()
         },[firebaseHighlights])
-
+        useEffect(()=>{
+          setMounted(true)
+        },[])
         useEffect(()=>{
           reHighlight()
         },[theText])
@@ -171,13 +174,20 @@ const Display = () => {
       setPk(theText[index].pk)
     }
     useEffect(()=>{
-      if (noUserALert===true){
-
-        setTimeout(()=>{
+      const toggleAlert = ()=>{
+        if (noUserALert===true){
+        if (!mounted){
+          return
+        }else{
+          setTimeout(()=>{
           console.log("alert no user")
           setNoUserAlert(false)
         },3000)
+        }
+        
       }
+      }
+      toggleAlert()
     },[noUserALert])
   return (
     <div className='display'>

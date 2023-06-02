@@ -29,7 +29,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
-    
+    const [mounted,setMounted]=useState(false)
     const handleClose = ()=>{
         setIsNote(false)
         setIsHighlight(false)
@@ -96,7 +96,10 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         } 
     }
     useEffect(()=>{
-        highlightVerse2()
+        if (mounted){
+             highlightVerse2()
+        }
+       
        // highlightVerse()
         
     },[updateHighlight])
@@ -120,7 +123,9 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
      //console.log(firebaseNotes?.length,"fb notes,",firebaseNotes)    
      setIsWrite(false)
     }
-
+    useEffect(()=>{
+        setMounted(true)
+    },[])
     useEffect(()=>{
         //console.log(pk,"changed pk")
         if (user!==null) {
