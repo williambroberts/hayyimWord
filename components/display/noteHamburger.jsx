@@ -30,6 +30,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
     const [mounted,setMounted]=useState(false)
+    const [isCopied,setIsCopied]=useState(false)
     const handleClose = ()=>{
         setIsNote(false)
         setIsHighlight(false)
@@ -216,6 +217,15 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
           console.error('Error deleting highlight: ', error);
         }
     }
+    const handleCopy = ()=>{
+        navigator.clipboard.writeText(text)
+        setIsCopied(true)
+        setTimeout(()=>{
+            setIsCopied(false)
+        },1000)
+        console.log(text,"copied")
+
+    }
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
@@ -235,7 +245,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         </div>
         <div className='note-options-wrapper'>
            <div className={`note-options ${isHighlight? "":isWrite? "":"open"}`}>
-            <span className='note-span'>Copy</span>
+            <span className='note-span' onClick={()=>handleCopy()}>{isCopied? "Done": "Copy"}</span>
             <span  className='note-span' onClick={()=>setIsWrite(true)}>Note</span>
             <span  className='note-span' onClick={()=>setIsHighlight(true)}>Highlight</span>
              
