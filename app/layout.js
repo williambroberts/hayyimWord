@@ -6,6 +6,7 @@ import "../styles/misc.css"
 import "../styles/footer.css"
 import "../styles/header.css"
 import "../styles/data.css"
+import "../styles/animation.css"
 import { Inter } from 'next/font/google'
 import IsAUserLoggedInProvider from "@/contexts/authContext"
 import Header from "@/components/header/header"

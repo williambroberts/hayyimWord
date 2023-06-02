@@ -1,0 +1,12 @@
+.loading {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+}
+
+.loading-span {
+    text-align: center;
+    font-size: var(--font-size-24);
+    color: var(--t-1);
+}
