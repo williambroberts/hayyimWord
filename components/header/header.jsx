@@ -8,6 +8,7 @@ import Hamburger from './hamburger'
 import Search from './search'
 import { BookContext } from '@/contexts/books'
 import IconMagnify from '../icons/action/mag'
+import ReactThemeButton from '../theme/themeReact/reactThemeButton'
 const Header = () => {
   const pathname = usePathname()
   console.log(pathname,"pathname")
@@ -63,6 +64,7 @@ const Header = () => {
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}
 
     <span className='header-theme'><ThemeButton/></span>
+    <span className=''><ReactThemeButton/></span>
     <span className='header-search' onClick={()=>setIsSearch((prev)=>true)}><IconMagnify/></span>
     </nav>
     <div className={`hamburger-blur ${isHamburger? 'open':''} ${isSearch? "open":""}`} onClick={()=>handleMenu()}></div>

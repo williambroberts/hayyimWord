@@ -75,3 +75,24 @@
     font-weight: 400;
     display: inline;
   }
+
+  .react-theme-button {
+    background-color:transparent;
+    color: var(--t-1);
+    font-size: var(--font-size-16);
+    padding: 4px;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 30px;
+    transition: var(--transition-1);
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.5rem;
+
+  }
+  .react-theme-button:hover {
+    background-color: var(--bg-3);
+  }

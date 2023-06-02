@@ -13,6 +13,9 @@ import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
 import BookProvider from "@/contexts/books"
 import DataProvider from "@/contexts/dataContext"
+import ReactThemeProvider, { ReactThemeContext } from "@/components/theme/themeReact/reactThemeProvider"
+import { useContext } from "react"
+import ThemeLayout from "@/components/theme/themeReact/themelayout"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -21,22 +24,34 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body className={inter.className}>
+        <ReactThemeProvider>
+
+       
+       
       <ProviderForTheme>
         <IsAUserLoggedInProvider>
           <DataProvider>
           <BookProvider>
-             <Header/>
+
+           
+           <ThemeLayout>
+              <Header/>
             {children}
-            <Footer/>
+              <Footer/>
+           </ThemeLayout>
+
+          
           </BookProvider>
           </DataProvider>
         </IsAUserLoggedInProvider>
       </ProviderForTheme>
       
-
+        
+        </ReactThemeProvider>
         </body>
     </html>
   )
