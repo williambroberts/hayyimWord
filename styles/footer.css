@@ -25,3 +25,13 @@
     position: relative;
     gap: 0.25rem;
 }
+
+.footer-link {
+    text-decoration: underline;
+    color: var(--t-3);
+    font-weight: 400;
+    font-size: var(--font-size-14);
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}

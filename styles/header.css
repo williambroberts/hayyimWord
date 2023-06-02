@@ -56,6 +56,7 @@
       box-sizing: border-box;
       padding: 0rem 0.0rem;
       overflow-y: hidden;
+      overflow-x: hidden;
       --hamburger-x-padding:1rem;
       box-shadow: var(--box-shadow-1);
       z-index: 1;
@@ -311,7 +312,7 @@ width: 100%;
     justify-content: flex-start;
     gap:1rem;
     top: 0px;
-    z-index: 1;
+    /* z-index: 1; */
     background-color: var(--navy);
     box-shadow: var(--box-shadow-1);
     padding: 0.5rem var(--hamburger-x-padding);
@@ -388,7 +389,7 @@ width: 100%;
     background-color: var(--bg-2);
     color: var(--t-1);
     position:absolute ;
-    top: 30%;
+    top: 0%;
     cursor: pointer;
     padding: 0rem var(--hamburger-x-padding);
     border: 1px solid var(--bg-4);
