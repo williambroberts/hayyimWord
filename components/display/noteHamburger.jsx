@@ -219,11 +219,10 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     }
     const handleCopy = ()=>{
         navigator.clipboard.writeText(text)
-        setIsCopied(true)
-        let timer = setTimeout(()=>{
+       setTimeout(()=>{
             setIsCopied(false)
         },1000)
-        clearTimeout(timer)
+        
         console.log(text,"copied")
 
     }
