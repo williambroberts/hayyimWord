@@ -7,8 +7,8 @@
  ### Date made 🗓: 05/2023
  
   ## Description 👨‍💻
-  This is a **fullstack** emoji search website I built for searching and copying emojis into websites and projects. It uses `firebase` for the backend for a user to save their favourite emojis and `Next.js 13`, for the front end. It is fully mobile responsive and has over **4,000 emojis** to choose from. It allows google noto snippets to be copied into html code. It has search by name and category functions.
-  
+<!--   This is a Bible study and search App. It is a full stack site that offers note taking and highlight functions for users and allows for searching for keywords and phrases. It uses 2 APIs and offers different bible translations. It is fully responsive, with variable text sizes and color themes available.  -->
+ This is a Bible study and search App. The app provides a comprehensive Bible study experience, enabling users to search, read, highlight, take notes, and access different translations of the Bible. 
    <p align="right"><a href="#readme-top">back to top ☝🏼</a></p>
 <!-- Built with -->
 
@@ -28,6 +28,6 @@ If you have any questions, please reach out to me via socials or by sending an e
 
 <a href="https://www.linkedin.com/in/williambroberts/" target="_blank">LinkedIn</a> | <a href="https://github.com/williambroberts" target="_blank">GitHub</a>
 
-Project Link: [https://github.com/williambroberts/EmojiSearch](https://github.com/williambroberts/EmojiSearch)
+Project Link: [https://github.com/williambroberts/hayyimWord](https://github.com/williambroberts/hayyimWord)
 
   <p align="right"><a href="#readme-top">back to top ☝🏼</a></p>
