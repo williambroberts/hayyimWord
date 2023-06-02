@@ -56,6 +56,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                     <span className={`theme-button-light ${theme==="light"? "checked-light":""}`} onClick={()=>setTheme("light")}>Light</span>
                     <span className={`theme-button-dark  ${theme==="dark"? "checked-dark":""}`} onClick={()=>setTheme("dark")}>Dark</span>
                     <span className={`theme-button-sepia  ${theme==="sepia"? "checked-light":""}`} onClick={()=>setTheme("sepia")}>Sepia</span>
+                    <span className={`theme-button-rose  ${theme==="rose"? "checked-light":""}`} onClick={()=>setTheme("rose")}>Rose</span>
                 </FlexRow>
 
             </div>

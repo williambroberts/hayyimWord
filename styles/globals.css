@@ -31,6 +31,23 @@
     --theme2:#393939;
     --bg-b:#1c1c1cf2;
   } 
+  [data-theme='rose'] {
+    --invert:0;
+
+
+    --bg-1:#ffe8e5;
+    --bg-2:#f6cfca;
+    --bg-3: #eabfb9;
+    --bg-4: #b86b77;
+
+    --t-1:#1A1717;
+    --t-2:#332E2E;
+    --t-3:#998B89;
+    --t-4:#E6D1CE;
+    --theme:#E7525B;
+    --theme2:#F17881;
+    --bg-b:#1c1c1cf2;
+  }
   [data-theme='sepia'] {
     --invert:0;
 
@@ -38,7 +55,7 @@
     --bg-1:#eadbcb;
     --bg-2:#e3ceb9;
     --bg-3: #dcc1a7;
-    --bg-4: #cda882;
+    --bg-4: #4b4742;
 
     --t-1:#000000;
     --t-2:#38393B;
@@ -198,7 +215,13 @@
   ::-webkit-scrollbar-thumb:hover {
     background-color: var(--bg-3);
   }
-  
+  body > div {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
   main {
     
     margin: 0px 0px 0px 0px;
@@ -211,7 +234,8 @@
     flex-direction: column;
     align-items: center;
     padding-top: 80px;
-    
+    box-sizing: border-box;
+    height: 100%;
     
     
     

@@ -578,6 +578,22 @@ input[type="range"]{
 .theme-button-sepia.checked-light {
     outline: 3px solid var(--red);
 }
+.theme-button-rose {
+    width:50px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--bg-4);
+    color:#998B89 ;
+    background-color:#eabfb9;
+    font-size: var(--font-size-14);
+    cursor: pointer;
+}
+.theme-button-rose.checked-light {
+    outline: 3px solid #F17881;
+}
 .theme-button-light.checked-light {
     outline: 3px solid var(--paleblue);
 }
