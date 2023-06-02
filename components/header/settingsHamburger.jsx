@@ -55,6 +55,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                 <FlexRow gap={"1rem"}>
                     <span className={`theme-button-light ${theme==="light"? "checked-light":""}`} onClick={()=>setTheme("light")}>Light</span>
                     <span className={`theme-button-dark  ${theme==="dark"? "checked-dark":""}`} onClick={()=>setTheme("dark")}>Dark</span>
+                    <span className={`theme-button-sepia  ${theme==="sepia"? "checked-light":""}`} onClick={()=>setTheme("sepia")}>Sepia</span>
                 </FlexRow>
 
             </div>

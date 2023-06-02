@@ -562,6 +562,19 @@ input[type="range"]{
     font-size: var(--font-size-14);
     cursor: pointer;
 }
+.theme-button-sepia {
+    width:50px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--bg-4);
+    color:#46220f ;
+    background-color:#e3ceb9;
+    font-size: var(--font-size-14);
+    cursor: pointer;
+}
 .theme-button-light.checked-light {
     outline: 3px solid var(--paleblue);
 }

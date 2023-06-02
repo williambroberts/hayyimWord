@@ -11,22 +11,13 @@
     --t-2:#38393B;
     --t-3:#898E96;
     --t-4:#989EA6;
-    /* cedric */
-    /* --bg-1:#161616;
-    --bg-2:#1c1c1c;
-    --bg-3:#2b2b2b;
-    --bg-4:#282828;
-
-    --t-1:#ffffff;
-    --t-2:#f2f2f2;
-    --t-3:#7d8084;
-    --t-4:#7c7f82; */
+    
     --bg-b:#fffffff2;
   }
   [data-theme='dark'] {
     --invert:0;
 
-/* cedric */
+
     --bg-1:#161616;
     --bg-2:#1c1c1c;
     --bg-3:#2b2b2b;
@@ -40,7 +31,23 @@
     --theme2:#393939;
     --bg-b:#1c1c1cf2;
   } 
-  
+  [data-theme='sepia'] {
+    --invert:0;
+
+
+    --bg-1:#eadbcb;
+    --bg-2:#e3ceb9;
+    --bg-3: #dcc1a7;
+    --bg-4: #cda882;
+
+    --t-1:#000000;
+    --t-2:#38393B;
+    --t-3:#46220f;
+    --t-4:#704214;
+    --theme:#0C2365;
+    --theme2:#315788;
+    --bg-b:#1c1c1cf2;
+  }
   *  {
     padding:0px;
     margin:0px;
