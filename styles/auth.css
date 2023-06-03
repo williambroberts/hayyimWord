@@ -86,3 +86,21 @@
     color: var(--blue2);
     text-decoration: underline;
 }
+
+.google-signin {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+    color: var(--white);
+    font-size: var(--font-size-16);
+    font-weight: 400;
+    background-color: var(--theme2);
+    padding: 0.5rem 0.75rem;
+    border-radius: 3px;
+    justify-content: center;
+    transition: var(--transition-1);
+}

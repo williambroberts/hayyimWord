@@ -7,6 +7,7 @@ import { firestore } from '@/firebase/firebaseConfig';
 import Link from 'next/link'
 import Title from '../setup/title';
 import { Inter } from 'next/font/google'
+import { signInWithGoogle } from '@/firebase/auth/signUpWithGmail';
 const inter  = Inter({subsets:["latin"]})
 
 const SignUpForm = () => {
@@ -42,6 +43,25 @@ const SignUpForm = () => {
             return
         }
     }
+    const handleGoogleSignIn =async () =>{
+        const {result,error}= await signInWithGoogle()
+        if (error){
+            console.log(error)
+            return
+        }else {
+            console.log(result)
+            try {
+                setDoc(doc(firestore, 'notes', result.user.uid), {
+                    notes: [],"highlights": [],
+                  });
+               }catch (err){
+                console.log(err,"err")
+              }
+
+            router.push("/")
+        }
+        
+    }
   return (
     <div className='auth-form-container'>
         <Title text={"Hayyim Word"}/>
@@ -58,6 +78,8 @@ const SignUpForm = () => {
              placeholder='Confirm password'  required onChange={(e)=>setConfirmPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
         </form>
+
+        <span onClick={()=>handleGoogleSignIn()} className='google-signin'>Sign in with google</span>
         <span className='auth-span'>
             Already have an account?
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>

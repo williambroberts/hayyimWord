@@ -31,7 +31,8 @@ const Display = () => {
         
         const [notePks,setNotePks]=useState(null)
         useEffect(()=>{
-          let newpks= []
+          if (user){
+            let newpks= []
           for (let i=0;i<firebaseNotes?.length;i++){
             if (!newpks.includes[firebaseNotes[i].pk]){
               newpks.push(firebaseNotes[i].pk)
@@ -40,8 +41,12 @@ const Display = () => {
           }
           setNotePks(newpks)
           console.log(newpks,"new pks")
+          }else {
+            setNotePks((prev)=>null)
+          }
+          
 
-        },[firebaseNotes])
+        },[firebaseNotes,user])
         useEffect(()=>{
           //console.log("scroll changed needed",startVerse)
           const verseSpans = document.querySelectorAll('.text-paragraph-verse-number');

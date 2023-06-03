@@ -18,7 +18,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     const theYear = thedate.getFullYear()
     const theMonth=thedate.getMonth()+1
     const fulldate = theDay+"/"+theMonth+"/"+theYear
-    const [message,setMessage]=useState(null)
+    const [message,setMessage]=useState("")
     const {user}=useContext(IsAUserLoggedInContext)
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,
@@ -219,6 +219,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
     }
     const handleCopy = ()=>{
         navigator.clipboard.writeText(text)
+        setIsCopied(true)
        setTimeout(()=>{
             setIsCopied(false)
         },1000)
