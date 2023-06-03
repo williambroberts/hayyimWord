@@ -7,8 +7,11 @@ import { firestore } from '@/firebase/firebaseConfig';
 import Link from 'next/link'
 import Title from '../setup/title';
 import { Inter } from 'next/font/google'
-import { signInWithGoogle } from '@/firebase/auth/signUpWithGmail';
+import { signInWithGoogle,signInWithFacebook,signInWithGithub } from '@/firebase/auth/signUpWithProvider';
 import IconGoogle from '../icons/social/google';
+import IconGithub from '../icons/social/github';
+import IconFacebook from '../icons/social/facebook';
+
 const inter  = Inter({subsets:["latin"]})
 
 const SignUpForm = () => {
@@ -63,6 +66,44 @@ const SignUpForm = () => {
         }
         
     }
+    const handleGithubSignIn =async () =>{
+        const {result,error}= await signInWithGithub()
+        if (error){
+            console.log(error)
+            return
+        }else {
+            console.log(result)
+            try {
+                setDoc(doc(firestore, 'notes', result.user.uid), {
+                    notes: [],"highlights": [],
+                  });
+               }catch (err){
+                console.log(err,"err")
+              }
+
+            router.push("/")
+        }
+        
+    }
+    const handleFacebookSignIn =async () =>{
+        const {result,error}= await signInWithFacebook()
+        if (error){
+            console.log(error)
+            return
+        }else {
+            console.log(result)
+            try {
+                setDoc(doc(firestore, 'notes', result.user.uid), {
+                    notes: [],"highlights": [],
+                  });
+               }catch (err){
+                console.log(err,"err")
+              }
+
+            router.push("/")
+        }
+        
+    }
   return (
     <div className='auth-form-container'>
         <Title text={"Hayyim Word"}/>
@@ -80,7 +121,9 @@ const SignUpForm = () => {
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
         </form>
 
-        <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with google</span>
+        <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with Google</span>
+        <span onClick={()=>handleGithubSignIn()} className='google-signin'><IconGithub/> Sign in with Github</span>
+        <span onClick={()=>handleFacebookSignIn()} className='google-signin'><IconFacebook/> Sign in with Facebook</span>
         <span className='auth-span'>
             Already have an account?
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>
