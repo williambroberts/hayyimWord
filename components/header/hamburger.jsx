@@ -44,7 +44,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
   }
   return (
     <div className={`hamburger ${isHamburger? "open":""} `}>
-      <span className='hamburger-title'>Hayyim Word</span>
+      <span className='hamburger-title'>Hayyim Word חיים </span>
         <div className='hamburger-link-div'>
        
           <HamburgerItem link={"/"} text={"Home"} icon={<IconHome/>} setIsHamburger={setIsHamburger}/>

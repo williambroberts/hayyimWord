@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Title from '../setup/title';
 import { Inter } from 'next/font/google'
 import { signInWithGoogle } from '@/firebase/auth/signUpWithGmail';
+import IconGoogle from '../icons/social/google';
 const inter  = Inter({subsets:["latin"]})
 
 const SignUpForm = () => {
@@ -79,7 +80,7 @@ const SignUpForm = () => {
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
         </form>
 
-        <span onClick={()=>handleGoogleSignIn()} className='google-signin'>Sign in with google</span>
+        <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with google</span>
         <span className='auth-span'>
             Already have an account?
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>

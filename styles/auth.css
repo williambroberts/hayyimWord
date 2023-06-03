@@ -98,9 +98,14 @@
     color: var(--white);
     font-size: var(--font-size-16);
     font-weight: 400;
-    background-color: var(--theme2);
+    background-color: var(--theme);
     padding: 0.5rem 0.75rem;
     border-radius: 3px;
     justify-content: center;
     transition: var(--transition-1);
+    gap: 0.5rem;
+}
+
+.google-signin:hover {
+    opacity: 0.9;
 }

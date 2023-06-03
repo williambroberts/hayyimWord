@@ -1,6 +1,7 @@
 "use client"
 import React,{useState} from 'react'
-
+import { signInWithGoogle } from '@/firebase/auth/signUpWithGmail';
+import IconGoogle from '../icons/social/google';
 import { useRouter } from 'next/navigation' 
 import Link from 'next/link'
 import Title from '../setup/title'
@@ -26,6 +27,25 @@ const LoginForm = () => {
             return
         }
     }
+    const handleGoogleSignIn =async () =>{
+        const {result,error}= await signInWithGoogle()
+        if (error){
+            console.log(error)
+            return
+        }else {
+            console.log(result)
+            try {
+                setDoc(doc(firestore, 'notes', result.user.uid), {
+                    notes: [],"highlights": [],
+                  });
+               }catch (err){
+                console.log(err,"err")
+              }
+
+            router.push("/")
+        }
+        
+    }
   return (
     <div className='auth-form-container'>
         <Title text={"Hayyim Word"}/>
@@ -39,6 +59,7 @@ const LoginForm = () => {
             placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Login</span></button>
         </form>
+        <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with google</span>
         <span className='auth-span'>
            Don&apos;t have an account?
             <Link href={"/signup"} className='auth-link'>Sign up</Link>
