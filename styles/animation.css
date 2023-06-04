@@ -7,6 +7,6 @@
 
 .loading-span {
     text-align: center;
-    font-size: var(--font-size-24);
+    font-size: var(--font-size-48);
     color: var(--t-1);
 }
