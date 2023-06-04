@@ -23,6 +23,7 @@ const BookProvider = ({children}) => {
    const [globalFontSize,setGlobalFontSize]=useState(16)
    const [scrollChangeNeeded,setScrollChangeNeeded]=useState(false)
    const [isNote,setIsNote]=useState(false)
+   const [globalLineHeight,setGlobalLineHeight]=useState(1.5)
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -43,7 +44,7 @@ const BookProvider = ({children}) => {
    },[bollsTranslation])
   return (
    <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
-    openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,
+    openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,globalLineHeight,setGlobalLineHeight,
     isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,isNote,setIsNote,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings

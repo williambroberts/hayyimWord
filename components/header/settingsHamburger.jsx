@@ -9,29 +9,71 @@ import IconMagnifyMinusOutline from '../icons/action/magnifysmall'
 import BollsTranslations from "../../app/api/bible/translationsBolls.json"
 import SearchTranslations from "../../app/api/bible/translationsSearch.json"
 import LogOutButton from '../auth/LogOutButton'
+import IconPlusCircle from '../icons/action/plus'
+import IconMinusCircle from '../icons/action/minus'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
     const { theme, setTheme } = useTheme()
 
-    const {globalFontSize,setGlobalFontSize,
+    const {globalFontSize,setGlobalFontSize,setGlobalLineHeight,globalLineHeight,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
+        const roundedLineHeight = globalLineHeight.toFixed(1)
         useEffect(()=>{
             console.log(searchTranslation,"s trans")
         },[searchTranslation])
         const handlePlus = ()=>{
-            // console.log("mag",globalFontSize)
-            // if (globalFontSize===24){
-            //     setGlobalFontSize(24)
-            // }else{
-            //     setGlobalFontSize((prev)=>prev+1)
-            // }
+            console.log("mag",globalFontSize)
+            if (globalFontSize===24){
+                setGlobalFontSize(24)
+                let myButton = document.querySelector(".font-size-mag")
+                myButton.style.color = "var(--red)"
+                setTimeout(()=>{
+                    myButton.style.color = "var(--theme)"
+                },1000)
+                return
+            }else{
+                setGlobalFontSize((prev)=>prev+1)
+            }
         }
 
         const handleMinus = ()=>{
-            // if (globalFontSize===12){
-            //     return
-            // }else{
-            //     setGlobalFontSize((prev)=>prev-1)
-            // }
+            if (globalFontSize===12){
+                let myButton = document.querySelector(".font-size-minus")
+                myButton.style.color = "var(--red)"
+                setTimeout(()=>{
+                    myButton.style.color = "var(--theme)"
+                },1000)
+                return
+            }else{
+                setGlobalFontSize((prev)=>prev-1)
+            }
+        }
+        const handlePlusLineHeight = ()=>{
+            if (globalLineHeight>=2.5){
+                setGlobalLineHeight(2.5)
+                let myButton = document.querySelector(".line-height-plus")
+                myButton.style.color = "var(--red)"
+                setTimeout(()=>{
+                    myButton.style.color = "var(--theme)"
+                },1000)
+                return
+            }else{
+                setGlobalLineHeight((prev)=>parseFloat(prev+.1))
+            }
+            console.log(globalLineHeight,"line heihgt")
+        }
+        const handleMinusLineHeight = ()=>{
+            if (globalLineHeight<=1){
+                setGlobalLineHeight(1)
+                let myButton = document.querySelector(".line-height-minus")
+                myButton.style.color = "var(--red)"
+                setTimeout(()=>{
+                    myButton.style.color = "var(--theme)"
+                },1000)
+                return
+            }else{
+                setGlobalLineHeight((prev)=>parseFloat(prev-.1))
+            }
+            console.log(globalLineHeight,"line heihgt")
         }
   return (
     <div className={`settings ${isSettings? "open" : ""}`}>
@@ -43,13 +85,21 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
             <div className='font-size-container'>
                
                 <label htmlFor='font-size-input' className='font-size-input-name'>Font Size:</label>
-                <span className='font-size-span'>{globalFontSize}(px)</span>
-                <span className='font-size-mag' onClick={()=>handleMinus()}><IconMagnifyMinusOutline/></span>
-                <input type='range' max="24" min="12" 
+                <span className='font-size-span'>{globalFontSize.toFixed(1)}(px)</span>
+                <button className='font-size-minus' onClick={()=>handleMinus()}><IconMagnifyMinusOutline/></button>
+                {/* <input type='range' max="24" min="12" 
                 className='font-size-input'
-                name="font-size-input" value={globalFontSize} onChange={(e)=>setGlobalFontSize(e.target.value)}/>
-                <span className='font-size-mag'  onClick={()=>handlePlus()}><IconMagnifyPlusOutline/></span>
+                name="font-size-input" value={globalFontSize} onChange={(e)=>setGlobalFontSize(e.target.value)}/> */}
+                <button className='font-size-mag'  onClick={()=>handlePlus()}><IconMagnifyPlusOutline/></button>
             </div>
+            <div className='font-size-container'>
+               
+               <label htmlFor='font-size-input' className='font-size-input-name'>Line height:</label>
+               <span className='font-size-span'>{roundedLineHeight}(rem)</span>
+               <button className='line-height-minus' onClick={()=>handleMinusLineHeight()}><IconMinusCircle/></button>
+              
+               <button className='line-height-plus'  onClick={()=>handlePlusLineHeight()}><IconPlusCircle/></button>
+           </div>
             <div className='color-theme-container'>
                 <span>Color Theme</span>
                 <FlexRow gap={"1rem"}>
