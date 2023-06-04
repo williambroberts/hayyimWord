@@ -524,9 +524,9 @@ input[type="range"]{
     display: flex;
     align-items: center;
     cursor: pointer;
-    
-    width: 26px;
-    aspect-ratio: 1/1;
+    ---button-dim:26px;
+    width: var(---button-dim);
+    height:var(---button-dim) ;
     border: 1px solid var(--bg-2);
     border-radius: 50%;
     /* outline: 3px solid var(--theme2); */
@@ -567,6 +567,7 @@ input[type="range"]{
     background-color: var(--white);
     font-size: var(--font-size-14);
     cursor: pointer;
+    box-shadow: var(--box-shadow-1);
 }
 .theme-button-dark{
     width:50px ;
@@ -580,6 +581,7 @@ input[type="range"]{
     background-color: var(--bg-dt);
     font-size: var(--font-size-14);
     cursor: pointer;
+    box-shadow: var(--box-shadow-1);
 }
 .theme-button-sepia {
     width:50px ;
@@ -593,6 +595,7 @@ input[type="range"]{
     background-color:#e3ceb9;
     font-size: var(--font-size-14);
     cursor: pointer;
+    box-shadow: var(--box-shadow-1);
 }
 .theme-button-sepia.checked-light {
     outline: 3px solid var(--red);
@@ -609,6 +612,7 @@ input[type="range"]{
     background-color:#eabfb9;
     font-size: var(--font-size-14);
     cursor: pointer;
+    box-shadow: var(--box-shadow-1);
 }
 .theme-button-rose.checked-light {
     outline: 3px solid #F17881;
