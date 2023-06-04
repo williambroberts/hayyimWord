@@ -110,6 +110,18 @@
     z-index: 0;
     position: relative;
 }
+.hamburger-user-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    flex-wrap: wrap;
+    
+}
+.hamburger-user {
+    color:var(--grey2);
+    font-size: var(--font-size-14);
+    font-weight: 400;
+}
 .header-book {
     color: var(--theme);
     font-size: var(--font-size-16);
@@ -394,6 +406,7 @@ width: 100%;
     padding: 0rem var(--hamburger-x-padding);
     border: 1px solid var(--bg-4);
     box-sizing: border-box;
+    overflow-y: auto;
 }
 
 .chapters-hamburger.open {
@@ -408,7 +421,7 @@ width: 100%;
 
 .chapter-item {
     color: var(--t-1);
-    padding: 0.25rem;
+    padding: 0.3rem;
 
 }
 
@@ -671,3 +684,4 @@ input[type="range"]{
     padding: 0.125rem;
     color: var(--t-1);
 }
+

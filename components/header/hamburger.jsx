@@ -45,11 +45,12 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
   return (
     <div className={`hamburger ${isHamburger? "open":""} `}>
       <span className='hamburger-title'>Hayyim Word חיים </span>
+     
         <div className='hamburger-link-div'>
        
           <HamburgerItem link={"/"} text={"Home"} icon={<IconHome/>} setIsHamburger={setIsHamburger}/>
           
-        {user!==null?<LogOutButton/>:""}
+        {user!==null? <div  className='hamburger-user-wrapper'><LogOutButton/>  <span className='hamburger-user'>{user?.email}</span> </div>:""}
         {user!==null? <HamburgerItem link={"/notes"} text={"Notes"} icon={<IconNotes/>} setIsHamburger={setIsHamburger}/>
         :<HamburgerItem link={"/login"} text={"Login"} icon={<IconLogin/>} setIsHamburger={setIsHamburger}/> }
        {user!==null? <HamburgerItem link={"/highlights"} text={"Highlights"} icon={<IconHighlight/>} setIsHamburger={setIsHamburger}/>
