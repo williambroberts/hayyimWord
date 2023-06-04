@@ -84,7 +84,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
            <p style={{fontSize:`${globalFontSize}px`}}>And the serpent hath been subtile above every beast of the field which Jehovah God hath made, and he saith unto the woman, Is it true that God hath said, Ye do not eat of every tree of the garden?</p>
             <div className='font-size-container'>
                
-                <label htmlFor='font-size-input' className='font-size-input-name'>Font Size:</label>
+                <label htmlFor='font-size-input' className='font-size-input-name'>Font size:</label>
                 <span className='font-size-span'>{globalFontSize.toFixed(1)}(px)</span>
                 <button className='font-size-minus' onClick={()=>handleMinus()}><IconMagnifyMinusOutline/></button>
                 {/* <input type='range' max="24" min="12" 

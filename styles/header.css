@@ -516,44 +516,28 @@ input[type="range"]{
     font-size: var(--font-size-14);
 
 }
-.font-size-mag ,.line-height-plus{
+
+.font-size-minus , .line-height-minus, .font-size-mag ,.line-height-plus{
     color: var(--theme);
     font-size: var(--font-size-36);
     font-weight: 600;
     display: flex;
     align-items: center;
     cursor: pointer;
-    padding: 4px;
+    
     width: 26px;
     aspect-ratio: 1/1;
-    border: 1px solid var(--theme);
+    border: 1px solid var(--bg-2);
     border-radius: 50%;
-    outline: 3px solid var(--theme2);
-    transition: var(--transition-1);
-    /* margin-left: auto; */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-.font-size-minus , .line-height-minus{
-    color: var(--theme);
-    font-size: var(--font-size-36);
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    padding: 4px;
-    width: 26px;
-    aspect-ratio: 1/1;
-    border: 1px solid var(--theme);
-    border-radius: 50%;
-    outline: 3px solid var(--theme2);
+    /* outline: 3px solid var(--theme2); */
     transition: var(--transition-1);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-left: auto;
-    margin-right: 1rem;
+   justify-self: flex-end;
+    margin-right: 0rem;
+    background-color: var(--bg-1);
+    box-shadow: var(--box-shadow-1);
 }
 
 .font-size-minus:hover, .font-size-mag:hover {
