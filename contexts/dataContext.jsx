@@ -9,7 +9,7 @@ const DataProvider = ({children}) => {
     const [firebaseNotes,setFirebaseNotes]=useState(null)
     const {user}=useContext(IsAUserLoggedInContext)
     useEffect(()=>{
-        console.log("try snapshot")
+        console.log("try snapshot",user,"user current")
         if (user!==null){
             try{
             const liveHighlights = onSnapshot(doc(firestore, "notes", `${user?.uid}`), (doc) => {

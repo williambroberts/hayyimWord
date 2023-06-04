@@ -27,7 +27,7 @@ const IsAUserLoggedInProvider = ({children}) => {
         })
         //remember to clear useEffect when close route?
          return ()=> isUser()
-    },[user])
+    },[])
 
     
 
