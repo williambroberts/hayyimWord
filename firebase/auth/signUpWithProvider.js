@@ -1,5 +1,5 @@
 // import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
-import { getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,GithubAuthProvider,FacebookAuthProvider } from 'firebase/auth'
+import { getAuth,GoogleAuthProvider,signInWithPopup,signInWithRedirect,GithubAuthProvider,FacebookAuthProvider,getRedirectResult } from 'firebase/auth'
 import firebase_app from '../firebaseConfig'
 const auth = getAuth(firebase_app)
 
@@ -10,7 +10,8 @@ export const signInWithGoogle = async () => {
     try {
     // result = await signInWithPopup(auth, provider);
       
-    result = await signInWithRedirect(auth, provider)
+    signInWithRedirect(auth, provider)
+    result = await getRedirectResult(auth)
     }catch(err){
         error = err
     }
