@@ -8,12 +8,13 @@ export const signInWithGoogle = async () => {
     let result = null
     let error =null
     try {
-     result = await signInWithPopup(auth, provider);
+    // result = await signInWithPopup(auth, provider);
+      
+    result = await signInWithRedirect(auth, provider)
     }catch(err){
         error = err
     }
-    
-    //signInWithRedirect(auth, provider)
+  
     return {result,error}
   };
 

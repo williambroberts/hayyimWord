@@ -53,7 +53,7 @@ const SignUpForm = () => {
             console.log(error)
             return
         }else {
-            console.log(result)
+            console.log(result,"signed in with google")
             try {
                 setDoc(doc(firestore, 'notes', result.user.uid), {
                     notes: [],"highlights": [],
@@ -122,8 +122,8 @@ const SignUpForm = () => {
         </form>
 
         <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with Google</span>
-        <span onClick={()=>handleGithubSignIn()} className='google-signin'><IconGithub/> Sign in with Github</span>
-        <span onClick={()=>handleFacebookSignIn()} className='google-signin'><IconFacebook/> Sign in with Facebook</span>
+        {/* <span onClick={()=>handleGithubSignIn()} className='google-signin'><IconGithub/> Sign in with Github</span> */}
+        {/* <span onClick={()=>handleFacebookSignIn()} className='google-signin'><IconFacebook/> Sign in with Facebook</span> */}
         <span className='auth-span'>
             Already have an account?
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>

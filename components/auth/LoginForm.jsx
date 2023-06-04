@@ -99,8 +99,8 @@ const LoginForm = () => {
             <button type='submit' className='auth-button'><span className={inter.className}>Login</span></button>
         </form>
         <span onClick={()=>handleGoogleSignIn()} className='google-signin'><IconGoogle/> Sign in with google</span>
-        <span onClick={()=>handleGithubSignIn()} className='google-signin'><IconGithub/> Sign in with Github</span>
-        <span onClick={()=>handleFacebookSignIn()} className='google-signin'><IconFacebook/> Sign in with Facebook</span>
+        {/* <span onClick={()=>handleGithubSignIn()} className='google-signin'><IconGithub/> Sign in with Github</span> */}
+        {/* <span onClick={()=>handleFacebookSignIn()} className='google-signin'><IconFacebook/> Sign in with Facebook</span> */}
         <span className='auth-span'>
            Don&apos;t have an account?
             <Link href={"/signup"} className='auth-link'>Sign up</Link>
