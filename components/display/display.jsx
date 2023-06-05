@@ -40,7 +40,7 @@ const Display = () => {
 
           }
           setNotePks(newpks)
-          console.log(newpks,"new pks")
+          //console.log(newpks,"new pks")
           }else {
             setNotePks((prev)=>null)
           }
@@ -108,7 +108,7 @@ const Display = () => {
         
         const text = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
         setTheText(text)
-        console.log(text,"fetched the text another time")
+       // console.log(text,"fetched the text another time")
         setDisplayTitle([openBookIndex,openChapterIndex])
          
    }

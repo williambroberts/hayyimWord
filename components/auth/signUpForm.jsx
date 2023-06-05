@@ -2,7 +2,7 @@
 import React, {useState} from 'react'
 import signUpWithEmailAndPassword from '@/firebase/auth/signUpWithEmail';
 import { useRouter } from 'next/navigation'
-import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot } from "firebase/firestore";
+import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,runTransaction } from "firebase/firestore";
 import { firestore } from '@/firebase/firebaseConfig';
 import Link from 'next/link'
 import Title from '../setup/title';
@@ -49,24 +49,44 @@ const SignUpForm = () => {
         }
     }
     const handleGoogleSignIn =async () =>{
-        const {result,error}= await signInWithGoogle()
+        const {result,error} = await signInWithGoogle()
+        console.log(result)
         if (error){
-            console.log(error)
-            return
-        }else {
-            console.log(result,"signed in with google")
-            try {
-                setDoc(doc(firestore, 'notes', result.user.uid), {
-                    notes: [],"highlights": [],
-                  });
-               }catch (err){
-                console.log(err,"err")
-              }
-
-            router.push("/")
-        }
+         console.log(error)
+         //console.log("change here will error on sign up")
+         return
+     }else {
+       const userNoteDoc = doc(firestore, 'notes', result?.user?.uid);
+       try {
+         await runTransaction(firestore, async (transaction) => {
+           const docSnapshot = await transaction.get(userNoteDoc);
+          
+         
+       console.log("here will,",docSnapshot.exists(), docSnapshot.data())
+       if (!docSnapshot.exists()){
         
-    }
+         try {
+           await setDoc(doc(firestore, 'notes', result?.user.uid), {
+            notes: [],"highlights": [],
+             });
+          }catch (err){
+           console.log(err,"err")
+         } 
+         console.log("user notes doc added")
+       }else {
+         console.log("user has a document already")
+       }
+     })
+   } catch(err){
+     console.log(err,"err adding new user doc")
+   }
+
+        
+
+         router.push("/")
+         
+   }
+ }
     const handleGithubSignIn =async () =>{
         const {result,error}= await signInWithGithub()
         if (error){
