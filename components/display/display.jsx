@@ -198,12 +198,12 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
+        onClick={()=>handleClick(index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
       {notePks?.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
-      <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>handleClick(index)}> 
+      <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>RemoveHighlight()}> 
       {item.text.replace(/<br\s*\/?>/gi, ". ").replace(/<i>|<\/i>/g, '')}</span>
        
         </span>
