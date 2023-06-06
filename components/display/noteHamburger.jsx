@@ -203,7 +203,9 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         const userNoteRef = doc(firestore, 'notes', user?.uid);
      try {
           await runTransaction(firestore, async (transaction) => {
+            //get sapshot of document
             const docSnapshot = await transaction.get(userNoteRef);
+            //Transaction functions should not directly modify application state.
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete highlights")
          
@@ -218,7 +220,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
     }
     const handleCopy = ()=>{
-        navigator.clipboard.writeText(text)
+        navigator.clipboard.writeText(`${book} ${chapter}:${verse+1} ${text}`)
         setIsCopied(true)
        setTimeout(()=>{
             setIsCopied(false)

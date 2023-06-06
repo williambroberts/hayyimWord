@@ -22,6 +22,7 @@ const Header = () => {
   const [isHamburger,setIsHamburger]=useState(false)
   const [isSearch,setIsSearch]=useState(false)
   const [searchData,setSearchData]=useState(null)
+  const [filteredData,setFilteredData]=useState(null)
   const handleMenu = ()=>{
     setIsHamburger(false)
     setIsSearch(false)
@@ -74,7 +75,7 @@ const Header = () => {
     <Hamburger isHamburger={isHamburger}
     setIsHamburger={setIsHamburger}
     />
-    <Search searchData={searchData} setSearchData={setSearchData}
+    <Search searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}
     isSearch={isSearch} setIsSearch={setIsSearch}/>
   </header>
   )

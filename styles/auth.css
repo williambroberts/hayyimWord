@@ -109,3 +109,9 @@
 .google-signin:hover {
     opacity: 0.9;
 }
+
+.auth-demo {
+    color: var(--t-3);
+    font-size: var(--font-size-14);
+    font-weight: 400;
+}

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Title from '../setup/title'
 import { Inter } from 'next/font/google'
+import LogInWithEmailAndPassword from '@/firebase/auth/LogInWithEmail'
 import { signInWithGoogle,signInWithFacebook,signInWithGithub } from '@/firebase/auth/signUpWithProvider';
 import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,runTransaction } from "firebase/firestore";
 import { firestore } from '@/firebase/firebaseConfig';
@@ -112,10 +113,10 @@ const LoginForm = () => {
         <Title text={"Hayyim Word"}/>
         <form onSubmit={(e)=>handleSubmit(e)} className='auth-form'>
 
-            <label  htmlFor='login-email' className='auth-label'>Email</label>
+            <label  htmlFor='login-email' className='auth-label'>Email <span className='auth-demo'>demo: hayyim@email.com</span></label>
             <input type='email' name="login-email" placeholder='Email' className='auth-input'
             required onChange={(e)=>setEmail(e.target.value)}/>
-            <label  htmlFor='login-password' className='auth-label'>Password</label>
+            <label  htmlFor='login-password' className='auth-label'>Password <span className='auth-demo'>demo: hayyim</span></label>
             <input type='password' name="login-password" className='auth-input'
             placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Login</span></button>

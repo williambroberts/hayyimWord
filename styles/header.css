@@ -685,3 +685,38 @@ input[type="range"]{
     color: var(--t-1);
 }
 
+.settings-verse {
+    color: var(--blue2);
+    font-weight: 500;
+    font-size: inherit;
+}
+
+.search-category-name {
+    color: var(--t-1);
+    font-weight: 400;
+    font-size: var(--font-size-14);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+    grid-template-rows: auto;
+    position: relative;
+    cursor: pointer;
+    
+
+}
+.search-graph {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.25rem 0rem;
+}
+.search-category-bar {
+    background-color: var(--theme);
+    display: inline-block;
+    border-radius: 4px;
+    cursor: pointer;
+    color: var(--white);
+}
