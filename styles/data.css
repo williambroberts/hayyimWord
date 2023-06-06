@@ -116,3 +116,58 @@
     font-size: var(--font-size-14);
     color: var(--t-1);
 }
+.text-selector-container {
+    width: 100%;
+    height: 400px;
+}
+.text-selector {
+    display: flex;
+    align-items: center;
+    align-content: flex-start;
+    height: 400px;
+    background-color: var(--bg-3);
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    
+    position: relative;
+    gap: 0.25rem;
+    overflow-y: auto;
+    padding: 0.25rem;
+    box-sizing: border-box;
+    justify-content: flex-start;
+
+}
+.get-item {
+    background-color: var(--bg-1);
+    color: var(--t-1);
+    font-weight: var(--font-size-16);
+    padding:0.25rem ;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow-1);
+    width:60px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+}
+.get-item2 {
+    background-color: var(--bg-4);
+    color: var(--t-1);
+    font-weight: var(--font-size-16);
+    padding:0.25rem ;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow-1);
+    width:60px;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+}
+.get-item-number {
+    font-size: 7px;
+    color: var(--t-1);
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    padding: 0.125rem;
+}

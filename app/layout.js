@@ -16,6 +16,7 @@ import DataProvider from "@/contexts/dataContext"
 import ReactThemeProvider, { ReactThemeContext } from "@/components/theme/themeReact/reactThemeProvider"
 import { useContext } from "react"
 import ThemeLayout from "@/components/theme/themeReact/themelayout"
+import FireBooksProvider from "@/contexts/fireBooks"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -34,6 +35,9 @@ export default function RootLayout({ children }) {
        
       <ProviderForTheme>
         <IsAUserLoggedInProvider>
+          <FireBooksProvider>
+
+         
           <DataProvider>
           <BookProvider>
 
@@ -47,6 +51,8 @@ export default function RootLayout({ children }) {
           
           </BookProvider>
           </DataProvider>
+          
+          </FireBooksProvider>
         </IsAUserLoggedInProvider>
       </ProviderForTheme>
       

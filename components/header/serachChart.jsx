@@ -22,11 +22,11 @@ const handleFilter = (id,lo,hi)=>{
         setIndex(-1)
 
     }else {
-        console.log("index",id,lo,hi)
+        //console.log("index",id,lo,hi)
         setIndex((prev)=>id)
         setIsFiltered((prev)=>true)
         let newfilteredData = searchData.filter((item)=>item.book>=lo &&item.book<=hi )
-        console.log(newfilteredData.length,"new filted data length")
+        //console.log(newfilteredData.length,"new filted data length")
         setFilteredData(newfilteredData)
     }
     

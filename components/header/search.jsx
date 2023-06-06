@@ -20,16 +20,16 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
    const handleSubmit = (e)=>{
     e.preventDefault()
     setSearch((prev)=> !prev)
-    console.log("submitted")
+    //console.log("submitted")
     let gotSearchesRaw = localStorage.getItem("recentSearches")
     let gotSearches = JSON.parse(gotSearchesRaw)
     if (gotSearches===null){
-      console.log("no recent searches") 
+     // console.log("no recent searches") 
       localStorage.setItem("recentSearches",JSON.stringify([searchInput]))
       setRecentSearches([searchInput])
     }else {
       if (!gotSearches.includes(searchInput)){
-         console.log(gotSearches,"recent searches",typeof(gotSearches))
+        // console.log(gotSearches,"recent searches",typeof(gotSearches))
       gotSearches.push(searchInput)
       localStorage.setItem("recentSearches",JSON.stringify(gotSearches))
       setRecentSearches(gotSearches)
@@ -59,7 +59,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
         //console.log("searchinput,",searchInput)
         try {
             const data = await SearchBible(searchTranslation,searchInput)
-        console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+        //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
         if (data!==undefined){
           setSearchData((prev)=> {return Object.values(data?.results)[0]} )
         }

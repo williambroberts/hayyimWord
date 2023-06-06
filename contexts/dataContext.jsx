@@ -3,6 +3,7 @@ import React,{createContext,useContext,useEffect,useState} from 'react'
 import { IsAUserLoggedInContext } from './authContext'
 import { doc,onSnapshot } from 'firebase/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
+
 export const  DataContext = createContext()
 const DataProvider = ({children}) => {
     const [firebaseHighlights,setfirebaseHighlights]=useState(null)

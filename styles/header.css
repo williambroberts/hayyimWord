@@ -680,12 +680,12 @@ input[type="range"]{
 }
 
 .testament-title {
-    background-color: var(--bg-4);
-    column-rule: var(--t-1);
+    background-color: var(--bg-3);
+    
     width: 100%;
     font-size: var(--font-size-16);
     padding: 0.125rem;
-    color: var(--t-1);
+    color: var(--t-3);
 }
 
 .settings-verse {

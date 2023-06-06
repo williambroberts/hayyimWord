@@ -48,15 +48,15 @@ const Display = () => {
 
         },[firebaseNotes,user])
         useEffect(()=>{
-          //console.log("scroll changed needed",startVerse)
+         
           const verseSpans = document.querySelectorAll('.text-paragraph-verse-number');
-          //console.log(verseSpans)
+         
           for (const span of verseSpans) {
-           // console.log(span.textContent)
+        
             if (span.textContent.includes(startVerse)) {
               const elemPosition = span.getBoundingClientRect()
               const elemPositionY = elemPosition.top + window.pageYOffset;
-              //console.log(elemPosition,"elemPos",elemPositionY,"y")
+             
               window.scrollTo({ top: elemPositionY-136, behavior: 'smooth' });
               break; 
             }

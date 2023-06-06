@@ -17,6 +17,7 @@ import IconHighlight from '../icons/pages/highlights';
 import IconCreate from '../icons/pages/signup';
 import IconHome from '../icons/pages/home';
 import IconSettingsSharp from '../icons/pages/settings';
+import GetText from './getText';
 
 const Hamburger = ({setIsHamburger,isHamburger}) => {
   const {user} = useContext(IsAUserLoggedInContext)
@@ -60,15 +61,15 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
         </div>
         <span className='hamburger-title'>Books of the bible</span>
         <hr className='hamburger-hr'/>
-       <div className='chapters-old'>
+       {/* <div className='chapters-old'>
         <span className='testament-title'>Old Testament</span>
       {chaptersAndVerses.slice(0,39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
         </div>
      <div className='chapters-new'>
      <span className='testament-title'>New Testament</span>
       {chaptersAndVerses.slice(39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
-        </div>
-      
+        </div> */}
+      <GetText/>  
 
       <div className={`chapters-menu-blur ${isChaptersMenuOpen? "open": ""}`} onClick={()=>handleChaptersMenu()} 
       ></div>
