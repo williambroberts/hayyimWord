@@ -159,6 +159,7 @@
       overflow-x: hidden;
       overflow-y: scroll;  
       z-index: 1; 
+      background-color: var(--bg-1);
     }
     
 .search.open {
@@ -186,6 +187,7 @@
     padding: 1rem;
     align-items: center;
     gap: 1rem;
+    background-color: var(--bg-1);
 }
 input[type="text"].search-input {
     color:var(--t-2);
@@ -214,6 +216,7 @@ input[type="text"].search-input {
     overflow-x:hidden ;
     overflow-y: scroll;
     padding: 0rem 0.5rem;
+    background-color: var(--bg-1);
 }
 
 .search-result-item {
