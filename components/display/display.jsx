@@ -353,7 +353,7 @@ const Display = () => {
  className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
 
       {textArrays!==null? textArrays[index].map((item,index)=>(<span style={{backgroundColor:noteids?.includes(item.exactId)? "orange":"" }} 
-      id={item.exactId}
+      id={item.exactId} key={uuidv4()}
       title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{item.word}</span>)) : ""}
        
         </span>
