@@ -11,7 +11,7 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import IconDelete from '../icons/action/delete'
-const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert}) => {
+const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert,title}) => {
     const [isHighlight,setIsHighlight]=useState(false)
     const thedate = new Date()
     const theDay=thedate.getDate()

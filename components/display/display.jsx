@@ -15,7 +15,7 @@ import VerseItem from './verseItem';
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
-    const [re,setRe]=useState(false)
+    
     const [id,setId]=useState(undefined) //verse api id , 
     const [exactId,setExactId]=useState(undefined) // word id
     const [isWrite,setIsWrite]=useState(false)
@@ -26,6 +26,7 @@ const Display = () => {
     const [mounted,setMounted]=useState(false)
     const [displayText,setDisplayText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
+    const [title,setTitle]=useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -105,31 +106,7 @@ const Display = () => {
         useEffect(()=>{
           setMounted(true)
         },[])
-        useEffect(()=>{
-         // reHighlight()
-          console.log(noteids,"noteids")
-            if (firebaseNotes!==null){
-
-            
-             for (let note of firebaseNotes){
-            
-            try{
-              let myElem= document.querySelector(`#${note.exactId}`)
-              if (myElem!==null){
-               
-                myElem.classList.add("noted")
-                
-               console.log(myElem.classList,myElem.innerHTML)
-              }
-            }catch(err){
-              console.log(err)
-            }
-           
-          }
-          setRe((prev)=>!prev)
-          }
-         
-        },[noteids])
+       
     useEffect(()=>{
       const fetchAnotherTime = async ()=>{
         let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
@@ -197,14 +174,14 @@ const Display = () => {
         
          if (myElem!==null){
          if (myElem.id.includes("verse")){
-            let myVerse = document.querySelector(`.verse${clickedVerse}`)
-            console.log("my verse",myVerse,`.verse${clickedVerse}`)
+            let myVerse = document.querySelector(`#text-span${clickedVerse}`)
+            console.log("my verse",myVerse,`#text-span${clickedVerse}`)
             myVerse.style.backgroundColor="var(--theme2)"
          }else{
            myElem.style.backgroundColor="var(--theme2)"
          }
-       console.log(myElem.style.color,"color",myElem)
-         
+       console.log(myElem.style.color,"color",myElem,myElem.title)
+         setTitle(myElem.title)
        
       }
       }catch(err){
@@ -314,12 +291,9 @@ const Display = () => {
             let newid = "V"+theText[i].id+"V"+(index+1)
             span.id = newid
             
-            if (noteids?.includes(newid)){
-              span.classList.add("noted")
-              
-            }
+           
             item.replaceWith(span)
-            setRe((prev)=>!prev)
+           
 
           })
           newDisplayText.push(newElem) //or .innerHTML
@@ -343,7 +317,7 @@ const Display = () => {
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
         onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
-       > 
+      id={`text-span${index}`} > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
@@ -353,8 +327,8 @@ const Display = () => {
  className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
 
       {textArrays!==null? textArrays[index].map((item,index)=>(<span style={{backgroundColor:noteids?.includes(item.exactId)? "orange":"" }} 
-      id={item.exactId} key={uuidv4()}
-      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{item.word}</span>)) : ""}
+      id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
+      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : ""}
        
         </span>
         
@@ -373,7 +347,7 @@ const Display = () => {
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
     <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText} exactId={exactId}
-    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
+    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""} title={title}
     isNote={isNote} setIsNote={setIsNote} id={id} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
    <div className={`display-alert ${noUserALert? "open":""}`}>

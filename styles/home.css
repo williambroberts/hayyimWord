@@ -397,4 +397,5 @@ textarea::placeholder {
 }
 .verse-span-u {
     margin-left: 0.125rem;
+    text-decoration: underline;
 }
