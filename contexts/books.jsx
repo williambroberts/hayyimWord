@@ -6,6 +6,7 @@ import SearchTranslations from "../app/api/bible/translationsSearch.json"
 import { getChapter } from '@/app/api/bible/getChapter'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
+import getText from '@/app/api/bible/getText'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -27,21 +28,33 @@ const BookProvider = ({children}) => {
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
-
-   useEffect(()=>{
-    const fetchChapter = async ()=>{
-      console.log("new translation will be",bollsTranslation)
-      const data = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
-      setTheText(data)
-      setDisplayTitle([openBookIndex,openChapterIndex])
-      setScrollChangeNeeded((prev)=>!prev)
-      console.log(pathname)
-      if (pathname!=="/"){
-        router.push("/")
-      }
-    }
-    fetchChapter()
-   },[bollsTranslation])
+// useEffect(()=>{
+//   const fetchText =async ()=>{
+//     let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
+//     let data = await getText("kjv_strongs",reference)
+//     setScrollChangeNeeded((prev)=>!prev)
+//     setIsChaptersMenuOpen(false)
+//      setIsVersesMenuOpen(false)
+//      //🦧 history component WIll!
+//   setTheText(data.results.kjv_strongs)
+//    console.log(data.results.kjv_strongs)
+//   }
+//   fetchText()
+// },[])
+  //  useEffect(()=>{
+  //   const fetchChapter = async ()=>{
+  //     console.log("new translation will be",bollsTranslation)
+  //     const data = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
+  //     setTheText(data)
+  //     setDisplayTitle([openBookIndex,openChapterIndex])
+  //     setScrollChangeNeeded((prev)=>!prev)
+  //     console.log(pathname)
+  //     if (pathname!=="/"){
+  //       router.push("/")
+  //     }
+  //   }
+  //   fetchChapter()
+  //  },[bollsTranslation])
   return (
    <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
     openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,globalLineHeight,setGlobalLineHeight,

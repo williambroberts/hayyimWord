@@ -8,8 +8,8 @@ import { usePathname } from 'next/navigation';
 const GetItem = ({item,setIsChapter,isChapter,setIsVerse,isVerse,setIsHamburger}) => {
     const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex, startVerse,setStartVerse,
-        openChapterIndex,setOpenChapterIndex,isNote,setIsNote,
-        isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,
+        openChapterIndex,setOpenChapterIndex,isNote,setIsNote,setDisplayTitle,
+        isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,setTheText,
         isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
         } = useContext(BookContext)
        // const {book,handleGetBook} = useContext(FirebookContext)
@@ -26,11 +26,18 @@ const GetItem = ({item,setIsChapter,isChapter,setIsVerse,isVerse,setIsHamburger}
             }else {
                 console.log(item,"item",openBookIndex,openChapterIndex)
                 let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
-               // let data = await getText("kjv_strongs",reference)
+               let data = await getText("kjv_strongs",reference)
                 setStartVerse(item+1)
                 setIsHamburger((prev)=>false)
                 setScrollChangeNeeded((prev)=>!prev)
-                console.log(chaptersAndVerses[openBookIndex].shortname,openChapterIndex,item+1,reference)
+                setIsChaptersMenuOpen(false)
+                 setIsVersesMenuOpen(false)
+                 setDisplayTitle([openBookIndex,openChapterIndex])
+
+                 //🦧 history component WIll!
+              setTheText(data.results.kjv_strongs)
+               console.log(data.results.kjv_strongs)
+                //console.log(chaptersAndVerses[openBookIndex].shortname,openChapterIndex,item+1,reference)
                 
             }  
             //console.log(pathname)

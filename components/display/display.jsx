@@ -1,5 +1,5 @@
 "use client"
-import { getChapter } from '@/app/api/bible/getChapter'
+//import { getChapter } from '@/app/api/bible/getChapter'
 import { BookContext } from '@/contexts/books'
 import React,{useContext,useEffect,useState} from 'react'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
@@ -9,12 +9,13 @@ import { DataContext } from '@/contexts/dataContext'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
+import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
 const Display = () => {
-    const [chapter,setChapter]=useState(null)
+    //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     
-    const [pk,setPk]=useState(undefined)
+    const [id,setId]=useState(undefined)
     const [isWrite,setIsWrite]=useState(false)
     const [clickedVerse,setClickedVerse]=useState(-1)
     const [highlights,setHighlights] = useState(null)
@@ -29,20 +30,20 @@ const Display = () => {
         const {user}=useContext(IsAUserLoggedInContext)
         const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
         
-        const [notePks,setNotePks]=useState(null)
+        const [noteids,setNoteids]=useState(null)
         useEffect(()=>{
           if (user){
-            let newpks= []
+            let newids= []
           for (let i=0;i<firebaseNotes?.length;i++){
-            if (!newpks.includes[firebaseNotes[i].pk]){
-              newpks.push(firebaseNotes[i].pk)
+            if (!newids.includes[firebaseNotes[i].id]){
+              newids.push(firebaseNotes[i].id)
             }
 
           }
-          setNotePks(newpks)
-          //console.log(newpks,"new pks")
+          setNoteids(newids)
+          //console.log(newids,"new ids")
           }else {
-            setNotePks((prev)=>null)
+            setNoteids((prev)=>null)
           }
           
 
@@ -65,7 +66,7 @@ const Display = () => {
         },[scrollChangeNeeded])
         const reHighlight = ()=>{
           if (theText!==null && user!==null){
-            let firebasePks = []
+            let firebaseids = []
             let firebaseColors = []
           if (firebaseHighlights?.length===0){
             return
@@ -74,14 +75,14 @@ const Display = () => {
 
           
             for (let item of firebaseHighlights){
-              firebasePks.push(item.pk)
+              firebaseids.push(item.id)
               firebaseColors.push(item.color)
             }
 
-            const newHighlights =Array(theText.length).fill("var(--bg-1)")
-            for (let i=0; i<theText.length; i++){
-              if (firebasePks.includes(theText[i].pk)){
-                let index = firebasePks.lastIndexOf(theText[i].pk)
+            const newHighlights =Array(theText?.length).fill("var(--bg-1)")
+            for (let i=0; i<theText?.length; i++){
+              if (firebaseids.includes(theText[i].id)){
+                let index = firebaseids.lastIndexOf(theText[i].id)
                 newHighlights[i]=firebaseColors[index]
               }
             }
@@ -105,9 +106,10 @@ const Display = () => {
         },[theText])
     useEffect(()=>{
       const fetchAnotherTime = async ()=>{
-        
-        const text = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
-        setTheText(text)
+        let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
+        let data = await getText("kjv_strongs",reference)
+       
+        setTheText(data.results.kjv_strongs)
        // console.log(text,"fetched the text another time")
         setDisplayTitle([openBookIndex,openChapterIndex])
          
@@ -166,9 +168,9 @@ const Display = () => {
       }else{
         setClickedVerse(index)
         setIsNote(true)
-        setPk(theText[index].pk)
+        setId(theText[index].id)
       }
-     // console.log(theText[index].pk,index,", pk, index")
+     // console.log(theText[index].id,index,", id, index")
      
      
     }
@@ -176,7 +178,7 @@ const Display = () => {
       setIsNote(true)
       setIsWrite(true)
       setClickedVerse(index)
-      setPk(theText[index].pk)
+      setId(theText[index].id)
     }
     useEffect(()=>{
       const toggleAlert = ()=>{
@@ -194,6 +196,7 @@ const Display = () => {
       }
       toggleAlert()
     },[noUserALert])
+    console.log(theText,"theText")
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
@@ -201,7 +204,7 @@ const Display = () => {
         onClick={()=>handleClick(index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
-      {notePks?.includes(theText[index].pk)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
+      {noteids?.includes(theText[index].id)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
       <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>RemoveHighlight()}> 
       {item.text.replace(/<br\s*\/?>/gi, ". ").replace(/<i>|<\/i>/g, '')}</span>
@@ -223,7 +226,7 @@ const Display = () => {
     </div> */}
     <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText}
     isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
-    isNote={isNote} setIsNote={setIsNote} pk={pk} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
+    isNote={isNote} setIsNote={setIsNote} id={id} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
    <div className={`display-alert ${noUserALert? "open":""}`}>
       Please <Link href={"/login"}>log in</Link> to {alertText}
