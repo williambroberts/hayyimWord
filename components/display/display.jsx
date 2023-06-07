@@ -15,7 +15,8 @@ const Display = () => {
     //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
     
-    const [id,setId]=useState(undefined)
+    const [id,setId]=useState(undefined) //verse api id , 
+    const [exactId,setExactId]=useState(undefined) // word id
     const [isWrite,setIsWrite]=useState(false)
     const [clickedVerse,setClickedVerse]=useState(-1)
     const [highlights,setHighlights] = useState(null)
@@ -125,12 +126,15 @@ const Display = () => {
        // backgroundColor:"#FFF36D"
     }
     const RemoveHighlight = ()=>{
+      
         setStartVerse(-1)
         console.log("removed highlight")
         
     }
     const handleLeft = async ()=>{
-      
+      if (startVerse!==-1){
+        setStartVerse(-1)
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
       //console.log(openBookIndex,openChapterIndex,"old")
@@ -145,6 +149,9 @@ const Display = () => {
     }
 
     const handleRight = ()=>{
+      if (startVerse!==-1){
+        setStartVerse(-1)
+      }
       window.scrollTo({ top: 0, behavior: 'smooth' });
      // console.log(openBookIndex,openChapterIndex,"old")
       if (openChapterIndex===chaptersAndVerses[openBookIndex].chapters-1){
@@ -157,21 +164,50 @@ const Display = () => {
       //console.log(openBookIndex,openChapterIndex,"new") 
       setReFetch((prev)=>!prev)
     }
-    
-    const handleClick = (index) =>{
+    useEffect(()=>{
+      console.log("ching")
+      try {
+        let myElem = document.querySelector(`#${exactId}`)
+         if (myElem!==null){
+       console.log(myElem.style.color,"color")
+          myElem.style.backgroundColor="var(--theme2)"
+       
+      }
+      }catch(err){
+        console.log(err)
+      }
+      
+     
+      console.log(exactId)
+      
+    },[exactId])
+    const handleClick = (e,index) =>{
+      console.log("handleClick")
       if (startVerse!==-1){
         setStartVerse(-1)
         return
       }
-      if (isNote && clickedVerse!==-1) {
+
+      const clickedElement = e.target;
+      
+      let rowId = parseInt(clickedElement.id.split("V")[1])
+      console.log(rowId,clickedVerse,index)
+      if (isNote && clickedVerse!==-1 && rowId!==id) {
         setClickedVerse(-1)
         setIsNote(false)
-      }else{
-        setClickedVerse(index)
-        setIsNote(true)
-        setId(theText[index].id)
       }
-     // console.log(theText[index].id,index,", id, index")
+      else if (isNote && clickedVerse!==-1 && rowId===id){
+        setExactId(clickedElement.id)
+      
+      }else{
+        console.log(index,"index")
+        setExactId(clickedElement.id)
+        console.log(clickedElement);
+         setClickedVerse(index)
+        setIsNote(true)
+        setId(theText[index]?.id)
+      }
+     console.log(theText[index].id,index,", id, index",clickedElement.id,"exact id")
      
      
     }
@@ -197,7 +233,7 @@ const Display = () => {
       }
       toggleAlert()
     },[noUserALert])
-    console.log(theText,"theText")
+   // console.log(theText,"theText")
     useEffect(()=>{
       let newDisplayText=[]
       //let textverses = document.querySelectorAll('.text-paragraph-verse-text')
@@ -222,11 +258,14 @@ const Display = () => {
           const newElem = document.createElement('div')
           
           newElem.innerHTML=nt
-          newElem.querySelectorAll('span').forEach((item)=>{
+          newElem.querySelectorAll('span').forEach((item,index)=>{
             const span = document.createElement('span');
             span.textContent = item.textContent;
             span.title=item.title
-            console.log(item,typeof(item))
+            item.title!==""? span.className="text-text-span-u" :  span.className="text-text-span"
+            span.id = "V"+theText[i].id+"V"+(index+1)
+            // span.onclick=handleClick(index)
+           // console.log(item,typeof(item))
             item.replaceWith(span)
 
           })
@@ -237,7 +276,8 @@ const Display = () => {
         // console.log(newText,typeof(newText))
         }
         setDisplayText([...newDisplayText])
-        console.log(newDisplayText[0].innerHTML,typeof(newDisplayText[0].innerHTML))
+       // console.log(newDisplayText[0].innerHTML,typeof(newDisplayText[0].innerHTML))
+
       }
       
       
@@ -246,14 +286,14 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>handleClick(index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:clickedVerse===index? "var(--theme2)":highlights!==null? `${highlights[index]}`:""}}
+        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
        > 
-      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
+      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].id)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
      
- {displayText!==null? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>RemoveHighlight()}
- className='text-text'  dangerouslySetInnerHTML={{ __html: displayText[index].innerHTML }}></span>: ""}
+ {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={(e)=>handleClick(e,index)}
+ className='text-text'  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""}
      
        
         </span>

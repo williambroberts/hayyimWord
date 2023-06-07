@@ -363,11 +363,6 @@ textarea::placeholder {
     display: flex;
 }
 
-.text-text > span {
-    text-decoration: underline;
-    cursor: pointer;
-    margin-left: 0.125rem;
-}
 .text-text {
     display:inline-flex;
     align-items: center;
@@ -375,5 +370,15 @@ textarea::placeholder {
 }
 .text-span {
     display: flex;
-    
+}
+.text-text>span {
+    margin-left: 0.125rem;
+}
+.text-text-span {
+    background-color: transparent;
+}
+.text-text-span-u {
+    background-color: transparent;
+    text-decoration: underline;
+    cursor: pointer;
 }
