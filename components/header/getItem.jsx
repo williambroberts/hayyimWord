@@ -4,9 +4,10 @@ import { BookContext } from '@/contexts/books'
 import { FirebookContext } from '@/contexts/fireBooks';
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import getText from '@/app/api/bible/getText';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 const GetItem = ({item,setIsChapter,isChapter,setIsVerse,isVerse,setIsHamburger}) => {
     const pathname = usePathname()
+    const router = useRouter()
     const {setOpenBookIndex,openBookIndex, startVerse,setStartVerse,
         openChapterIndex,setOpenChapterIndex,isNote,setIsNote,setDisplayTitle,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,setTheText,

@@ -35,7 +35,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
         setIsNote(false)
         setIsHighlight(false)
         setIsWrite(false)
-        setMessage(null)
+        setMessage("")
     }
     useEffect(()=>{
         if (!isNote) {
@@ -115,9 +115,11 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({id:id,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
-            console.log("added note ",message)
-                
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({exactId:exactId,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
+            
+            let myElem = document.querySelector(`#${exactId}`)
+            myElem.style.color="red"
+            console.log("added note ",message,myElem)
             }catch (err){
             console.log(err)
             }
@@ -130,14 +132,14 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
     useEffect(()=>{
        
         if (user!==null) {
-            let notesPks = []
+            let notesExactIds = []
             let firebaseMessages = []
             for (let i=0;i<firebaseNotes?.length;i++) {
-                notesPks.push(firebaseNotes[i].id)
+                notesExactIds.push(firebaseNotes[i].exactId)
                 firebaseMessages.push(firebaseNotes[i].message)
             }
-            if (notesPks.includes(id)){
-                let index = notesPks.lastIndexOf(id)
+            if (notesExactIds.includes(exactId)){
+                let index = notesExactIds.lastIndexOf(exactId)
                 setMessage(firebaseMessages[index])
             }else{
                 setMessage("")
@@ -147,7 +149,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
         }else {
             setMessage("")
         }
-    },[id])
+    },[exactId])
 
      const handleDelete2 = async ()=>{
         if (user===null){
@@ -163,7 +165,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
            const notes = [...docSnapshot.data().notes]
             console.log(notes,"pre delete notes")
          
-          let updatedNotes = notes.filter((item,index)=>item.id!==id)
+          let updatedNotes = notes.filter((item,index)=>item.exactId!==exactId)
           transaction.update(userNoteRef, { notes: updatedNotes })
            console.log("deleted that note",message) 
           })
@@ -184,7 +186,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({id:id,message:""})})
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({exactId:exactId,message:""})})
             console.log("delted note ",message)
                 
             }catch (err){

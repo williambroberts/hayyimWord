@@ -37,13 +37,13 @@ const Display = () => {
           if (user){
             let newids= []
           for (let i=0;i<firebaseNotes?.length;i++){
-            if (!newids.includes[firebaseNotes[i].id]){
-              newids.push(firebaseNotes[i].id)
+            if (!newids.includes[firebaseNotes[i].exactId]){
+              newids.push(firebaseNotes[i].exactId)
             }
 
           }
           setNoteids(newids)
-          //console.log(newids,"new ids")
+          console.log(newids,"new ids")
           }else {
             setNoteids((prev)=>null)
           }
@@ -104,8 +104,28 @@ const Display = () => {
           setMounted(true)
         },[])
         useEffect(()=>{
-          reHighlight()
-        },[theText])
+         // reHighlight()
+          console.log(noteids,"noteids")
+            if (firebaseNotes!==null){
+
+            
+             for (let note of firebaseNotes){
+            
+            try{
+              let myElem= document.querySelector(`#${note.exactId}`)
+              if (myElem!==null){
+               
+                myElem.classList.add(".noted")
+               console.log(myElem.classList,myElem.innerHTML)
+              }
+            }catch(err){
+              console.log(err)
+            }
+           
+          }
+          }
+         
+        },[noteids])
     useEffect(()=>{
       const fetchAnotherTime = async ()=>{
         let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
@@ -140,7 +160,9 @@ const Display = () => {
       //console.log(openBookIndex,openChapterIndex,"old")
       if (openChapterIndex===0){
         setOpenBookIndex((prev)=>{return Math.max(0,openBookIndex-1)})
-        
+        if (openBookIndex!==0){
+          setOpenChapterIndex(chaptersAndVerses[openBookIndex-1].chapters-1)
+        }
       }else{
         setOpenChapterIndex((prev)=>{return prev-1})
       }
@@ -271,10 +293,15 @@ const Display = () => {
             span.textContent = item.textContent;
             span.title=item.title
             item.title!==""? span.className="text-text-span-u" :  span.className="text-text-span"
-            span.id = "V"+theText[i].id+"V"+(index+1)
+            let newid = "V"+theText[i].id+"V"+(index+1)
+            span.id = newid
             // span.onclick=handleClick(index)
            // console.log(item,typeof(item))
             item.replaceWith(span)
+            if (noteids?.includes(newid)){
+              span.classList.add(".noted")
+              span.style.color="red"
+            }
 
           })
           newDisplayText.push(newElem) //or .innerHTML

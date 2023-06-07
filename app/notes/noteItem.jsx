@@ -41,7 +41,7 @@ const NoteItem = ({item}) => {
          const notes = [...docSnapshot.data().notes]
           console.log(notes,"pre delete notes")
        
-        let updatedNotes = notes.filter((note,index)=>note.pk!==item.pk)
+        let updatedNotes = notes.filter((note,index)=>note.exactId!==item.exactId)
         transaction.update(userNoteRef, { notes: updatedNotes })
          console.log("deleted that note",item.message) 
         })
