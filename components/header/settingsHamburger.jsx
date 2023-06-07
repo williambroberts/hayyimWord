@@ -110,12 +110,12 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                 </FlexRow>
 
             </div>
-           <div className='translation-container'>
+           {/* <div className='translation-container'>
             <label htmlFor='bolls-select'>Text translation</label>
                 <select className='translation-select' name='bolls-select' onChange={(e)=>setBollsTranslation(e.target.value)}>
                     {BollsTranslations.map((item)=> (<option value={item} key={uuidv4()} className='translation-option' selected={item===bollsTranslation}>{item}</option>) )}
                 </select>
-           </div>
+           </div> */}
            <div className='translation-container'>
             <label htmlFor='search-select'>Search translation</label>
                 <select className='translation-select' name='search-select' onChange={(e)=>setSearchTranslation(e.target.value)}>

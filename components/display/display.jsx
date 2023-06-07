@@ -22,6 +22,7 @@ const Display = () => {
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
     const [mounted,setMounted]=useState(false)
+    const [displayText,setDisplayText]=useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -197,6 +198,50 @@ const Display = () => {
       toggleAlert()
     },[noUserALert])
     console.log(theText,"theText")
+    useEffect(()=>{
+      let newDisplayText=[]
+      //let textverses = document.querySelectorAll('.text-paragraph-verse-text')
+      
+      if (theText !==null){
+        for (let i=0; i<theText.length;i++){
+          //let newText = theText[i].text.replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
+          let newText = theText[i].text.split(" ")
+          let nt = ""
+          for (let item of newText){
+            if (item.includes("{")){
+                let ni = item.replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
+            nt+=ni 
+            }else {
+                let ni = "<span>"+item+"</span>"
+                 nt+=ni 
+            }
+           
+        }
+          
+          
+          const newElem = document.createElement('div')
+          
+          newElem.innerHTML=nt
+          newElem.querySelectorAll('span').forEach((item)=>{
+            const span = document.createElement('span');
+            span.textContent = item.textContent;
+            span.title=item.title
+            console.log(item,typeof(item))
+            item.replaceWith(span)
+
+          })
+          newDisplayText.push(newElem) //or .innerHTML
+          //newDisplayText.push(newElem)
+         // textverses[i].innerHTML="newText"
+         // console.log(textverses[i])
+        // console.log(newText,typeof(newText))
+        }
+        setDisplayText([...newDisplayText])
+        console.log(newDisplayText[0].innerHTML,typeof(newDisplayText[0].innerHTML))
+      }
+      
+      
+    },[theText])
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
@@ -206,12 +251,15 @@ const Display = () => {
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}}>{item.verse}  
       {noteids?.includes(theText[index].id)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
-      <span className='text-paragraph-verse-text' style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>RemoveHighlight()}> 
-      {item.text.replace(/<br\s*\/?>/gi, ". ").replace(/<i>|<\/i>/g, '')}</span>
+     
+ {displayText!==null? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={()=>RemoveHighlight()}
+ className='text-text'  dangerouslySetInnerHTML={{ __html: displayText[index].innerHTML }}></span>: ""}
+     
        
         </span>
         
         )}</p>
+       
         <div className='turner-container'>
            <span className='turner-left' onClick={()=>handleLeft()} 
         style={{display:` ${openBookIndex+openChapterIndex===0? "none":"flex"}  `}}>❮</span>

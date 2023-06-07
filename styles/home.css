@@ -362,3 +362,18 @@ textarea::placeholder {
 .display-alert.open{
     display: flex;
 }
+
+.text-text > span {
+    text-decoration: underline;
+    cursor: pointer;
+    margin-left: 0.125rem;
+}
+.text-text {
+    display:inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.text-span {
+    display: flex;
+    
+}
