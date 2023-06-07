@@ -13,8 +13,8 @@ import Header from "@/components/header/header"
 import Footer from "@/components/footer/footer"
 import BookProvider from "@/contexts/books"
 import DataProvider from "@/contexts/dataContext"
-import ReactThemeProvider, { ReactThemeContext } from "@/components/theme/themeReact/reactThemeProvider"
-import { useContext } from "react"
+import ReactThemeProvider from "@/components/theme/themeReact/reactThemeProvider"
+
 import ThemeLayout from "@/components/theme/themeReact/themelayout"
 import FireBooksProvider from "@/contexts/fireBooks"
 const inter = Inter({ subsets: ['latin'] })

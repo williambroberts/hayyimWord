@@ -1,6 +1,8 @@
 "use client"
 import React, { createContext, useEffect, useState } from 'react'
-export const firebooksContext = createContext()
+
+export const FirebookContext = createContext()
+
 import { doc,onSnapshot,getDoc } from 'firebase/firestore';
 import { firestore } from '@/firebase/firebaseConfig';
 const FireBooksProvider = ({children}) => {
@@ -18,9 +20,9 @@ const FireBooksProvider = ({children}) => {
 
     }
   return (
-    <firebooksContext.Provider value={{book,handleGetBook}}>
+    <FirebookContext.Provider value={{book,handleGetBook}}>
         {children}
-    </firebooksContext.Provider>
+    </FirebookContext.Provider>
   )
 }
 

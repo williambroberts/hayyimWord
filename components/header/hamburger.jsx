@@ -69,7 +69,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
      <span className='testament-title'>New Testament</span>
       {chaptersAndVerses.slice(39).map((item,index)=>(<BookItem key={uuidv4()} item={item}/>) )}
         </div> */}
-      <GetText/>  
+      <GetText setIsHamburger={setIsHamburger}/>  
 
       <div className={`chapters-menu-blur ${isChaptersMenuOpen? "open": ""}`} onClick={()=>handleChaptersMenu()} 
       ></div>

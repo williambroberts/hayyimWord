@@ -2,11 +2,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
-import { firebooksContext } from '@/contexts/fireBooks';
+
 import { BookContext } from '@/contexts/books';
 import GetItem from './getItem';
-const GetText = () => {
-    const {book,handleGetBook} = useContext(firebooksContext)
+import { FirebookContext } from '@/contexts/fireBooks';
+const GetText = ({setIsHamburger}) => {
+   
     const [isChapter,setIsChapter]=useState(false)
     const [isVerse,setIsVerse]=useState(false)
     const [chaptersArray,setChaptersArray] = useState(null)
@@ -17,6 +18,7 @@ const GetText = () => {
         isChaptersMenuOpen,setIsChaptersMenuOpen,
         isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
         } = useContext(BookContext)
+
         useEffect(()=>{
             const versesObject = chaptersAndVerses[openBookIndex].chapter_verses
                  const numOfVerses = Object.entries(versesObject).filter(([k,v])=> parseInt(k)===openChapterIndex+1)[0][1]
@@ -56,7 +58,7 @@ const GetText = () => {
            
         <span className='testament-title' id="ot-title">{chaptersAndVerses[openBookIndex].name} </span>
         <span className='get-item2' onClick={()=>handleCloseChapters()}>back</span>
-         {chaptersArray?.map((item,index)=>(<GetItem key={uuidv4()} item={index} setIsChapter={setIsChapter}
+         {chaptersArray?.map((item,index)=>(<GetItem key={uuidv4()} item={index} setIsChapter={setIsChapter} isVerse={isVerse}setIsHamburger={setIsHamburger}
          isChapter={isChapter} setIsVerse={setIsVerse}/>) )}
          <a className='get-item2' href="#ot-title">top</a>
        
@@ -65,7 +67,7 @@ const GetText = () => {
            
          <span className='testament-title' id="ot-title">{chaptersAndVerses[openBookIndex].name} {openChapterIndex+1}</span>
          <span className='get-item2' onClick={()=>handleCloseVerses()}>back</span>
-          {versesArray?.map((item,index)=>(<GetItem key={uuidv4()} item={index} setIsChapter={setIsChapter} isVerse={isVerse}
+          {versesArray?.map((item,index)=>(<GetItem key={uuidv4()} item={index} setIsChapter={setIsChapter} isVerse={isVerse} setIsHamburger={setIsHamburger}
           isChapter={isChapter} setIsVerse={setIsVerse}/>) )}
           <a className='get-item2' href="#ot-title">top</a>
         

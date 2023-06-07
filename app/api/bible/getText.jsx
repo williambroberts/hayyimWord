@@ -1,4 +1,4 @@
-export async function SearchBible(bible="kjv_strongs",search="",whole_words=true,page_all=true,highlight=true) {
+export default async function getText(bible="kjv_strongs",reference="",whole_words=true,page_all=true,highlight=true) {
     
     // const fetch = require('node-fetch');
     console.log(search,"golden",bible,whole_words,page_all,highlight)
@@ -8,13 +8,13 @@ export async function SearchBible(bible="kjv_strongs",search="",whole_words=true
     }
     //add extra search paramers will🦧🦧🦧🦧
     
-    const url = `https://api.biblesupersearch.com/api?bible=${bible}&search=${search}&whole_words=${whole_words}&data_format=minimal&page_all=true&highlight=${highlight}`
+    const url = `https://api.biblesupersearch.com/api?bible=${bible}&reference=${reference}&whole_words=${whole_words}&data_format=minimal&page_all=true&highlight=${highlight}`
     const options = {
       method: 'GET',
       
       
     };
-      console.log("searching...fetching")
+      console.log("refereceing...fetching")
     console.log(url)
      const res = await fetch(url,options);
     console.log(res,"res")
