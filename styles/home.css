@@ -384,6 +384,7 @@ textarea::placeholder {
 }
 
 .noted {
-        color: violet;
+        
         background-color: aquamarine;
+        color: var(--t-1);
 }

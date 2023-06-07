@@ -118,7 +118,8 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
             await updateDoc(userHighlightRef,{ "notes": arrayUnion({exactId:exactId,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
             
             let myElem = document.querySelector(`#${exactId}`)
-            myElem.style.color="red"
+            myElem.classList.add("noted")
+
             console.log("added note ",message,myElem)
             }catch (err){
             console.log(err)
@@ -169,7 +170,8 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
           transaction.update(userNoteRef, { notes: updatedNotes })
            console.log("deleted that note",message) 
           })
-      
+          let myElem = document.querySelector(`#${exactId}`)
+          myElem.classList.remove("noted")
           
         } catch (error) {
           console.error('Error deleting note: ', error);

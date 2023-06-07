@@ -14,7 +14,7 @@ import IconNotes from '../icons/note2'
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
-    
+    const [re,setRe]=useState(false)
     const [id,setId]=useState(undefined) //verse api id , 
     const [exactId,setExactId]=useState(undefined) // word id
     const [isWrite,setIsWrite]=useState(false)
@@ -115,7 +115,8 @@ const Display = () => {
               let myElem= document.querySelector(`#${note.exactId}`)
               if (myElem!==null){
                
-                myElem.classList.add(".noted")
+                myElem.classList.add("noted")
+                
                console.log(myElem.classList,myElem.innerHTML)
               }
             }catch(err){
@@ -123,6 +124,7 @@ const Display = () => {
             }
            
           }
+          setRe((prev)=>!prev)
           }
          
         },[noteids])
@@ -210,7 +212,7 @@ const Display = () => {
      
       console.log(exactId)
       
-    },[exactId])
+    },[exactId,isNote])
     const handleClick = (e,index) =>{
       console.log("handleClick")
       if (startVerse!==-1){
@@ -224,10 +226,17 @@ const Display = () => {
       console.log(rowId,clickedVerse,index)
       if (isNote && clickedVerse!==-1 && rowId!==id) {
         setClickedVerse(-1)
-        setIsNote(false)
-      }
-      else if (isNote && clickedVerse!==-1 && rowId===id){
+         setIsNote(false)
+        }else if(isNote && clickedVerse!==-1 && exactId===clickedElement.id){
+          console.log("3")
+          setIsNote(false)
+          setClickedVerse(-1)
+          let myElem = document.querySelector(`#${exactId}`)
+          myElem.style.backgroundColor="var(--theme2)"
+      }else if (isNote && clickedVerse!==-1 && rowId===id){
         setExactId(clickedElement.id)
+        console.log("2")
+      
       
       }else{
         console.log(index,"index")
@@ -295,13 +304,13 @@ const Display = () => {
             item.title!==""? span.className="text-text-span-u" :  span.className="text-text-span"
             let newid = "V"+theText[i].id+"V"+(index+1)
             span.id = newid
-            // span.onclick=handleClick(index)
-           // console.log(item,typeof(item))
-            item.replaceWith(span)
+            
             if (noteids?.includes(newid)){
-              span.classList.add(".noted")
-              span.style.color="red"
+              span.classList.add("noted")
+              
             }
+            item.replaceWith(span)
+            setRe((prev)=>!prev)
 
           })
           newDisplayText.push(newElem) //or .innerHTML
@@ -317,6 +326,7 @@ const Display = () => {
       
       
     },[theText])
+  
   return (
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
@@ -324,7 +334,7 @@ const Display = () => {
         onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
        > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
-      {noteids?.includes(theText[index].id)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
+      {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
      
  {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}} 
