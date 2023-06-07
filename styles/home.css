@@ -370,6 +370,9 @@ textarea::placeholder {
 }
 .text-span {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: flex-start;
 }
 .text-text>span {
     margin-left: 0.125rem;
@@ -387,4 +390,11 @@ textarea::placeholder {
         
         background-color: aquamarine;
         color: var(--t-1);
+}
+
+.verse-span {
+    margin-left: 0.125rem;
+}
+.verse-span-u {
+    margin-left: 0.125rem;
 }

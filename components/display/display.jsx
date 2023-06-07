@@ -11,6 +11,7 @@ import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
+import VerseItem from './verseItem';
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
@@ -347,10 +348,13 @@ const Display = () => {
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
      
- {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}} 
+ {/* {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}} 
  onClick={()=>RemoveHighlight()} 
- className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""}
-     
+ className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
+
+      {textArrays!==null? textArrays[index].map((item,index)=>(<span style={{backgroundColor:noteids?.includes(item.exactId)? "orange":"" }} 
+      id={item.exactId}
+      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{item.word}</span>)) : ""}
        
         </span>
         
