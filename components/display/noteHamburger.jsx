@@ -11,7 +11,7 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import IconDelete from '../icons/action/delete'
-const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert}) => {
+const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert}) => {
     const [isHighlight,setIsHighlight]=useState(false)
     const thedate = new Date()
     const theDay=thedate.getDate()
@@ -58,7 +58,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
+            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({id:id,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
             console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
                 
             }catch (err){
@@ -85,8 +85,8 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete notes")
          
-          let updatedHighlights = highlights.filter((item,index)=>item.pk!==pk)
-          updatedHighlights.push({pk:pk,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
+          let updatedHighlights = highlights.filter((item,index)=>item.id!==id)
+          updatedHighlights.push({id:id,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
           transaction.update(useHighlightsRef, { highlights: updatedHighlights })
           console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
           })
@@ -115,7 +115,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({id:id,message:message,text:text,verse:verse+1,chapter:chapter,book:book,bookid:openBookIndex+1,date:fulldate})})
             console.log("added note ",message)
                 
             }catch (err){
@@ -128,16 +128,16 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         setMounted(true)
     },[])
     useEffect(()=>{
-        //console.log(pk,"changed pk")
+       
         if (user!==null) {
             let notesPks = []
             let firebaseMessages = []
             for (let i=0;i<firebaseNotes?.length;i++) {
-                notesPks.push(firebaseNotes[i].pk)
+                notesPks.push(firebaseNotes[i].id)
                 firebaseMessages.push(firebaseNotes[i].message)
             }
-            if (notesPks.includes(pk)){
-                let index = notesPks.lastIndexOf(pk)
+            if (notesPks.includes(id)){
+                let index = notesPks.lastIndexOf(id)
                 setMessage(firebaseMessages[index])
             }else{
                 setMessage("")
@@ -147,7 +147,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }else {
             setMessage("")
         }
-    },[pk])
+    },[id])
 
      const handleDelete2 = async ()=>{
         if (user===null){
@@ -163,7 +163,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
            const notes = [...docSnapshot.data().notes]
             console.log(notes,"pre delete notes")
          
-          let updatedNotes = notes.filter((item,index)=>item.pk!==pk)
+          let updatedNotes = notes.filter((item,index)=>item.id!==id)
           transaction.update(userNoteRef, { notes: updatedNotes })
            console.log("deleted that note",message) 
           })
@@ -184,7 +184,7 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "notes": arrayUnion({pk:pk,message:""})})
+            await updateDoc(userHighlightRef,{ "notes": arrayUnion({id:id,message:""})})
             console.log("delted note ",message)
                 
             }catch (err){
@@ -209,9 +209,9 @@ const NoteHamburger = ({isNote,setIsNote,pk,chapter,book,verse,isWrite,setIsWrit
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete highlights")
          
-          let updatedHighlights = highlights.filter((item,index)=>item.pk!==pk)
+          let updatedHighlights = highlights.filter((item,index)=>item.id!==id)
           transaction.update(userNoteRef, { highlights: updatedHighlights })
-           console.log("deleted that highlight",pk,color) 
+           console.log("deleted that highlight",id,color) 
           })
       
           

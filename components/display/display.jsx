@@ -168,9 +168,17 @@ const Display = () => {
       console.log("ching")
       try {
         let myElem = document.querySelector(`#${exactId}`)
+        
          if (myElem!==null){
-       console.log(myElem.style.color,"color")
-          myElem.style.backgroundColor="var(--theme2)"
+         if (myElem.id.includes("verse")){
+            let myVerse = document.querySelector(`.verse${clickedVerse}`)
+            console.log("my verse",myVerse,`.verse${clickedVerse}`)
+            myVerse.style.backgroundColor="var(--theme2)"
+         }else{
+           myElem.style.backgroundColor="var(--theme2)"
+         }
+       console.log(myElem.style.color,"color",myElem)
+         
        
       }
       }catch(err){
@@ -286,14 +294,15 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={()=>RemoveHighlight()} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
+        onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
        > 
-      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`${theText[index].id}-0`}>{item.verse}  
+      <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].id)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
      
- {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}}  onClick={(e)=>handleClick(e,index)}
- className='text-text'  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""}
+ {displayText!==null?  displayText!==undefined? <span style={index+1===startVerse? {...highlightedVerseStyles}:{}} 
+ onClick={()=>RemoveHighlight()} 
+ className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""}
      
        
         </span>
@@ -312,7 +321,7 @@ const Display = () => {
     
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
-    <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText}
+    <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText} exactId={exactId}
     isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""}
     isNote={isNote} setIsNote={setIsNote} id={id} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
