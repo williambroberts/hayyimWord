@@ -24,6 +24,7 @@ const Display = () => {
     const [alertText,setAlertText]=useState(null)
     const [mounted,setMounted]=useState(false)
     const [displayText,setDisplayText]=useState(null)
+    const [textArrays,setTextArrays]=useState(null)
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -278,21 +279,28 @@ const Display = () => {
       //let textverses = document.querySelectorAll('.text-paragraph-verse-text')
       
       if (theText !==null){
+        let bigx = []
         for (let i=0; i<theText.length;i++){
           //let newText = theText[i].text.replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
           let newText = theText[i].text.split(" ")
           let nt = ""
-          for (let item of newText){
-            if (item.includes("{")){
-                let ni = item.replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
-            nt+=ni 
+          let x = []
+          for (let j=0; j<newText.length;j++){
+            if (newText[j].includes("{")){
+                let ni = newText[j].replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
+                let xi = newText[j].replace(/(\w+)\{([\w\d]+)\}/g, `$2 $1`).replace(/\{[^ ]+/g, '').split(" ")
+                let no = {strong:xi[0],word:xi[1],exactId:"V"+theText[i].id+"V"+(j+1)}
+                x.push(no)
+               nt+=ni 
             }else {
-                let ni = "<span>"+item+"</span>"
+                let ni = "<span>"+newText[j]+"</span>"
                  nt+=ni 
+                 let no = {strong:"",word:newText[j],exactId:"V"+theText[i].id+"V"+(j+1)}
+                 x.push(no)
             }
            
         }
-          
+          bigx.push(x)
           
           const newElem = document.createElement('div')
           
@@ -319,7 +327,9 @@ const Display = () => {
          // console.log(textverses[i])
         // console.log(newText,typeof(newText))
         }
+        setTextArrays([...bigx])
         setDisplayText([...newDisplayText])
+        console.log(bigx)
        // console.log(newDisplayText[0].innerHTML,typeof(newDisplayText[0].innerHTML))
 
       }
