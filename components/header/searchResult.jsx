@@ -45,7 +45,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
         setStartVerse(item.verse)
         setOpenChapterIndex(item.chapter-1)
        
-        let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
+        let reference = chaptersAndVerses[item.book-1].shortname+parseInt(item.chapter)
         let data = await getText("kjv_strongs",reference)
          
           setTheText(data.results.kjv_strongs)
