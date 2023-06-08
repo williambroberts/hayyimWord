@@ -61,7 +61,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
-            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({id:id,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
+            await updateDoc(userHighlightRef,{ "highlights": arrayUnion({exactId:exactId,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
             console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
                 
             }catch (err){
@@ -88,8 +88,8 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete notes")
          
-          let updatedHighlights = highlights.filter((item,index)=>item.id!==id)
-          updatedHighlights.push({id:id,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
+          let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
+          updatedHighlights.push({exactId:exactId,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
           transaction.update(useHighlightsRef, { highlights: updatedHighlights })
           console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
           })
@@ -216,9 +216,9 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete highlights")
          
-          let updatedHighlights = highlights.filter((item,index)=>item.id!==id)
+          let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
           transaction.update(userNoteRef, { highlights: updatedHighlights })
-           console.log("deleted that highlight",id,color) 
+           console.log("deleted that highlight",exactId,color) 
           })
       
           

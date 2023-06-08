@@ -34,7 +34,8 @@ const BookProvider = ({children}) => {
   const [searchData,setSearchData]=useState(null)
   const [isSearchChart,setIsSearchChart]=useState(false)
   const [searchFound,setSearchFound]=useState(undefined)
-
+  const [isChapter,setIsChapter]=useState(false)
+    const [isVerse,setIsVerse]=useState(false)
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -53,6 +54,7 @@ const BookProvider = ({children}) => {
 // },[])
   useEffect(()=>{
       console.log("isNote",isNote,isStrong)
+      
       
   },[isSearch])
   useEffect(()=>{
@@ -97,6 +99,7 @@ const BookProvider = ({children}) => {
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,strongData,
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
+    ,isChapter,setIsChapter,isVerse,setIsVerse,
     }}>
     {children}
    </BookContext.Provider>

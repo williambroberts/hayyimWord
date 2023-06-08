@@ -8,14 +8,13 @@ import GetItem from './getItem';
 import { FirebookContext } from '@/contexts/fireBooks';
 const GetText = ({setIsHamburger}) => {
    
-    const [isChapter,setIsChapter]=useState(false)
-    const [isVerse,setIsVerse]=useState(false)
+    
     const [chaptersArray,setChaptersArray] = useState(null)
     const [versesArray,setVersesArray]=useState(null)
     const [numOfVersesInOpenChapter,SetNumOfVersesInOpenChapter]=useState(1)
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,isNote,setIsNote,
-        isChaptersMenuOpen,setIsChaptersMenuOpen,
+        isChaptersMenuOpen,setIsChaptersMenuOpen,isVerse,setIsVerse,isChapter,setIsChapter,
         isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
         } = useContext(BookContext)
 

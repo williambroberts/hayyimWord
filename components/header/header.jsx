@@ -17,6 +17,7 @@ const Header = () => {
     isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,isStrong,setIsStrong,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
+    ,isChapter,setIsChapter,isVerse,setIsVerse,
     } = useContext(BookContext)
     const {user}=useContext(IsAUserLoggedInContext)
   const [isHamburger,setIsHamburger]=useState(false)
@@ -35,6 +36,7 @@ const Header = () => {
  
  const handleOpenToChapter = ()=>{
   setIsHamburger(true)
+  setIsChapter(true)
   
  }
  useEffect(()=>{

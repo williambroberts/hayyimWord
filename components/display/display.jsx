@@ -27,7 +27,8 @@ const Display = () => {
     const [displayText,setDisplayText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
     const [title,setTitle]=useState(null)
-   
+    const [firebaseHighlightsColors,setFirebaseHighlightsColors]=useState(null)
+    const [firebaseHighlightsIds,setFirebaseHighlightsIds]=useState(null)
     const [selectedWords,setSelectedWords]=useState([])
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,strongText,setStrongText,
@@ -83,20 +84,21 @@ const Display = () => {
 
           
             for (let item of firebaseHighlights){
-              firebaseids.push(item.id)
+              firebaseids.push(item.exactId)
               firebaseColors.push(item.color)
             }
-
-            const newHighlights =Array(theText?.length).fill("var(--bg-1)")
-            for (let i=0; i<theText?.length; i++){
-              if (firebaseids.includes(theText[i].id)){
-                let index = firebaseids.lastIndexOf(theText[i].id)
-                newHighlights[i]=firebaseColors[index]
-              }
-            }
+            setFirebaseHighlightsColors(firebaseColors)
+            setFirebaseHighlightsIds(firebaseids)
+            // const newHighlights =Array(theText?.length).fill("var(--bg-1)")
+            // for (let i=0; i<theText?.length; i++){
+            //   if (firebaseids.includes(theText[i].exactId)){
+            //     let index = firebaseids.lastIndexOf(theText[i].exactId)
+            //     newHighlights[i]=firebaseColors[index]
+            //   }
+            // }
             
 
-            setHighlights(newHighlights)
+            //setHighlights(newHighlights)
             //console.log("new highlight",newHighlights)
           }catch(err){
             console.log(err)
@@ -349,7 +351,7 @@ const Display = () => {
  onClick={()=>RemoveHighlight()} 
  className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
 
-      {textArrays!==null? textArrays!==undefined? textArrays[index]?.map((item,index)=>(<span style={{backgroundColor:selectedWords.includes(item.exactId)? "var(--theme2)" :noteids?.includes(item.exactId)? "orange":"" }} 
+      {textArrays!==null? textArrays!==undefined? textArrays[index]?.map((item,index)=>(<span style={{backgroundColor:selectedWords?.includes(item.exactId)? "var(--theme2)" :firebaseHighlightsIds?.includes(item.exactId)? firebaseHighlightsColors[firebaseHighlightsIds?.indexOf(item.exactId)] :"" }} 
       id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
       title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : "": ""}
        

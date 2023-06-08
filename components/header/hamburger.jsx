@@ -71,14 +71,14 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
         </div> */}
       <GetText setIsHamburger={setIsHamburger}/>  
 
-      <div className={`chapters-menu-blur ${isChaptersMenuOpen? "open": ""}`} onClick={()=>handleChaptersMenu()} 
+      {/* <div className={`chapters-menu-blur ${isChaptersMenuOpen? "open": ""}`} onClick={()=>handleChaptersMenu()} 
       ></div>
       <ChaptersHamburger item={chaptersAndVerses[openBookIndex]} handleChaptersMenu={handleChaptersMenu}/>
 
       <div className={`chapters-menu-blur ${isVersesMenuOpen? "open": ""}`} onClick={()=>handleVersesMenu()} 
       ></div>
       <VersesHamburger setIsHamburger={setIsHamburger} handleVersesMenu={handleVersesMenu}
-       numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/>
+       numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/> */}
 
        <SettingsHamburger isSettings={isSettings} setIsSettings={setIsSettings}/>
     </div>
