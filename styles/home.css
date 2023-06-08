@@ -374,23 +374,9 @@ textarea::placeholder {
     align-items: center;
     align-content: flex-start;
 }
-.text-text>span {
-    margin-left: 0.125rem;
-}
-.text-text-span {
-    background-color: transparent;
-}
-.text-text-span-u {
-    background-color: transparent;
-    text-decoration: underline;
-    cursor: pointer;
-}
 
-.noted {
-        
-        background-color: aquamarine;
-        color: var(--t-1);
-}
+
+
 
 .verse-span {
     margin-left: 0.125rem;
@@ -398,4 +384,21 @@ textarea::placeholder {
 .verse-span-u {
     margin-left: 0.125rem;
     text-decoration: underline;
+}
+
+.note-dict {
+    width: 100%;
+    display: flex;
+    height:0px;
+    overflow: hidden;
+    flex: 1 1 auto;
+    transition:var(--transition-1);
+    position: absolute;
+    color: var(--white);
+    background-color: var(--black2);
+    flex-direction: column;
+}
+.note-dict.open {
+    height: 200px;
+    transform: translate(0,-100%);
 }

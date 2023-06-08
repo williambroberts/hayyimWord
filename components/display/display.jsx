@@ -27,6 +27,9 @@ const Display = () => {
     const [displayText,setDisplayText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
     const [title,setTitle]=useState(null)
+    const [isStrong,setIsStrong]=useState(false)
+    const [strongText,setStrongText]=useState(null)
+    const [selectedWords,setSelectedWords]=useState([])
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
@@ -167,64 +170,76 @@ const Display = () => {
       //console.log(openBookIndex,openChapterIndex,"new") 
       setReFetch((prev)=>!prev)
     }
-    useEffect(()=>{
-      console.log("ching")
-      try {
-        let myElem = document.querySelector(`#${exactId}`)
-        
-         if (myElem!==null){
-         if (myElem.id.includes("verse")){
-            let myVerse = document.querySelector(`#text-span${clickedVerse}`)
-            console.log("my verse",myVerse,`#text-span${clickedVerse}`)
-            myVerse.style.backgroundColor="var(--theme2)"
-         }else{
-           myElem.style.backgroundColor="var(--theme2)"
-         }
-       console.log(myElem.style.color,"color",myElem,myElem.title)
-         setTitle(myElem.title)
-       
-      }
-      }catch(err){
-        console.log(err)
-      }
-      
-     
-      console.log(exactId)
-      
-    },[exactId,isNote])
+   
     const handleClick = (e,index) =>{
       console.log("handleClick")
+      
       if (startVerse!==-1){
         setStartVerse(-1)
         return
+      }else if (isWrite){
+        //if note taking cant click off but by button only
+        return
+      }
+      let newSelectedWords= []
+      const clickedElement = e.target;
+      //if clicked element not a  word close
+      let rowId = parseInt(clickedElement.id.split("V")[1])
+      console.log(rowId,clickedVerse,index,clickedElement.id,exactId)
+      if (clickedElement.id===exactId){
+        if (isNote){
+           setIsNote(false)
+        setClickedVerse(-1)
+        setSelectedWords(newSelectedWords)
+       
+        }else {
+          setIsNote(true)
+          setClickedVerse(index)
+          newSelectedWords = clickedElement.id
+          setSelectedWords(newSelectedWords)
+          setIsStrong(true)
+        }
+       
+        console.log("exact id same")
+       
+        
+      }else if (clickedElement.className==="text-span"){
+        setIsNote(false)
+        setClickedVerse(-1)
+       
+        setSelectedWords(newSelectedWords)
+        setExactId(-1)
+      }else if (clickedElement.id!==exactId){
+        setIsNote(true)
+        setClickedVerse(index)
+        setExactId(clickedElement.id)
+        //when click on diff word , keep little note menu open but close note taking
+        setIsWrite(false)
+        if (clickedElement.className==="text-paragraph-verse-number"){
+          newSelectedWords.push(clickedElement.id)
+            for (let word of textArrays[index]){
+              newSelectedWords.push(word.exactId)
+            }
+            setSelectedWords([...newSelectedWords])
+         
+     
+        }else {
+          newSelectedWords=[clickedElement.id]
+          setSelectedWords([...newSelectedWords])
+          console.log(clickedElement.title)
+          setStrongText(clickedElement.title)
+          if (clickedElement.title!==""){
+            setIsStrong(true)
+           
+          }else {
+            setIsStrong(false)
+          }
+        }
+       
       }
 
-      const clickedElement = e.target;
-      
-      let rowId = parseInt(clickedElement.id.split("V")[1])
-      console.log(rowId,clickedVerse,index)
-      if (isNote && clickedVerse!==-1 && rowId!==id) {
-        setClickedVerse(-1)
-         setIsNote(false)
-        }else if(isNote && clickedVerse!==-1 && exactId===clickedElement.id){
-          console.log("3")
-          setIsNote(false)
-          setClickedVerse(-1)
-          let myElem = document.querySelector(`#${exactId}`)
-          myElem.style.backgroundColor="var(--theme2)"
-      }else if (isNote && clickedVerse!==-1 && rowId===id){
-        setExactId(clickedElement.id)
-        console.log("2")
-      
-      
-      }else{
-        console.log(index,"index")
-        setExactId(clickedElement.id)
-        console.log(clickedElement);
-         setClickedVerse(index)
-        setIsNote(true)
-        setId(theText[index]?.id)
-      }
+
+     
      console.log(theText[index].id,index,", id, index",clickedElement.id,"exact id")
      
      
@@ -316,7 +331,7 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:highlights!==null? `${highlights[index]}`:""}}
+        onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:selectedWords.includes(`verse${theText[index].id}-0`)? "var(--theme2)": highlights!==null? `${highlights[index]}`:""}}
       id={`text-span${index}`} > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
@@ -326,9 +341,9 @@ const Display = () => {
  onClick={()=>RemoveHighlight()} 
  className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
 
-      {textArrays!==null? textArrays[index].map((item,index)=>(<span style={{backgroundColor:noteids?.includes(item.exactId)? "orange":"" }} 
+      {textArrays!==null? textArrays!==undefined? textArrays[index].map((item,index)=>(<span style={{backgroundColor:selectedWords.includes(item.exactId)? "var(--theme2)" :noteids?.includes(item.exactId)? "orange":"" }} 
       id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
-      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : ""}
+      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : "": ""}
        
         </span>
         
@@ -347,7 +362,7 @@ const Display = () => {
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
     <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText} exactId={exactId}
-    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""} title={title}
+    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""} title={title} setSelectedWords={setSelectedWords}
     isNote={isNote} setIsNote={setIsNote} id={id} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
    <div className={`display-alert ${noUserALert? "open":""}`}>

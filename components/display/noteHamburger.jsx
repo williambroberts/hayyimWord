@@ -11,7 +11,8 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import IconDelete from '../icons/action/delete'
-const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert,title}) => {
+const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,isStrong,strongText,
+    setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert,title,setSelectedWords}) => {
     const [isHighlight,setIsHighlight]=useState(false)
     const thedate = new Date()
     const theDay=thedate.getDate()
@@ -36,6 +37,8 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
         setIsHighlight(false)
         setIsWrite(false)
         setMessage("")
+        setSelectedWords([])
+        
     }
     useEffect(()=>{
         if (!isNote) {
@@ -250,6 +253,15 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
                 </form>
 
         </div>
+        <div className={`note-dict ${isStrong? "open":""}`}>
+            <div className="note-dict-top">
+                    <span className='note-dict-title'></span>
+                    <span className='note-dict-found'></span>
+                    <span className='note-dict-close'><IconCrossCircled/></span>
+            </div>
+            <span className='note-dict-strong'>{strongText}</span>
+        </div>
+
         <div className='note-options-wrapper'>
            <div className={`note-options ${isHighlight? "":isWrite? "":"open"}`}>
             <span className='note-span' onClick={()=>handleCopy()}>{isCopied? "Done": "Copy"}</span>
@@ -275,7 +287,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,s
                 <span className='note-span' onClick={()=>setIsWrite(false)}>Cancel</span>
                 <span className='note-span' onClick={()=>handleSubmit()}>Save</span>
             </div>
-            <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span> 
+           {isStrong? "": <span  className='note-cross' onClick={()=>handleClose()}><IconCrossCircled/></span> }
         </div>
         
 
