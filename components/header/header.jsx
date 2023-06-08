@@ -11,7 +11,7 @@ import IconMagnify from '../icons/action/mag'
 import ReactThemeButton from '../theme/themeReact/reactThemeButton'
 const Header = () => {
   const pathname = usePathname()
-  console.log(pathname,"pathname")
+ // console.log(pathname,"pathname")
   const {setOpenBookIndex,openBookIndex,searchData,setSearchData,isSearch,setIsSearch,
     openChapterIndex,setOpenChapterIndex,
     isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,

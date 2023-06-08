@@ -4,6 +4,7 @@ import { getChapter } from '@/app/api/bible/getChapter'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { BookContext } from '@/contexts/books'
 import { useRouter } from 'next/navigation'
+import getText from '@/app/api/bible/getText'
 import { usePathname } from 'next/navigation'
 const SearchResultItem = ({item,setIsSearch}) => {
   const router = useRouter()
@@ -43,8 +44,15 @@ const SearchResultItem = ({item,setIsSearch}) => {
         setOpenBookIndex(item.book-1)
         setStartVerse(item.verse)
         setOpenChapterIndex(item.chapter-1)
-        const data = await getChapter(bollsTranslation,parseInt(item.book),parseInt(item.chapter))
-        setTheText(data)
+       
+        let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
+        let data = await getText("kjv_strongs",reference)
+         
+          setTheText(data.results.kjv_strongs)
+        
+          setDisplayTitle([openBookIndex,openChapterIndex])
+       
+       
         setScrollChangeNeeded((prev)=>!prev)
         setDisplayTitle([item.book-1,item.chapter-1])
 

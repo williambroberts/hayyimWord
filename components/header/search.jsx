@@ -16,7 +16,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     const [isFiltered,setIsFiltered]=useState(false)
     const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart}=useContext(BookContext)
     const [recentSearches,setRecentSearches]=useState(null)
-  console.log(recentSearches,"recent")
+ // console.log(recentSearches,"recent")
    const handleSubmit = (e)=>{
     e.preventDefault()
     setSearch((prev)=> !prev)
@@ -124,7 +124,10 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     
     </form>
     <div className='search-results'>
-    <span className='search-number'>{searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${searchData?.length}`: `Found ${searchData.length} verses. Tap chart to filter` : "No word search results."}</span>
+      
+    <span className='search-number'>
+      {searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${searchData?.length}. Tap again to show all`: `Found ${searchData.length} verses. ${isSearchChart? "Tap chart to filter":""}` : "No word search results."}</span>
+  
     {/* chart of results */}
     <div>
 

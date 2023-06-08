@@ -59,7 +59,7 @@ const BookProvider = ({children}) => {
       try {
         const data = await getStrong(strongText)
         if (data!==undefined){
-          console.log(data,"strong data")
+          console.log("strong data",data[0].lexeme)
           setStrongData((prev)=> data[0])
         }
       }catch(err){
@@ -91,7 +91,7 @@ const BookProvider = ({children}) => {
    <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
     openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,globalLineHeight,setGlobalLineHeight,
     isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,isNote,setIsNote,searchFound,
-    isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,
+    isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,strongData,
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     }}>

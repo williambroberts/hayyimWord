@@ -11,7 +11,7 @@ import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
-import VerseItem from './verseItem';
+
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
     const [reFetch,setReFetch]=useState(false)
@@ -55,6 +55,7 @@ const Display = () => {
           
 
         },[firebaseNotes,user])
+       
         useEffect(()=>{
          
           const verseSpans = document.querySelectorAll('.text-paragraph-verse-number');
@@ -197,6 +198,7 @@ const Display = () => {
           newSelectedWords = clickedElement.id
           setSelectedWords(newSelectedWords)
           setIsStrong(true)
+         
         }
        
         console.log("exact id same")
@@ -227,6 +229,12 @@ const Display = () => {
           setSelectedWords([...newSelectedWords])
           console.log(clickedElement.title)
           setStrongText(clickedElement.title)
+          let position = clickedElement.getBoundingClientRect()
+          let HeightFromBottom = window.innerHeight-position.bottom
+          console.log(HeightFromBottom,"height")
+          if (HeightFromBottom<200){
+            window.scrollBy(0,200)
+          }
           if (clickedElement.title!==""){
             setIsStrong(true)
            
@@ -330,7 +338,8 @@ const Display = () => {
     <div className='display'>
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
-        onClick={(e)=>handleClick(e,index)} style={{fontSize:`${globalFontSize}px`,backgroundColor:selectedWords.includes(`verse${theText[index].id}-0`)? "var(--theme2)": highlights!==null? `${highlights[index]}`:""}}
+        onClick={(e)=>handleClick(e,index)} style={{color:index+1===startVerse?"var(--red)":"", 
+          fontSize:`${globalFontSize}px`,backgroundColor:selectedWords.includes(`verse${theText[index].id}-0`)? "var(--theme2)": highlights!==null? `${highlights[index]}`:""}}
       id={`text-span${index}`} > 
       <span className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
@@ -340,7 +349,7 @@ const Display = () => {
  onClick={()=>RemoveHighlight()} 
  className={`text-text verse${index}`}  dangerouslySetInnerHTML={{ __html: displayText[index]?.innerHTML }}/>: "" : ""} */}
 
-      {textArrays!==null? textArrays!==undefined? textArrays[index].map((item,index)=>(<span style={{backgroundColor:selectedWords.includes(item.exactId)? "var(--theme2)" :noteids?.includes(item.exactId)? "orange":"" }} 
+      {textArrays!==null? textArrays!==undefined? textArrays[index]?.map((item,index)=>(<span style={{backgroundColor:selectedWords.includes(item.exactId)? "var(--theme2)" :noteids?.includes(item.exactId)? "orange":"" }} 
       id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
       title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : "": ""}
        

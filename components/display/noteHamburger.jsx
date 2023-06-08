@@ -243,6 +243,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             setIsStrong(true)
         }
     },[isWrite])
+  
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
@@ -264,9 +265,12 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             <div className="note-dict-top">
                     <span className='note-dict-title'>{strongData?.lexeme}</span>
                     <span className='note-dict-found' onClick={()=>setIsSearch((prev)=>true)}>Found {searchFound} verses</span>
-                    <span className='note-cross'><IconCrossCircled/></span>
+                    <span className='note-cross' onClick={()=>setIsStrong((prev)=>false)}><IconCrossCircled/></span>
             </div>
-            <span className='note-dict-strong'>{strongText}</span>
+            <span className='note-dict-strong'>Strongs: {strongText}</span>
+            <span className='note-dict-item'>Transliteration: {strongData?.transliteration}</span>
+            <span className='note-dict-item'> Pronunciation: {strongData?.pronunciation}</span>
+            <span className='note-dict-item'>{strongData?.short_definition}</span>
         </div>
 
         <div className='note-options-wrapper'>
