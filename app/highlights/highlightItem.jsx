@@ -40,9 +40,9 @@ const HightlightItem = ({item}) => {
          const highlights = [...docSnapshot.data().highlights]
           console.log(highlights,"pre delete highlights")
        
-        let updatedHighlights = highlights.filter((saved,index)=>saved.pk!==item.pk)
+        let updatedHighlights = highlights.filter((saved,index)=>saved.exactId!==item.exactId)
         transaction.update(userNoteRef, { highlights: updatedHighlights })
-         console.log("deleted that highlight",item.pk,item.color) 
+         console.log("deleted that highlight",item.exactId,item.color) 
         })
     
         
