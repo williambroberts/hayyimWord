@@ -723,3 +723,24 @@ input[type="range"]{
     cursor: pointer;
     color: var(--white);
 }
+
+.history-clear {
+    margin-top: 80px;
+    color: var(--t-3);
+    display: flex;
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    font-size: var(--font-size-14);
+    --history-h-padding:0.5rem;
+    padding: 1rem var(--history-h-padding);
+    border-bottom: 1px solid var(--bg-3);
+}
+
+.history-delete {
+    color: var(--t-1);
+    font-size: var(--font-size-16);
+    cursor: pointer;
+   
+    
+}

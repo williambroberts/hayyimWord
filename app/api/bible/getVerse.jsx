@@ -1,4 +1,4 @@
-export default async function getVerse(bible="kjv_strongs",reference="",whole_words=true,page_all=true,highlight=true) {
+export default async function getVerse(bible="kjv",reference="",whole_words=true,page_all=true,highlight=true) {
     console.log(reference,"verse ref")
     if (reference===""){
         return

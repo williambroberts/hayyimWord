@@ -47,6 +47,10 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         }
     },[isNote])
     const handleHighlight =(color)=>{
+        if (exactId.includes("verse")){
+            console.log("returning")
+            return
+        }
         setColor(color)
         setUpdateHighlight((prev)=>!prev)
 
@@ -80,6 +84,9 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             return
         }
         if (color===null){
+            return
+        }
+        if (exactId.includes("verse")){
             return
         }
         const useHighlightsRef = doc(firestore, 'notes', user?.uid);

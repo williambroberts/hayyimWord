@@ -40,6 +40,7 @@ const BookProvider = ({children}) => {
     const [isVerse,setIsVerse]=useState(false)
     const [history,setHistory]=useState(null)
     const [recentSearches,setRecentSearches]=useState(null)
+    const [isHistory,setIsHistory]=useState(false)
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -58,9 +59,9 @@ const BookProvider = ({children}) => {
 // },[])
 useEffect(()=>{
   const fetchVerse = async (reference) =>{
-    const data = await getVerse(reference)
-    const toAdd = data?.results[0]
-    console.log(toAdd,"toAdd")
+    const data = await getVerse("kjv",reference)
+    const toAdd = data?.results.kjv[0]
+    console.log(toAdd,"toAdd",data)
       try {
       let histroyRaw = localStorage.getItem("history")
       let history = JSON.parse(histroyRaw)
@@ -81,8 +82,8 @@ useEffect(()=>{
   }
   if (startVerse!==-1){
     //add current to history
-    let reference = chaptersAndVerses[openBookIndex]+(openChapterIndex+1)+":"+(startVerse+1)
-    console.log(reference,"verse ref")
+    let reference = chaptersAndVerses[openBookIndex].shortname+(openChapterIndex+1)+":"+(startVerse)
+    console.log(reference,"verse ref",openBookIndex,openChapterIndex,startVerse)
     fetchVerse(reference)
   
   }
@@ -137,6 +138,7 @@ useEffect(()=>{
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,
+    isHistory,setIsHistory,history,setHistory,
     }}>
     {children}
    </BookContext.Provider>

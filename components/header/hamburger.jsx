@@ -18,6 +18,8 @@ import IconCreate from '../icons/pages/signup';
 import IconHome from '../icons/pages/home';
 import IconSettingsSharp from '../icons/pages/settings';
 import GetText from './getText';
+import IconHistoryTwentyFour from '../icons/pages/history';
+import HistoryHamburger from './historyHamburger';
 
 const Hamburger = ({setIsHamburger,isHamburger}) => {
   const {user} = useContext(IsAUserLoggedInContext)
@@ -25,7 +27,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
  
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,isNote,setIsNote,
-    isChaptersMenuOpen,setIsChaptersMenuOpen,
+    isChaptersMenuOpen,setIsChaptersMenuOpen,setIsHistory,
     isVersesMenuOpen,setIsVersesMenuOpen,isSettings,setIsSettings
     } = useContext(BookContext)
     
@@ -58,6 +60,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
         :<HamburgerItem link={"/signup"} text={"Sign up"} icon={<IconCreate/>} setIsHamburger={setIsHamburger}/> }
          
           <div className='settings-name' onClick={()=>setIsSettings(true)}> <IconSettingsSharp/> Settings</div>
+          <div className='settings-name' onClick={()=>setIsHistory(true)}> <IconHistoryTwentyFour/> History</div>
         </div>
         <span className='hamburger-title'>Books of the bible</span>
         <hr className='hamburger-hr'/>
@@ -79,7 +82,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
       ></div>
       <VersesHamburger setIsHamburger={setIsHamburger} handleVersesMenu={handleVersesMenu}
        numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/> */}
-
+        <HistoryHamburger/>
        <SettingsHamburger isSettings={isSettings} setIsSettings={setIsSettings}/>
     </div>
   )
