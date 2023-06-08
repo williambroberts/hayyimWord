@@ -14,7 +14,7 @@ const Header = () => {
  // console.log(pathname,"pathname")
   const {setOpenBookIndex,openBookIndex,searchData,setSearchData,isSearch,setIsSearch,
     openChapterIndex,setOpenChapterIndex,
-    isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,
+    isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,isStrong,setIsStrong,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     } = useContext(BookContext)
@@ -26,11 +26,14 @@ const Header = () => {
     setIsHamburger(false)
     setIsSearch(false)
     setIsSettings(false)
+    if (isStrong){
+      setIsNote(true)
+    }
+    console.log(isNote,isStrong,"handleMEnu")
   }
 
  
  const handleOpenToChapter = ()=>{
-  setIsChaptersMenuOpen(true)
   setIsHamburger(true)
   
  }

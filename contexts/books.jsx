@@ -51,7 +51,10 @@ const BookProvider = ({children}) => {
 //   }
 //   fetchText()
 // },[])
-
+  useEffect(()=>{
+      console.log("isNote",isNote,isStrong)
+      
+  },[isSearch])
   useEffect(()=>{
     setIsSearchChart(false)
     //get new strong data
