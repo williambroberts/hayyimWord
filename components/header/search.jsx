@@ -8,6 +8,7 @@ import IconMagnify from '../icons/action/mag';
 import { BookContext } from '@/contexts/books';
 import IconDelete from '../icons/action/delete';
 import SearchChart from './serachChart';
+import { SearchStrong } from '@/app/api/bible/searchStrong';
 
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
     const [searchInput,setSearchInput]=useState("")
@@ -55,12 +56,18 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     setSearch((prev)=> !prev)
    }
     useEffect(()=> {
-      setIsSearchChart(true)
+      setIsSearchChart(true)  
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
       const fetchData = async (searchInput)=> {
-        //console.log("searchinput,",searchInput)
+        console.log("searchinput,",searchInput)
         try {
-            const data = await SearchBible(searchTranslation,searchInput)
+          let data = null
+            if (parseInt(searchInput.slice(1)[0])!==NaN){
+               data = await SearchStrong(searchTranslation,searchInput)
+            }else{
+                data = await SearchBible(searchTranslation,searchInput)
+            }
+           
         //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
         if (data!==undefined){
           setSearchData((prev)=> {return Object.values(data?.results)[0]} )
