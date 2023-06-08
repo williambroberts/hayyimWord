@@ -14,7 +14,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
-    const {searchTranslation,setSearchTranslation}=useContext(BookContext)
+    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart}=useContext(BookContext)
     const [recentSearches,setRecentSearches]=useState(null)
   console.log(recentSearches,"recent")
    const handleSubmit = (e)=>{
@@ -54,6 +54,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     setSearch((prev)=> !prev)
    }
     useEffect(()=> {
+      setIsSearchChart(true)
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
       const fetchData = async (searchInput)=> {
         //console.log("searchinput,",searchInput)
@@ -127,9 +128,9 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     {/* chart of results */}
     <div>
 
-       {searchData?
+       {isSearchChart? searchData? 
     <SearchChart isFiltered={isFiltered} setIsFiltered={setIsFiltered} 
-    searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}/> :""}
+    searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}/> :"" :""}
     </div>
     {searchData? "": <div className='recent-searches'>
     <span className='recent-span'>Recent searches:

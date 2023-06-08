@@ -11,7 +11,7 @@ import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 import IconDelete from '../icons/action/delete'
-const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,isStrong,strongText,
+const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     setIsWrite,text,setNoUserAlert,setAlertText,noUserAlert,title,setSelectedWords}) => {
     const [isHighlight,setIsHighlight]=useState(false)
     const thedate = new Date()
@@ -22,10 +22,10 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,i
     const [message,setMessage]=useState("")
     const {user}=useContext(IsAUserLoggedInContext)
     const {setOpenBookIndex,openBookIndex,
-        openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,
-        isChaptersMenuOpen,setIsChaptersMenuOpen,
-        isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
-        startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle
+        openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,strongText,isStrong,
+        isChaptersMenuOpen,setIsChaptersMenuOpen,setIsStrong,searchData,setSearchData,isSearch,setIsSearch,
+        isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
+        startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,searchFound,
         } = useContext(BookContext)
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
@@ -236,6 +236,13 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,i
         console.log(text,"copied")
 
     }
+    useEffect(()=>{
+        if (isWrite){
+            setIsStrong(false)
+        }else if( strongText!=="") {
+            setIsStrong(true)
+        }
+    },[isWrite])
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
@@ -255,9 +262,9 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,i
         </div>
         <div className={`note-dict ${isStrong? "open":""}`}>
             <div className="note-dict-top">
-                    <span className='note-dict-title'></span>
-                    <span className='note-dict-found'></span>
-                    <span className='note-dict-close'><IconCrossCircled/></span>
+                    <span className='note-dict-title'>{strongData?.lexeme}</span>
+                    <span className='note-dict-found' onClick={()=>setIsSearch((prev)=>true)}>Found {searchFound} verses</span>
+                    <span className='note-cross'><IconCrossCircled/></span>
             </div>
             <span className='note-dict-strong'>{strongText}</span>
         </div>

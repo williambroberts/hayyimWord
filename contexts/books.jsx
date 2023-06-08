@@ -7,6 +7,8 @@ import { getChapter } from '@/app/api/bible/getChapter'
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation'
 import getText from '@/app/api/bible/getText'
+import getStrong from '@/app/api/bible/getStrong'
+import { SearchBible } from '@/app/api/bible/searchBible'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -25,6 +27,14 @@ const BookProvider = ({children}) => {
    const [scrollChangeNeeded,setScrollChangeNeeded]=useState(false)
    const [isNote,setIsNote]=useState(false)
    const [globalLineHeight,setGlobalLineHeight]=useState(1.5)
+   const [isStrong,setIsStrong]=useState(false)
+   const [strongText,setStrongText]=useState(null)
+   const [strongData,setStrongData]=useState(null)
+   const [isSearch,setIsSearch]=useState(false)
+  const [searchData,setSearchData]=useState(null)
+  const [isSearchChart,setIsSearchChart]=useState(false)
+  const [searchFound,setSearchFound]=useState(undefined)
+
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -41,25 +51,48 @@ const BookProvider = ({children}) => {
 //   }
 //   fetchText()
 // },[])
-  //  useEffect(()=>{
-  //   const fetchChapter = async ()=>{
-  //     console.log("new translation will be",bollsTranslation)
-  //     const data = await getChapter(bollsTranslation,openBookIndex+1,openChapterIndex+1)
-  //     setTheText(data)
-  //     setDisplayTitle([openBookIndex,openChapterIndex])
-  //     setScrollChangeNeeded((prev)=>!prev)
-  //     console.log(pathname)
-  //     if (pathname!=="/"){
-  //       router.push("/")
-  //     }
-  //   }
-  //   fetchChapter()
-  //  },[bollsTranslation])
+
+  useEffect(()=>{
+    setIsSearchChart(false)
+    //get new strong data
+    const fetchStrong= async (strongText)=>{
+      try {
+        const data = await getStrong(strongText)
+        if (data!==undefined){
+          console.log(data,"strong data")
+          setStrongData((prev)=> data[0])
+        }
+      }catch(err){
+        console.log(err)
+      }
+    }
+    //search super api for that word
+    const fetchData = async (searchInput)=> {
+      //console.log("searchinput,",searchInput)
+      try {
+          const data = await SearchBible(searchTranslation,searchInput,true,false,true)
+      //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+      if (data!==undefined){
+        setSearchData((prev)=> {return Object.values(data?.results)[0]} )
+        setSearchFound((prev)=>data.paging.total)
+      }
+      
+      }catch(err){
+          console.log(err)
+      }
+      
+      
+    }
+    fetchStrong(strongText)
+    fetchData(strongText) 
+  },[strongText])
+
   return (
    <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
     openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,globalLineHeight,setGlobalLineHeight,
-    isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,isNote,setIsNote,
-    isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
+    isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,isNote,setIsNote,searchFound,
+    isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,
+    strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     }}>
     {children}

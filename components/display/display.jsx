@@ -27,12 +27,11 @@ const Display = () => {
     const [displayText,setDisplayText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
     const [title,setTitle]=useState(null)
-    const [isStrong,setIsStrong]=useState(false)
-    const [strongText,setStrongText]=useState(null)
+   
     const [selectedWords,setSelectedWords]=useState([])
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
-        openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,
-        isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,
+        openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,strongText,setStrongText,
+        isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,isStrong,setIsStrong,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)

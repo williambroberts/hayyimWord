@@ -12,7 +12,7 @@ import ReactThemeButton from '../theme/themeReact/reactThemeButton'
 const Header = () => {
   const pathname = usePathname()
   console.log(pathname,"pathname")
-  const {setOpenBookIndex,openBookIndex,
+  const {setOpenBookIndex,openBookIndex,searchData,setSearchData,isSearch,setIsSearch,
     openChapterIndex,setOpenChapterIndex,
     isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
@@ -20,8 +20,7 @@ const Header = () => {
     } = useContext(BookContext)
     const {user}=useContext(IsAUserLoggedInContext)
   const [isHamburger,setIsHamburger]=useState(false)
-  const [isSearch,setIsSearch]=useState(false)
-  const [searchData,setSearchData]=useState(null)
+  
   const [filteredData,setFilteredData]=useState(null)
   const handleMenu = ()=>{
     setIsHamburger(false)

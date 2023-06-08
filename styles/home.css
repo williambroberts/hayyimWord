@@ -402,3 +402,22 @@ textarea::placeholder {
     height: 200px;
     transform: translate(0,-100%);
 }
+
+.note-dict-top {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.0rem;
+    padding: 0.5rem 0rem;
+    box-sizing: border-box;
+
+}
+.note-dict-found {
+    margin-left: auto;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 100px;
+    border: 1px solid var(--white);
+    font-size: var(--font-size-14);
+
+}

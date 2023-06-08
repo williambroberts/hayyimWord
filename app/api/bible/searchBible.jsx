@@ -8,7 +8,7 @@ export async function SearchBible(bible="kjv_strongs",search="",whole_words=true
     }
     //add extra search paramers will🦧🦧🦧🦧
     
-    const url = `https://api.biblesupersearch.com/api?bible=${bible}&search=${search}&whole_words=${whole_words}&data_format=minimal&page_all=true&highlight=${highlight}`
+    const url = `https://api.biblesupersearch.com/api?bible=${"kjv_strongs"}&search=${search}&whole_words=${whole_words}&data_format=minimal&page_all=${page_all}&highlight=${highlight}`
     const options = {
       method: 'GET',
       
