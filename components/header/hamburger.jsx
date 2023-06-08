@@ -82,7 +82,7 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
       ></div>
       <VersesHamburger setIsHamburger={setIsHamburger} handleVersesMenu={handleVersesMenu}
        numberOfVerses={numOfVersesInOpenChapter} book={chaptersAndVerses[openBookIndex]}/> */}
-        <HistoryHamburger/>
+        <HistoryHamburger  setIsHamburger={setIsHamburger}/>
        <SettingsHamburger isSettings={isSettings} setIsSettings={setIsSettings}/>
     </div>
   )

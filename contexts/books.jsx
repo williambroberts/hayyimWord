@@ -69,9 +69,16 @@ useEffect(()=>{
         localStorage.setItem("history",JSON.stringify([toAdd]))
         setHistory([toAdd])
       }else {
-        history.push(toAdd)
+        let ids = []
+        for (let item of history){
+          ids.push(item.id)
+        }
+        if (!ids.includes(toAdd.id)){
+           history.push(toAdd)
         localStorage.setItem("history",JSON.stringify(history))
         setHistory([...history])
+        }
+       
       }
 
     }catch(err){
