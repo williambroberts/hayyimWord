@@ -26,6 +26,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setIsStrong,searchData,setSearchData,isSearch,setIsSearch,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,searchFound,
+        setRecentSearches,
         } = useContext(BookContext)
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
@@ -243,7 +244,24 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             setIsStrong(true)
         }
     },[isWrite])
-  
+  const handleFoundToSearch = ()=>{
+    setIsSearch((prev)=>true)
+    let gotSearchesRaw = localStorage.getItem("recentSearches")
+    let gotSearches = JSON.parse(gotSearchesRaw)
+    if (gotSearches===null){
+     // console.log("no recent searches") 
+      localStorage.setItem("recentSearches",JSON.stringify([strongText]))
+      setRecentSearches([strongText])
+    }else {
+      if (!gotSearches.includes(strongText)){
+        // console.log(gotSearches,"recent searches",typeof(gotSearches))
+      gotSearches.push(strongText)
+      localStorage.setItem("recentSearches",JSON.stringify(gotSearches))
+      setRecentSearches(gotSearches)
+      }
+     
+    }
+  }
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
         <div className={`note-note ${isWrite? "open":""}`}>
@@ -264,7 +282,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         <div className={`note-dict ${isStrong? "open":""}`}>
             <div className="note-dict-top">
                     <span className='note-dict-title'>{strongData?.lexeme}</span>
-                    <span className='note-dict-found' onClick={()=>setIsSearch((prev)=>true)}>Found {searchFound} verses</span>
+                    <span className='note-dict-found' onClick={()=>handleFoundToSearch()}>Found {searchFound} verses</span>
                     <span className='note-cross' onClick={()=>setIsStrong((prev)=>false)}><IconCrossCircled/></span>
             </div>
             <span className='note-dict-strong'>Strongs: {strongText}</span>

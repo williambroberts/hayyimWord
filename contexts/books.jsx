@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation'
 import getText from '@/app/api/bible/getText'
 import getStrong from '@/app/api/bible/getStrong'
 import { SearchBible } from '@/app/api/bible/searchBible'
+import getVerse from '@/app/api/bible/getVerse'
+import { SearchStrong } from '@/app/api/bible/searchStrong'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -36,6 +38,8 @@ const BookProvider = ({children}) => {
   const [searchFound,setSearchFound]=useState(undefined)
   const [isChapter,setIsChapter]=useState(false)
     const [isVerse,setIsVerse]=useState(false)
+    const [history,setHistory]=useState(null)
+    const [recentSearches,setRecentSearches]=useState(null)
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -52,6 +56,37 @@ const BookProvider = ({children}) => {
 //   }
 //   fetchText()
 // },[])
+useEffect(()=>{
+  const fetchVerse = async (reference) =>{
+    const data = await getVerse(reference)
+    const toAdd = data?.results[0]
+    console.log(toAdd,"toAdd")
+      try {
+      let histroyRaw = localStorage.getItem("history")
+      let history = JSON.parse(histroyRaw)
+      if (history===null){
+        localStorage.setItem("history",JSON.stringify([toAdd]))
+        setHistory([toAdd])
+      }else {
+        history.push(toAdd)
+        localStorage.setItem("history",JSON.stringify(history))
+        setHistory([...history])
+      }
+
+    }catch(err){
+      console.log(err)
+    }
+
+
+  }
+  if (startVerse!==-1){
+    //add current to history
+    let reference = chaptersAndVerses[openBookIndex]+(openChapterIndex+1)+":"+(startVerse+1)
+    console.log(reference,"verse ref")
+    fetchVerse(reference)
+  
+  }
+},[openBookIndex,openChapterIndex,startVerse])
   useEffect(()=>{
       console.log("isNote",isNote,isStrong)
       
@@ -75,7 +110,7 @@ const BookProvider = ({children}) => {
     const fetchData = async (searchInput)=> {
       //console.log("searchinput,",searchInput)
       try {
-          const data = await SearchBible(searchTranslation,searchInput,true,false,true)
+          const data = await SearchStrong(searchTranslation,searchInput,true,false,true)
       //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
       if (data!==undefined){
         setSearchData((prev)=> {return Object.values(data?.results)[0]} )
@@ -88,6 +123,8 @@ const BookProvider = ({children}) => {
       
       
     }
+
+    
     fetchStrong(strongText)
     fetchData(strongText) 
   },[strongText])
@@ -99,7 +136,7 @@ const BookProvider = ({children}) => {
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,strongData,
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
-    ,isChapter,setIsChapter,isVerse,setIsVerse,
+    ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,
     }}>
     {children}
    </BookContext.Provider>

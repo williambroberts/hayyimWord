@@ -24,7 +24,7 @@ const Display = () => {
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
     const [mounted,setMounted]=useState(false)
-    const [displayText,setDisplayText]=useState(null)
+    const [pureText,setPureText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
     const [title,setTitle]=useState(null)
     const [firebaseHighlightsColors,setFirebaseHighlightsColors]=useState(null)
@@ -282,8 +282,11 @@ const Display = () => {
       
       if (theText !==null){
         let bigx = []
+        let newPureText=[]
         for (let i=0; i<theText.length;i++){
-          //let newText = theText[i].text.replace(/(\w+)\{([\w\d]+)\}/g, `<span title="$2">$1</span>`).replace(/\{[^ ]+/g, '')
+
+          let wordsOnly = theText[i].text.replace(/\{.*?\}/g, '')
+          newPureText.push(wordsOnly)
           let newText = theText[i].text.split(" ")
           let nt = ""
           let x = []
@@ -321,13 +324,11 @@ const Display = () => {
 
           })
           newDisplayText.push(newElem) //or .innerHTML
-          //newDisplayText.push(newElem)
-         // textverses[i].innerHTML="newText"
-         // console.log(textverses[i])
-        // console.log(newText,typeof(newText))
+         
         }
         setTextArrays([...bigx])
-        setDisplayText([...newDisplayText])
+        setPureText([...newPureText])
+       
         console.log(bigx)
        // console.log(newDisplayText[0].innerHTML,typeof(newDisplayText[0].innerHTML))
 
@@ -372,7 +373,7 @@ const Display = () => {
     {/* <div className={`note-blur ${isNote? "open":""}`} onClick={()=>setIsNote(false)}>
     </div> */}
     <NoteHamburger noUserALert={noUserALert} setNoUserAlert={setNoUserAlert} setAlertText={setAlertText} exactId={exactId}
-    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? theText[clickedVerse]?.text:""} title={title} setSelectedWords={setSelectedWords}
+    isWrite={isWrite} setIsWrite={setIsWrite} text={clickedVerse!==-1? pureText[clickedVerse]:""} title={title} setSelectedWords={setSelectedWords}
     isNote={isNote} setIsNote={setIsNote} id={id} book={chaptersAndVerses[displayTitle[0]].name} chapter={displayTitle[1]+1} verse={clickedVerse}/>
    
    <div className={`display-alert ${noUserALert? "open":""}`}>

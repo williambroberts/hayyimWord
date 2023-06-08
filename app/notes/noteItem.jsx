@@ -8,6 +8,8 @@ import { firestore } from '@/firebase/firebaseConfig'
 import { doc,runTransaction } from 'firebase/firestore'
 import IconDelete from '@/components/icons/action/delete'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
+import chaptersAndVerses from "../api/bible/chaptersAndVerses.json"
+import getText from '../api/bible/getText'
 const NoteItem = ({item}) => {
     const router = useRouter()
     console.log(item)
@@ -24,8 +26,12 @@ const NoteItem = ({item}) => {
         setOpenBookIndex(item.bookid-1)
         setStartVerse(item.verse)
         setOpenChapterIndex(item.chapter-1)
-        const data = await getChapter(bollsTranslation,parseInt(item.bookid),parseInt(item.chapter))
-        setTheText(data)
+       
+       let reference = chaptersAndVerses[item.bookid-1].shortname+parseInt(item.chapter)
+       let data = await getText("kjv_strongs",reference)
+        
+         setTheText(data.results.kjv_strongs)
+       
         setScrollChangeNeeded((prev)=>!prev)
         router.push("/")
     }

@@ -14,8 +14,9 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
-    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart}=useContext(BookContext)
-    const [recentSearches,setRecentSearches]=useState(null)
+    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,
+      recentSearches,setRecentSearches}=useContext(BookContext)
+    
  // console.log(recentSearches,"recent")
    const handleSubmit = (e)=>{
     e.preventDefault()
