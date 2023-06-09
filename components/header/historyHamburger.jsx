@@ -47,7 +47,7 @@ const HistoryHamburger = ({setIsHamburger}) => {
         </nav>
         <div className='history-clear'>Tap verse to view in context. Clear History <span className='history-delete' onClick={()=>handleDelete()}><IconDelete/></span></div>
         <div className='history-wrapper'>
-            {history?.map((item)=>  <div className='search-result-item' onClick={()=>handleGoto(item)}>
+            {history?.map((item)=>  <div className='search-result-item' key={uuidv4()} onClick={()=>handleGoto(item)}>
         <span className='search-result-item-title'>{chaptersAndVerses[item.book-1].name} {item?.chapter}:{item?.verse}
         <span className='search-result-icon'>&#8250;</span> 
         </span>
