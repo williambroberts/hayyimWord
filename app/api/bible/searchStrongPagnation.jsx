@@ -1,7 +1,7 @@
 export async function SearchStrongPagnation(bible="kjv_strongs",search="",whole_words=true,page_all=false,highlight=true,page=1) {
     
     // const fetch = require('node-fetch');
-    console.log(search,"searchStrong",bible,whole_words,page_all,highlight)
+    console.log(search,"searchStrong",bible,whole_words,page_all,highlight,page)
     if (search===''){
       console.log("leaving",search)
       return undefined
