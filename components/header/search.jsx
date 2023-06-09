@@ -7,19 +7,25 @@ import IconArrowLeft from '../icons/navigation/arrowLeft';
 import IconMagnify from '../icons/action/mag';
 import { BookContext } from '@/contexts/books';
 import IconDelete from '../icons/action/delete';
+import shortNames from "../../app/api/bible/shortnames.json"
 import SearchChart from './serachChart';
 import { SearchStrong } from '@/app/api/bible/searchStrong';
+import getText from '@/app/api/bible/getText';
 import 'intersection-observer';
 import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation';
+import { usePathname } from 'next/navigation';
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
     // const [searchInput,setSearchInput]=useState("")
+    const pathname = usePathname()
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
     const nums = ["1","2","3","4","5","6","7","8","9","0"]
     const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,searchInput,setSearchInput,setStrongText,setReGetStrongs,reGetStrongs,
       isNote,setIsNote,setIsStrong,setTotalPages,totalPages,page,setPage,isStrong,strongText,setSearchFound,searchFound,reObserve,setReObserve,
-      recentSearches,setRecentSearches}=useContext(BookContext)
+      recentSearches,setRecentSearches,setOpenBookIndex,openBookIndex,setOpenChapterIndex,setDisplayTitle,setTheText,
+      openChapterIndex,setScrollChangeNeeded,setStartVerse,setIsChaptersMenuOpen,setIsVersesMenuOpen,
+    }=useContext(BookContext)
     
      
       
@@ -83,6 +89,76 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     setSearchInput(item)
     setSearch((prev)=> !prev)
    }
+
+   const fetchText =async (reference)=>{
+    console.log(reference,"fetchnig refenerce text")
+    let newrefernce=reference.split(":")[0]
+   let data = await getText("kjv_strongs",newrefernce)
+   
+  
+    let bookNo=null
+    let b=reference
+    if(nums.includes(reference[0])){
+     b = reference.slice(1)
+      bookNo=reference[0]
+    }
+     let book=b.match(/[a-zA-Z]+/g)[0]
+  
+  let cAndV = b.slice(b.search(/\d/)).split(":")
+  let c = cAndV[0]
+    let v= cAndV[1]
+  
+  
+  
+    let exactBook=null
+    if (bookNo===null){
+      exactBook=book
+    }else {
+      exactBook=bookNo+book
+    }
+    //console.log(bookNo,c,v,book,exactBook,"all ref details bookNo,c,v,book,exactBook")
+    let newStartVerse=1
+      if (v!==undefined){
+        newStartVerse=parseInt(v)
+      }
+      setStartVerse(newStartVerse)
+      //set chapter
+      console.log(bookNo,c,v,book,exactBook,"all ref details bookNo,c,v,book,exactBook",newStartVerse)
+      let newOpenChapterIndex=null
+      if (!c===undefined){
+        newOpenChapterIndex=parseInt(c)-1
+      }else{
+       newOpenChapterIndex=0
+      }
+      //set book index
+      let newopenBookIndex=0
+      for (let i=0; i<shortNames.length;i++){
+        if (shortNames[i].toLowerCase().includes(exactBook.toLowerCase())){
+         
+          newopenBookIndex=i
+        }
+      }
+
+    
+      setOpenBookIndex(newopenBookIndex)
+      setOpenChapterIndex(newOpenChapterIndex)
+    setStartVerse()
+    setIsSearch(false)
+    setScrollChangeNeeded((prev)=>!prev)
+    setIsChaptersMenuOpen(false)
+     setIsVersesMenuOpen(false)
+     setDisplayTitle([newopenBookIndex,newOpenChapterIndex])
+
+     
+  setTheText(data.results.kjv_strongs)
+   console.log(data.results.kjv_strongs)
+   
+if (pathname!=="/"){
+  router.push("/")
+   }
+    
+}  
+
     useEffect(()=> {
       setIsSearchChart(true)  
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
@@ -91,16 +167,31 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
         try {
           let data = null
           console.log("hmm",parseInt(searchInput.slice(1)[0]), typeof(parseInt(searchInput.slice(1)[0])),NaN)
-            if (!nums.includes(searchInput[1])){
+            if (!nums.includes(searchInput[1]) && nums.includes(searchInput[searchInput.length-1])){
+             //eg john3 mark1:12 1chron 1:12
+             setIsStrong(false)
+             console.log("ref search")
+             fetchText(searchInput)
+             return
+            }else if(nums.includes(searchInput[0])&& searchInput.length>2){
+                //eg 1ki or 1John 
+                setIsStrong(false)
+                console.log("ref search")
+                let newSearchInput=searchInput+1
+                fetchText(newSearchInput)
+                return
+            
+            } else if (nums.includes(searchInput[1])){
+              //eg H123 or G1234
+              setReObserve((prev)=>!prev)
+              setReGetStrongs((prev)=>!prev)
+             setStrongText(searchInput)
+             console.log("strong search")
+             return
+            }else{
               setIsStrong(false)
               data = await SearchBible(searchTranslation,searchInput)
-               
-            }else{
-               setReObserve((prev)=>!prev)
-               setReGetStrongs((prev)=>!prev)
-              setStrongText(searchInput)
-              
-              return
+              console.log("normal search")
             }
            
         //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
