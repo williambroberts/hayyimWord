@@ -96,6 +96,7 @@ useEffect(()=>{
 
 
   }
+  console.log(startVerse,"startVerse")
   if (startVerse!==-1 && startVerse!==undefined){
     //add current to history
     let reference = chaptersAndVerses[openBookIndex].shortname+(openChapterIndex+1)+":"+(startVerse)

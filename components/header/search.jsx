@@ -121,7 +121,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
       if (v!==undefined){
         newStartVerse=parseInt(v)
       }
-      setStartVerse(newStartVerse)
+      setStartVerse((prev)=>newStartVerse)
       //set chapter
       console.log(bookNo,c,v,book,exactBook,"all ref details bookNo,c,v,book,exactBook",newStartVerse)
       let newOpenChapterIndex=null
@@ -142,7 +142,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     
       setOpenBookIndex(newopenBookIndex)
       setOpenChapterIndex(newOpenChapterIndex)
-    setStartVerse()
+    
     setIsSearch(false)
     setScrollChangeNeeded((prev)=>!prev)
     setIsChaptersMenuOpen(false)
