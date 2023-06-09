@@ -27,7 +27,7 @@ const Header = () => {
     setIsHamburger(false)
     setIsSearch(false)
     setIsSettings(false)
-    if (isStrong){
+    if (isStrong && strongText!==null){
       console.log(strongText,isStrong)
       setIsNote(true)
     }
