@@ -46,6 +46,8 @@ const BookProvider = ({children}) => {
     const [recentSearches,setRecentSearches]=useState(null)
     const [isHistory,setIsHistory]=useState(false)
     const [searchInput,setSearchInput]=useState("")
+    const [page,setPage]=useState(1)
+    const [totalPages,setTotalPages]=useState(null)
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -134,6 +136,8 @@ useEffect(()=>{
       if (data!==undefined){
         setSearchData((prev)=> {return Object.values(data?.results)[0]} )
         setSearchFound((prev)=>data.paging.total)
+        setTotalPages((prev)=>data.paging.last_page)
+        setPage(1)
         // let totalData =  Object.values(data?.results)[0]
         // console.log(data.paging.total,data.paging.last_page)
         // for (let i=0; i<data.paging.last_page-1; i++){
@@ -164,7 +168,7 @@ useEffect(()=>{
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,searchInput,setSearchInput,
-    isHistory,setIsHistory,history,setHistory,superStrongData,setSuperStrongData,
+    isHistory,setIsHistory,history,setHistory,superStrongData,setSuperStrongData,setTotalPages,totalPages,page,setPage,
     }}>
     {children}
    </BookContext.Provider>
