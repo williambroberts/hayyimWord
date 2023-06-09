@@ -40,6 +40,10 @@ const Display = () => {
         
         const [noteids,setNoteids]=useState(null)
         useEffect(()=>{
+          setIsNote(false)
+          return ()=>setIsNote(false)
+        },[])
+        useEffect(()=>{
           if (user){
             let newids= []
           for (let i=0;i<firebaseNotes?.length;i++){
