@@ -385,6 +385,8 @@ textarea::placeholder {
 .verse-span-u {
     margin-left: 0.125rem;
     position: relative;
+    display: inline-flex;
+    align-items: center;
 }
 .verse-span-u::after {
     content: "";
@@ -444,4 +446,11 @@ textarea::placeholder {
     color: var(--t-3);
     font-size: var(--font-size-14);
     margin-bottom: 1.5rem;
+}
+
+.display-note-icon {
+    cursor: pointer;
+    color: var(--theme);
+    display: flex;
+    align-items: center;
 }

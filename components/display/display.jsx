@@ -11,6 +11,7 @@ import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
+import IconBxsNote from '../icons/note3';
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -358,7 +359,7 @@ const Display = () => {
 
       {textArrays!==null? textArrays!==undefined? textArrays[index]?.map((item,index)=>(<span style={{backgroundColor:selectedWords?.includes(item.exactId)? "var(--theme2)" :firebaseHighlightsIds?.includes(item.exactId)? firebaseHighlightsColors[firebaseHighlightsIds?.indexOf(item.exactId)] :"" }} 
       id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
-      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)? "#":""}{item.word}</span>)) : "": ""}
+      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)?"✍" :""}{item.word}</span>)) : "": ""}
        
         </span>
         
@@ -388,3 +389,5 @@ const Display = () => {
 }
 
 export default Display
+
+//♗ ✍⊛

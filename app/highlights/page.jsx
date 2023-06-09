@@ -1,12 +1,15 @@
 "use client"
-import React,{useContext,useEffect} from 'react'
+import React,{useContext,useEffect, useState} from 'react'
 import { useRouter } from 'next/navigation'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import { DataContext } from '@/contexts/dataContext'
 import HightlightItem from './highlightItem'
 import { v4 as uuidv4 } from 'uuid'
+import HighLightChart from './highlightChart'
 const HighlightsPage = () => {
   const {firebaseHighlights,setfirebaseHighlights} = useContext(DataContext)
+  const [filteredData,setFilteredData]=useState(firebaseHighlights)
+  const [isFiltered,setIsFiltered]=useState(false)
     const {user,setUser}=useContext(IsAUserLoggedInContext)
   const router=useRouter()
   useEffect(()=>{
@@ -17,11 +20,16 @@ const HighlightsPage = () => {
     } 
     
   },[user,router])
+  useEffect(()=>{
+    setFilteredData(firebaseHighlights)
+    //console.log(firebaseHighlights,filteredData)
+  },[])
   return (
    <main>
-    <span className='page-stats'>Showing {firebaseHighlights?.length} {firebaseHighlights?.length!==1? "highlights":"highlight"} of {firebaseHighlights?.length}</span>
+    <HighLightChart setFilteredData={setFilteredData} setIsFiltered={setIsFiltered} isFiltered={isFiltered}/>
+    <span className='page-stats'>Showing {filteredData?.length} {firebaseHighlights?.length!==1? "highlights":"highlight"} of {firebaseHighlights?.length}</span>
     <div className='page-flex'>
-      {firebaseHighlights?.map((item)=> (<HightlightItem key={uuidv4()} item={item}/>) )}
+      {filteredData?.map((item)=> (<HightlightItem key={uuidv4()} item={item}/>) )}
     </div>
    </main>
   )

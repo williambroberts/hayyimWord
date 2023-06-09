@@ -715,6 +715,9 @@ input[type="range"]{
     flex-direction: column;
     gap: 0.25rem;
     padding: 0.25rem 0rem;
+    border-radius: 4px;
+    box-shadow: var(--box-shadow-4);
+    margin: 0.25rem 0rem;
 }
 .search-category-bar {
     background-color: var(--theme);

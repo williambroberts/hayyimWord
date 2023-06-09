@@ -9,7 +9,7 @@ import { doc,runTransaction } from 'firebase/firestore'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 const HightlightItem = ({item}) => {
     const router = useRouter()
-    console.log(item)
+    //console.log(item)
     const {setOpenBookIndex,openBookIndex,
         openChapterIndex,setOpenChapterIndex,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,
