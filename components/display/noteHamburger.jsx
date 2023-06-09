@@ -298,7 +298,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             <span className='note-dict-item'> Pronunciation: {strongData?.pronunciation}</span>
             <span className='note-dict-item'>Short definition: {strongData?.short_definition}</span>
             <span>Definition: {superStrongData?.entry.replace(/<\/?i>/g, '')}</span>
-            <span className='note-dict-source'>BDBT - Brown-Driver-Briggs' Hebrew Definitions / Thayer's Greek Definitions</span>
+            <span className='note-dict-source'>BDBT - Brown-Driver-Briggs&apos; Hebrew Definitions / Thayer&apos;s Greek Definitions</span>
         </div>
 
         <div className='note-options-wrapper'>
