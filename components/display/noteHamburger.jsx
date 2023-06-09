@@ -26,7 +26,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setIsStrong,searchData,setSearchData,isSearch,setIsSearch,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,searchFound,
-        setRecentSearches,
+        setRecentSearches,superStrongData,
         } = useContext(BookContext)
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
@@ -296,6 +296,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             <span className='note-dict-item'>Transliteration: {strongData?.transliteration}</span>
             <span className='note-dict-item'> Pronunciation: {strongData?.pronunciation}</span>
             <span className='note-dict-item'>{strongData?.short_definition}</span>
+            <span>{superStrongData?.entry.replace(/<\/?i>/g, '')}</span>
         </div>
 
         <div className='note-options-wrapper'>

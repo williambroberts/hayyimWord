@@ -11,6 +11,7 @@ import getStrong from '@/app/api/bible/getStrong'
 import { SearchBible } from '@/app/api/bible/searchBible'
 import getVerse from '@/app/api/bible/getVerse'
 import { SearchStrong } from '@/app/api/bible/searchStrong'
+import { superGetStrong } from '@/app/api/bible/superGetStrong'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -32,6 +33,8 @@ const BookProvider = ({children}) => {
    const [isStrong,setIsStrong]=useState(false)
    const [strongText,setStrongText]=useState(null)
    const [strongData,setStrongData]=useState(null)
+
+   const [superStrongData,setSuperStrongData]=useState(null)
    const [isSearch,setIsSearch]=useState(false)
   const [searchData,setSearchData]=useState(null)
   const [isSearchChart,setIsSearchChart]=useState(false)
@@ -106,6 +109,11 @@ useEffect(()=>{
     const fetchStrong= async (strongText)=>{
       try {
         const data = await getStrong(strongText)
+        const superData = await superGetStrong(strongText)
+        if (superData!==undefined){
+          console.log("strnong super",superData.results[0].entry)
+          setSuperStrongData((prev)=>superData.results[0])
+        }
         if (data!==undefined){
           console.log("strong data",data[0].lexeme)
           setStrongData((prev)=> data[0])
@@ -145,7 +153,7 @@ useEffect(()=>{
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
     ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,
-    isHistory,setIsHistory,history,setHistory,
+    isHistory,setIsHistory,history,setHistory,superStrongData,setSuperStrongData,
     }}>
     {children}
    </BookContext.Provider>
