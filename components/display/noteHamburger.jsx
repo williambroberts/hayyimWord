@@ -26,7 +26,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setIsStrong,searchData,setSearchData,isSearch,setIsSearch,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,searchFound,
-        setRecentSearches,superStrongData,
+        setRecentSearches,superStrongData,searchInput,setSearchInput,
         } = useContext(BookContext)
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
@@ -253,6 +253,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     },[isWrite])
   const handleFoundToSearch = ()=>{
     setIsSearch((prev)=>true)
+    setSearchInput((prev)=>strongText)
     let gotSearchesRaw = localStorage.getItem("recentSearches")
     let gotSearches = JSON.parse(gotSearchesRaw)
     if (gotSearches===null){

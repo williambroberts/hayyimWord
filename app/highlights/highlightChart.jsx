@@ -19,18 +19,18 @@ const HighLightChart = ({setFilteredData,setIsFiltered,isFiltered}) => {
     const [index,setIndex]=useState(null)
     
 const handleFilter = (id,lo,hi)=>{
-    console.log("index",index,id,lo,hi,isFiltered)
+    //console.log("index",index,id,lo,hi,isFiltered)
     if (isFiltered && id===index){
         setFilteredData([...firebaseHighlights])
         setIsFiltered(false)
         setIndex(-1)
-        console.log(firebaseHighlights)
+       // console.log(firebaseHighlights)
     }else {
-        console.log("index",index,id,lo,hi)
+       // console.log("index",index,id,lo,hi)
         setIndex((prev)=>id)
         setIsFiltered((prev)=>true)
         let newfilteredData = firebaseHighlights?.filter((item)=>item.bookid>=lo &&item.bookid<=hi )
-        console.log(newfilteredData.length,"new filted data length")
+        //console.log(newfilteredData.length,"new filted data length")
         setFilteredData(newfilteredData)
     }
     

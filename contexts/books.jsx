@@ -12,6 +12,7 @@ import { SearchBible } from '@/app/api/bible/searchBible'
 import getVerse from '@/app/api/bible/getVerse'
 import { SearchStrong } from '@/app/api/bible/searchStrong'
 import { superGetStrong } from '@/app/api/bible/superGetStrong'
+import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -44,6 +45,7 @@ const BookProvider = ({children}) => {
     const [history,setHistory]=useState(null)
     const [recentSearches,setRecentSearches]=useState(null)
     const [isHistory,setIsHistory]=useState(false)
+    const [searchInput,setSearchInput]=useState("")
   useEffect(()=>{
     console.log("new search translation will be",searchTranslation)
   },[searchTranslation])
@@ -123,14 +125,23 @@ useEffect(()=>{
       }
     }
     //search super api for that word
-    const fetchData = async (searchInput)=> {
-      //console.log("searchinput,",searchInput)
+    const fetchData = async (searchInputVar)=> {
+      
       try {
-          const data = await SearchStrong(searchTranslation,searchInput,true,false,true)
+         
+          const data = await SearchStrongPagnation(searchTranslation,searchInputVar,true,false,true,1)
       //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
       if (data!==undefined){
         setSearchData((prev)=> {return Object.values(data?.results)[0]} )
         setSearchFound((prev)=>data.paging.total)
+        // let totalData =  Object.values(data?.results)[0]
+        // console.log(data.paging.total,data.paging.last_page)
+        // for (let i=0; i<data.paging.last_page-1; i++){
+        //   let extraData = await SearchStrongPagnation(searchTranslation,searchInputVar,true,false,true,i+2)
+          
+        // }
+        // console.log(totalData.length,"total data",totalData)
+        // setSearchData(totalData)
       }
       
       }catch(err){
@@ -152,7 +163,7 @@ useEffect(()=>{
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,strongData,
     strongText,setStrongText,searchData,setSearchData,isSearch,setIsSearch,isSearchChart,setIsSearchChart,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
-    ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,
+    ,isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,searchInput,setSearchInput,
     isHistory,setIsHistory,history,setHistory,superStrongData,setSuperStrongData,
     }}>
     {children}

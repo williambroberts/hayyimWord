@@ -11,11 +11,13 @@ import SearchChart from './serachChart';
 import { SearchStrong } from '@/app/api/bible/searchStrong';
 
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
-    const [searchInput,setSearchInput]=useState("")
+    // const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
-    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,
+    const nums = ["1","2","3","4","5","6","7","8","9","0"]
+    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,searchInput,setSearchInput,
+      isNote,setIsNote,setIsStrong,
       recentSearches,setRecentSearches}=useContext(BookContext)
     
  // console.log(recentSearches,"recent")
@@ -59,13 +61,17 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
       setIsSearchChart(true)  
         // ADD EXTRA PARAMETERS WILL !!!!!!!! 🌼🌼🌼🌼
       const fetchData = async (searchInput)=> {
-        console.log("searchinput,",searchInput)
+        console.log("searchinput,",searchInput,typeof(parseInt(searchInput[1])))
         try {
           let data = null
-            if (parseInt(searchInput.slice(1)[0])!==NaN){
-               data = await SearchStrong(searchTranslation,searchInput)
+          console.log("hmm",parseInt(searchInput.slice(1)[0]), typeof(parseInt(searchInput.slice(1)[0])),NaN)
+            if (!nums.includes(searchInput[1])){
+              setIsStrong(false)
+              data = await SearchBible(searchTranslation,searchInput)
+               console.log("osehfes")
             }else{
-                data = await SearchBible(searchTranslation,searchInput)
+              
+                data = await SearchStrong(searchTranslation,searchInput)
             }
            
         //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])

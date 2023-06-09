@@ -13,7 +13,7 @@ const Header = () => {
   const pathname = usePathname()
  // console.log(pathname,"pathname")
   const {setOpenBookIndex,openBookIndex,searchData,setSearchData,isSearch,setIsSearch,
-    openChapterIndex,setOpenChapterIndex,
+    openChapterIndex,setOpenChapterIndex,strongText,
     isChaptersMenuOpen,setIsChaptersMenuOpen,isNote,setIsNote,isStrong,setIsStrong,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings
@@ -28,6 +28,7 @@ const Header = () => {
     setIsSearch(false)
     setIsSettings(false)
     if (isStrong){
+      console.log(strongText,isStrong)
       setIsNote(true)
     }
     console.log(isNote,isStrong,"handleMEnu")

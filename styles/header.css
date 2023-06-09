@@ -700,7 +700,7 @@ input[type="range"]{
     font-size: var(--font-size-14);
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 6fr 4fr 1fr;
     gap: 0.25rem;
     grid-template-rows: auto;
     position: relative;
@@ -714,10 +714,15 @@ input[type="range"]{
     justify-content: start;
     flex-direction: column;
     gap: 0.25rem;
-    padding: 0.25rem 0rem;
+    padding: 0.25rem 0.25rem;
     border-radius: 4px;
     box-shadow: var(--box-shadow-4);
     margin: 0.25rem 0rem;
+}
+.search-graph-number {
+    width: min-content;
+    color: var(--t-1);
+    font-size: var(--font-size-14);
 }
 .search-category-bar {
     background-color: var(--theme);
