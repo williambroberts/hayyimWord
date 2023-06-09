@@ -9,17 +9,41 @@ import { BookContext } from '@/contexts/books';
 import IconDelete from '../icons/action/delete';
 import SearchChart from './serachChart';
 import { SearchStrong } from '@/app/api/bible/searchStrong';
-
+import 'intersection-observer';
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
     // const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
     const nums = ["1","2","3","4","5","6","7","8","9","0"]
-    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,searchInput,setSearchInput,
-      isNote,setIsNote,setIsStrong,
+    const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,searchInput,setSearchInput,setStrongText,setReGetStrongs,reGetStrongs,
+      isNote,setIsNote,setIsStrong,setTotalPages,totalPages,page,setPage,isStrong,strongText,setSearchFound,searchFound,reObserve,setReObserve,
       recentSearches,setRecentSearches}=useContext(BookContext)
     
+     
+      
+    
+      useEffect(()=>{
+        if (!loading) {
+          const parent = document.getElementById('search-results')
+        console.log(parent)
+        const lastChild = parent.lastElementChild
+        console.log(lastChild,"lastChild")
+        
+        const observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.target === lastChild && entry.isIntersecting) {
+             
+              console.log('Last child is visible',totalPages,page,isStrong,strongText,searchFound)
+              //functionS!!!
+             observer.unobserve(lastChild)
+            }
+          });
+        });
+        observer.observe(lastChild);
+        }
+
+      },[loading,reObserve])
  // console.log(recentSearches,"recent")
    const handleSubmit = (e)=>{
     e.preventDefault()
@@ -68,15 +92,20 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
             if (!nums.includes(searchInput[1])){
               setIsStrong(false)
               data = await SearchBible(searchTranslation,searchInput)
-               console.log("osehfes")
+               
             }else{
+               setReObserve((prev)=>!prev)
+               setReGetStrongs((prev)=>!prev)
+              setStrongText(searchInput)
               
-                data = await SearchStrong(searchTranslation,searchInput)
+              return
             }
            
         //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
         if (data!==undefined){
           setSearchData((prev)=> {return Object.values(data?.results)[0]} )
+          setReObserve((prev)=>!prev)
+         
         }
         
         }catch(err){
@@ -137,10 +166,10 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     <button type="submit" onClick={(e)=>handleSubmit(e)} className='search-button'><IconMagnify/></button>
     
     </form>
-    <div className='search-results'>
+    <div className='search-results' id="search-results">
       
     <span className='search-number'>
-      {searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${searchData?.length}. Tap again to show all`: `Found ${searchData.length} verses. ${isSearchChart? "Tap chart to filter":""}` : "No word search results."}</span>
+      {searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${isStrong? searchFound:searchData?.length} verses. `: `Found ${isStrong? searchFound: searchData?.length} verses. ${isSearchChart? "Tap chart to filter":""}` : "No word search results."}</span>
   
     {/* chart of results */}
     <div>
