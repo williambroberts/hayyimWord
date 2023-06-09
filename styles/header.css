@@ -754,4 +754,5 @@ input[type="range"]{
 }
 .history-wrapper {
     padding:0.5rem;
+    overflow-y: auto;
 }
