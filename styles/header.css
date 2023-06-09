@@ -756,3 +756,10 @@ input[type="range"]{
     padding:0.5rem;
     overflow-y: auto;
 }
+
+.get-more-data {
+    cursor: pointer;
+    font-size: var(--font-size-16);
+    color: var(--t-3);
+    padding:1rem 0rem;
+}

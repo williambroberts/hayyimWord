@@ -10,6 +10,7 @@ import IconDelete from '../icons/action/delete';
 import SearchChart from './serachChart';
 import { SearchStrong } from '@/app/api/bible/searchStrong';
 import 'intersection-observer';
+import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation';
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
     // const [searchInput,setSearchInput]=useState("")
     const [search,setSearch]=useState(false)
@@ -25,23 +26,24 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     
       useEffect(()=>{
         if (!loading) {
-          const parent = document.getElementById('search-results')
+          let parent = document.getElementById('get-more-data')
         console.log(parent)
-        const lastChild = parent.lastElementChild
-        console.log(lastChild,"lastChild")
-        
-        const observer = new IntersectionObserver(entries => {
+        if (parent!==null){
+            const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
-            if (entry.target === lastChild && entry.isIntersecting) {
+            if (entry.target === parent && entry.isIntersecting) {
              
               console.log('Last child is visible',totalPages,page,isStrong,strongText,searchFound)
               //functionS!!!
-             observer.unobserve(lastChild)
+             observer.unobserve(parent)
             }
           });
         });
-        observer.observe(lastChild);
+        observer.observe(parent);
         }
+        }
+        
+      
 
       },[loading,reObserve])
  // console.log(recentSearches,"recent")
@@ -112,7 +114,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
             console.log(err)
         }
         
-         setLoading(false);
+       
       }
       fetchData(searchInput) 
     },[search])
@@ -151,6 +153,39 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
         console.log(err)
       }
     }
+    const getNextPageStrong = ()=>{
+      const fetchData = async (searchInputVar,newpage)=> {
+      
+        try {
+           
+            const data = await SearchStrongPagnation(searchTranslation,searchInputVar,true,false,true,newpage)
+        //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+        if (data!==undefined){
+          setSearchData((prev)=> {return Object.values(data?.results)[0]} )
+          setSearchFound(data.paging.total)
+          setTotalPages(data.paging.last_page)
+          console.log(data.paging.total,data.paging.last_page)
+          setPage((prev)=>prev+1)
+          setReObserve((prev)=>prev)
+          setIsStrong(true)
+         
+          
+        }
+        
+        }catch(err){
+            console.log(err)
+        }
+        
+        
+      }
+      if (page<totalPages && isStrong){
+        fetchData(searchInput,page+1)
+        console.log("total",totalPages,page+1,"page")
+      }else {
+        console.log(isStrong,totalPages,page,"no")
+      }
+      
+    }
   return (
     <div className={`search ${isSearch? "open":""}`}>
 
@@ -174,9 +209,9 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     {/* chart of results */}
     <div>
 
-       {isSearchChart? searchData? 
+       {searchData? 
     <SearchChart isFiltered={isFiltered} setIsFiltered={setIsFiltered} 
-    searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}/> :"" :""}
+    searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}/> :"" }
     </div>
     {searchData? "": <div className='recent-searches'>
     <span className='recent-span'>Recent searches:
@@ -187,6 +222,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>handleResearch(item)}>{item}</span>))}
     </div>}
     {filteredData?.map((item,index)=> (<SearchResultItem key={uuidv4()} item={item} setIsSearch={setIsSearch}/>) )}
+    { filteredData? isStrong? <span id="get-more-data" className="get-more-data" onClick={()=>getNextPageStrong()}>More {isStrong? "strong":"false"}, {totalPages}, {page}</span> :"" :""}
     </div>
    
     </div>
