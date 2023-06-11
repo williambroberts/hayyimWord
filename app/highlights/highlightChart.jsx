@@ -5,7 +5,7 @@ import { DataContext } from '@/contexts/dataContext'
 const HighLightChart = ({setFilteredData,setIsFiltered,isFiltered}) => {
     const{firebaseHighlights,setfirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     let bookids = firebaseHighlights?.map((item)=>item.bookid)
-    console.log(bookids,"bookids")
+  //  console.log(bookids,"bookids")
     let categories = bookids?.map((id)=>chapters[chapters.findIndex(item=>item.bookid===id)].category)
     let categoriesLen = categories?.length
     let Pentateuch = categories?.filter((item)=> item==="Pentateuch").length

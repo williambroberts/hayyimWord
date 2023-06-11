@@ -13,7 +13,7 @@ const HighlightsPage = () => {
     const {user,setUser}=useContext(IsAUserLoggedInContext)
   const router=useRouter()
   useEffect(()=>{
-    console.log("user",user)
+   // console.log("user",user)
     if (user===null){
       router.push("/")
       return
