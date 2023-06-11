@@ -443,7 +443,7 @@ textarea::placeholder {
 
 }
 .note-dict-source {
-    color: var(--t-3);
+    color: var(--grey2);
     font-size: var(--font-size-14);
     margin-bottom: 1.5rem;
 }
