@@ -62,7 +62,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
   setIsClear((prev)=>false)
  }
  useEffect(()=>{
-  console.log(isClear,searchData?.length)
+  console.log(isClear,searchData?.length,"isStrong?",isStrong,"strongData",strongData,strongData?.lexeme,"searchInput",searchInput)
   setIsClear((prev)=>false)
   setIsStrong(false)
  },[searchInput])

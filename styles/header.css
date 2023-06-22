@@ -210,8 +210,8 @@ input[type="text"].search-input {
     margin-right: 2rem;
 }
 .search-strong-word {
-    position: relative;
-    right: 0px;
+    position: absolute;
+    right: 100px;
     font-size: var(--font-size-14);
     color: var(--t-2);
     padding: 0rem 0.5rem;
