@@ -131,3 +131,48 @@
     font-size: var(--font-size-14);
 
 }
+.portal {
+    position: absolute;
+    top: 100px;
+    width: 0px;
+    height: 0px;
+    background-color: var(--bg-b);
+}
+.reset-portal {
+    margin: auto;
+    width: 300px;
+    background-color: var(--bg-1);
+    box-shadow: var(--box-shadow-1);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: var(--t-1);
+    transform: translate(-50%,0);
+}
+.reset-portal-back{
+    padding: 0rem;
+    color: var(--blue2);
+    font-size: var(--font-size-14);
+    background-color: var(--bg-1);
+    text-decoration: underline;
+    border: none;
+    margin: 0.5rem 0rem;
+    cursor: pointer;
+}
+.reset-portal-button {
+
+}
+
+.notification {
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    flex-wrap: nowrap;
+    padding: 0.5rem 1rem;
+    box-sizing: border-box;
+    box-shadow: var(--box-shadow-1);
+    color: var(--red-2);
+    font-size: var(--font-size-14);
+    font-weight: 500;
+    transform: translate(-50%,0%);
+    background-color: var(--bg-1);
+}

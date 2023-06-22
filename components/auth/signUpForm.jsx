@@ -1,5 +1,5 @@
 "use client"
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import signUpWithEmailAndPassword from '@/firebase/auth/signUpWithEmail';
 import { useRouter } from 'next/navigation'
 import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,runTransaction } from "firebase/firestore";
@@ -9,8 +9,9 @@ import Title from '../setup/title';
 import { Inter } from 'next/font/google'
 import { signInWithGoogle,signInWithFacebook,signInWithGithub } from '@/firebase/auth/signUpWithProvider';
 import IconGoogle from '../icons/social/google';
-import IconGithub from '../icons/social/github';
-import IconFacebook from '../icons/social/facebook';
+import ResetPasswordButton from './resetButton';
+import { IsAUserLoggedInContext } from '@/contexts/authContext';
+import NotificationPortal from './notificationPortal';
 
 const inter  = Inter({subsets:["latin"]})
 
@@ -19,11 +20,12 @@ const SignUpForm = () => {
     const [password,setPassword]=useState()
     const [confirmPassword,setConfirmPassword]=useState()
     const router = useRouter()
-
+    const {notification,setNotification,setOpenNotification,openNotification}=useContext(IsAUserLoggedInContext)
     const handleSubmit = async(e)=>{
         e.preventDefault()
         if (confirmPassword !== password){
-            alert("Passwords do not match")
+          setNotification((prev)=>"Passwords do not match")
+            //alert("Passwords do not match")
             return
         }
 
@@ -31,7 +33,8 @@ const SignUpForm = () => {
         const {result, error} = resArr
         if (error){
             console.log(error)
-            alert("Failed to sign up. Please try again.")
+            setNotification((prev)=>error.code)
+           // alert("Failed to sign up. Please try again.")
             console.log("change here will error on sign up")
             return
         }else {
@@ -53,6 +56,7 @@ const SignUpForm = () => {
         console.log(result)
         if (error){
          console.log(error)
+         setNotification((prev)=>error.code)
          //console.log("change here will error on sign up")
          return
      }else {
@@ -150,6 +154,7 @@ const SignUpForm = () => {
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>
         </span>
         <div className='reset-password-container'>Need to reset your password? <ResetPasswordButton/></div>
+        {openNotification && <NotificationPortal notification={notification}/>}
     </div>
   )
 }

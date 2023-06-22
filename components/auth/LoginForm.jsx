@@ -1,5 +1,5 @@
 "use client"
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import { useRouter } from 'next/navigation' 
 import Link from 'next/link'
 import Title from '../setup/title'
@@ -11,19 +11,23 @@ import { firestore } from '@/firebase/firebaseConfig';
 import IconGoogle from '../icons/social/google';
 
 import ResetPasswordButton from './resetButton'
+import { IsAUserLoggedInContext } from '@/contexts/authContext'
+import NotificationPortal from './notificationPortal'
 const inter  = Inter({subsets:["latin"]})
 const LoginForm = () => {
     const [email,setEmail]=useState()
     const [password,setPassword]=useState()
     const router = useRouter()
-
+  const {notification,setNotification,setOpenNotification,openNotification}=useContext(IsAUserLoggedInContext)
     const handleSubmit=async (e)=>{
         e.preventDefault()
         const resArr = await LogInWithEmailAndPassword(email,password)
         const {result, error} = resArr
         if (error){
-            console.log(error)
-            console.log("change here will error on login")
+            console.log(error,error.code,error.message)
+            //console.log()
+            setNotification((prev)=>error.code)
+            //console.log("change here will error on login")
             return
         }else {
             console.log(result,result.user.uid)
@@ -36,6 +40,7 @@ const LoginForm = () => {
         console.log(result)
         if (error){
          console.log(error)
+         setNotification((prev)=>error.code)
          //console.log("change here will error on sign up")
          return
      }else {
@@ -129,6 +134,7 @@ const LoginForm = () => {
             <Link href={"/signup"} className='auth-link'>Sign up</Link>
         </span>
         <div className='reset-password-container'>Need to reset your password? <ResetPasswordButton/></div>
+        {openNotification && <NotificationPortal notification={notification}/>}
     </div>
   )
 }

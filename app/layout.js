@@ -44,8 +44,10 @@ export default function RootLayout({ children }) {
            
            <ThemeLayout>
               <Header/>
-            {children}
+            {children} 
+            <div id="portal" className="portal"></div>
               <Footer/>
+             
            </ThemeLayout>
 
           
