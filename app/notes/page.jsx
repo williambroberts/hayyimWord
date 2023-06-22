@@ -22,8 +22,8 @@ const NotesPage = () => {
   },[user,router])
   useEffect(()=>{
     setFilteredData(firebaseNotes)
-    //console.log(firebaseHighlights,filteredData)
-  },[])
+    console.log(firebaseNotes,filteredData)
+  },[firebaseNotes])
   return (
    <main>
     <NotesChart  setFilteredData={setFilteredData} setIsFiltered={setIsFiltered} isFiltered={isFiltered}/>

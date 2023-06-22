@@ -157,8 +157,11 @@ useEffect(()=>{
     }
 
     //console.log(strongText,"strongText")
-    fetchStrong(strongText)
+    if (strongText!==null){
+      fetchStrong(strongText)
     fetchData(strongText) 
+    }
+    
   },[strongText,reGetStrongs])
 
   return (

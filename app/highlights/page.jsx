@@ -23,7 +23,7 @@ const HighlightsPage = () => {
   useEffect(()=>{
     setFilteredData(firebaseHighlights)
     //console.log(firebaseHighlights,filteredData)
-  },[])
+  },[firebaseHighlights])
   return (
    <main>
     <HighLightChart setFilteredData={setFilteredData} setIsFiltered={setIsFiltered} isFiltered={isFiltered}/>
