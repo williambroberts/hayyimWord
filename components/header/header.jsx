@@ -30,8 +30,11 @@ const Header = () => {
     if (isStrong && strongText!==null){
       console.log(strongText,isStrong)
       setIsNote(true)
+      setIsStrong((prev)=>true)
+      const myElem = document.querySelector(".note-dict")
+      myElem.classList.add("open")
     }
-    console.log(isNote,isStrong,"handleMEnu")
+    console.log(isNote,isStrong,"handleMEnu",strongText)
   }
 
  

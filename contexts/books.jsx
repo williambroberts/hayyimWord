@@ -160,6 +160,7 @@ useEffect(()=>{
     if (strongText!==null){
       fetchStrong(strongText)
     fetchData(strongText) 
+    setIsClear((prev)=>true)
     }
     
   },[strongText,reGetStrongs])

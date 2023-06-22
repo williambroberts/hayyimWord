@@ -1,7 +1,7 @@
 "use client"
 //import { getChapter } from '@/app/api/bible/getChapter'
 import { BookContext } from '@/contexts/books'
-import React,{useContext,useEffect,useState} from 'react'
+import React,{Suspense, useContext,useEffect,useState} from 'react'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { v4 as uuidv4 } from 'uuid';
 import NoteHamburger from './noteHamburger'
@@ -12,6 +12,7 @@ import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
 import IconBxsNote from '../icons/note3';
+import Loading from '@/app/loading';
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -33,13 +34,19 @@ const Display = () => {
     const [selectedWords,setSelectedWords]=useState([])
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,strongText,setStrongText,
-        isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,isStrong,setIsStrong,
+        isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,isStrong,setIsStrong,isSearch,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)
         const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
         
         const [noteids,setNoteids]=useState(null)
+        useEffect(()=>{
+          if (!isSearch){
+            
+            console.log("strongText,isNote,isStrong",strongText,isNote,isStrong,)
+          }
+        },[isSearch])
         useEffect(()=>{
           setIsNote(false)
           return ()=>setIsNote(false)
@@ -352,6 +359,9 @@ const Display = () => {
   
   return (
     <div className='display'>
+      <Suspense fallback={<Loading/>}>
+
+      
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
         onClick={(e)=>handleClick(e,index)} style={{color:index+1===startVerse?"var(--red)":"", 
@@ -392,6 +402,7 @@ const Display = () => {
    <div className={`display-alert ${noUserALert? "open":""}`}>
       Please <Link href={"/login"}>log in</Link> to {alertText}
    </div>
+   </Suspense>
     </div>
   )
 }

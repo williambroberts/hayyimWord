@@ -64,7 +64,10 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
  useEffect(()=>{
   console.log(isClear,searchData?.length,"isStrong?",isStrong,"strongData",strongData,strongData?.lexeme,"searchInput",searchInput)
   setIsClear((prev)=>false)
-  setIsStrong(false)
+  if (isSearch){
+    setIsStrong(false)
+  }
+  
  },[searchInput])
 
    const handleSubmit = (e)=>{
@@ -206,8 +209,12 @@ if (pathname!=="/"){
              return
             }else{
               setIsStrong(false)
-              data = await SearchBible(searchTranslation,searchInput)
+              data = await SearchBible(searchTranslation,searchInput,true,false,true,1)
               console.log("normal search")
+              setSearchFound(data.paging.total)
+              setTotalPages(data.paging.last_page)
+              console.log(data.paging.total,data.paging.last_page)
+              setPage(1)
             }
            
         //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
@@ -227,7 +234,7 @@ if (pathname!=="/"){
      setIsClear((prev)=>true)
     },[search])
     useEffect(()=>{
-      console.log(searchData)
+      //console.log(searchData)
     },[searchData])
     useEffect(()=>{
       if (searchData!==null){
@@ -264,6 +271,30 @@ if (pathname!=="/"){
         console.log(err)
       }
     }
+    const fetchDataWord = async (searchInputVar,newpage)=> {
+      
+      try {
+         
+          const data = await SearchBible(searchTranslation,searchInputVar,true,false,true,newpage)
+      //console.log(data, "search result",searchTranslation, data?.results , Object.values(data?.results)[0])
+      if (data!==undefined){
+        setSearchData((prev)=> {return Object.values(data?.results)[0]} )
+        setSearchFound(data.paging.total)
+        setTotalPages(data.paging.last_page)
+        console.log(data.paging.total,data.paging.last_page)
+        setPage((prev)=>newpage)
+        setReObserve((prev)=>prev)
+        setIsStrong((prev)=>false)
+       
+        
+      }
+      
+      }catch(err){
+          console.log(err)
+      }
+      
+      
+    }
     const fetchData = async (searchInputVar,newpage)=> {
       
       try {
@@ -293,6 +324,9 @@ if (pathname!=="/"){
       if (page<totalPages && isStrong){
         fetchData(searchInput,page+1)
         console.log("total",totalPages,page+1,"page")
+      }else if(page<totalPages){
+        fetchDataWord(searchInput,page+1)
+       
       }else {
         console.log(isStrong,totalPages,page,"no")
       }
@@ -302,6 +336,9 @@ if (pathname!=="/"){
       if (page>1 && isStrong){
         fetchData(searchInput,page-1)
         console.log("total",totalPages,page+1,"page")
+      }else if (page>1){
+        fetchDataWord(searchInput,page-1)
+        
       }else {
         console.log(isStrong,totalPages,page,"no")
       }
@@ -328,7 +365,7 @@ if (pathname!=="/"){
     <div className='search-results' id="search-results">
       
     <span className='search-number'>
-      {searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${isStrong? searchFound:searchData?.length} verses. `: `Found ${isStrong? searchFound: searchData?.length} verses. ${isSearchChart? "Tap chart to filter":""}` : "No word search results."}</span>
+      {searchInput===""? "" : searchData? isFiltered? `Showing ${filteredData?.length}   of ${ searchFound} verses. `: `Found ${searchFound} verses. ${isSearchChart? "Tap chart to filter":""}` : "No word search results."}</span>
   
     {/* chart of results */}
     <div>
@@ -337,7 +374,7 @@ if (pathname!=="/"){
     <SearchChart isFiltered={isFiltered} setIsFiltered={setIsFiltered} 
     searchData={searchData} setSearchData={setSearchData} setFilteredData={setFilteredData} filteredData={filteredData}/> :"" }
     </div>
-    {isStrong &&totalPages>1&&page>1? <span className='get-more-data' onClick={()=>getPrevPageStrong()}>View previous verses</span>:""}
+    {totalPages>1&&page>1? <span className='get-more-data' onClick={()=>getPrevPageStrong()}>View previous verses</span>:""}
     {searchData? "": <div className='recent-searches'>
     <span className='recent-span'>Recent searches:
     <abbr className='recent-clear' title="Clear search history" onClick={()=>ClearLocalStorage()}><IconDelete/></abbr>
@@ -347,7 +384,7 @@ if (pathname!=="/"){
     {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>handleResearch(item)}>{item}</span>))}
     </div>}
     {filteredData?.map((item,index)=> (<SearchResultItem key={uuidv4()} item={item} setIsSearch={setIsSearch}/>) )}
-    { filteredData? isStrong&&totalPages>1? <span id="get-more-data" className="get-more-data" onClick={()=>getNextPageStrong()}>View more verses</span> :"" :""}
+    { filteredData? totalPages>1? <span id="get-more-data" className="get-more-data" onClick={()=>getNextPageStrong()}>View more verses</span> :"" :""}
     </div>
    
     </div>
