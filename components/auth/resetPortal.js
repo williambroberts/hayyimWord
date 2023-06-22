@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import React, { useContext, useState } from 'react'
 import ReactDom from 'react-dom'
 const ResetPortal = () => {
-    const {setOpenModal,setNotifcation}=useContext(IsAUserLoggedInContext)
+    const {setOpenModal,setNotification}=useContext(IsAUserLoggedInContext)
 
     const [email,setEmail]=useState("")
     const handleBack = ()=>{
@@ -17,12 +17,14 @@ const ResetPortal = () => {
         try {
             let {result,error} = await resetPassword(email)
             if (error){
-                setNotifcation((prev)=>error.code)
+                setNotification((prev)=>error.code)
+            }else {
+                 setOpenModal((prev)=>false)
             }
         }catch(err){
             console.log(err)
         }
-        setOpenModal((prev)=>false)
+       
     }
   return ReactDom.createPortal(
     <div className='reset-portal'>
