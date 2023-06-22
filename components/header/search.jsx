@@ -13,10 +13,11 @@ import { SearchStrong } from '@/app/api/bible/searchStrong';
 import getText from '@/app/api/bible/getText';
 import 'intersection-observer';
 import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setFilteredData}) => {
     // const [searchInput,setSearchInput]=useState("")
     const pathname = usePathname()
+    const router = useRouter()
     const [search,setSearch]=useState(false)
     
     const [loading, setLoading] = useState(true);
@@ -140,7 +141,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
       //set chapter
       console.log(bookNo,c,v,book,exactBook,"all ref details bookNo,c,v,book,exactBook",newStartVerse)
       let newOpenChapterIndex=null
-      if (!c===undefined){
+      if (c!==undefined){
         newOpenChapterIndex=parseInt(c)-1
       }else{
        newOpenChapterIndex=0
@@ -166,7 +167,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
 
      
   setTheText(data.results.kjv_strongs)
-   console.log(data.results.kjv_strongs)
+   console.log(data.results.kjv_strongs,newopenBookIndex,newOpenChapterIndex)
    
 if (pathname!=="/"){
   router.push("/")
