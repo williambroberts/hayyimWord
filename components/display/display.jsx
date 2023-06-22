@@ -142,6 +142,14 @@ const Display = () => {
         console.log("removed highlight")
         
     }
+
+    useEffect(()=>{
+     
+      let parent = document.querySelector(".text-paragraph")
+      let strongWords = parent.querySelectorAll(".verse-span-u")
+       console.log(strongText,strongWords)
+
+    },[strongText])
     const handleLeft = async ()=>{
       if (startVerse!==-1){
         setStartVerse(-1)
@@ -359,7 +367,7 @@ const Display = () => {
 
       {textArrays!==null? textArrays!==undefined? textArrays[index]?.map((item,index)=>(<span style={{backgroundColor:selectedWords?.includes(item.exactId)? "var(--theme2)" :firebaseHighlightsIds?.includes(item.exactId)? firebaseHighlightsColors[firebaseHighlightsIds?.indexOf(item.exactId)] :"" }} 
       id={item.exactId} key={uuidv4()} onClick={()=>RemoveHighlight()}
-      title={item.strong} className={`${item.strong===""?" verse-span" : "verse-span-u"}`}>{noteids?.includes(item.exactId)?<IconBasic_notebook/> :""}{item.word}</span>)) : "": ""}
+      title={item.strong} className={`${item.strong===""?  "verse-span" :item.strong===strongText && isNote?"verse-span-u-h": "verse-span-u"}`}>{noteids?.includes(item.exactId)?<IconBasic_notebook/> :""}{item.word}</span>)) : "": ""}
        
         </span>
         

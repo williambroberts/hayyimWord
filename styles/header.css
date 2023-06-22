@@ -186,8 +186,9 @@
     width: 320px;
     padding: 1rem;
     align-items: center;
-    gap: 1rem;
+    gap: 0rem;
     background-color: var(--bg-1);
+    padding-right: 1.5rem;
 }
 input[type="text"].search-input {
     color:var(--t-2);
@@ -195,15 +196,25 @@ input[type="text"].search-input {
     font-size: var(--font-size-16);
     border: none;
     outline: none;
+    flex: 1 1 auto;
     background-color: var(--bg-1);
 }
-.search-button {
+.search-button,.clear-search {
     color: var(--t-1);
     font-size: var(--font-size-24);
     font-weight: 600;
     border: none;
     background-color: transparent;
     cursor: pointer;
+    padding:0rem 0rem;
+    margin-right: 2rem;
+}
+.search-strong-word {
+    position: relative;
+    right: 0px;
+    font-size: var(--font-size-14);
+    color: var(--t-2);
+    padding: 0rem 0.5rem;
 }
 .search-results {
     margin-top: 0px;

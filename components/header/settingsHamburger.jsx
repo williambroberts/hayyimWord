@@ -11,9 +11,11 @@ import SearchTranslations from "../../app/api/bible/translationsSearch.json"
 import LogOutButton from '../auth/LogOutButton'
 import IconPlusCircle from '../icons/action/plus'
 import IconMinusCircle from '../icons/action/minus'
+import { IsAUserLoggedInContext } from '@/contexts/authContext'
+import ResetPasswordButton from '../auth/resetButton'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
     const { theme, setTheme } = useTheme()
-
+    const {user}=useContext(IsAUserLoggedInContext)
     const {globalFontSize,setGlobalFontSize,setGlobalLineHeight,globalLineHeight,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
         const roundedLineHeight = globalLineHeight.toFixed(1)
@@ -122,7 +124,10 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                     {SearchTranslations.map((item)=> (<option value={item[0]} key={uuidv4()} className='translation-option' selected={item[0]===searchTranslation}>{item[1].shortname}</option>) )}
                 </select>
            </div> */}
-           
+           {user===null?"":
+           <div className='reset-password-container'>
+            Need to reset your password? <ResetPasswordButton/></div>
+           }
     </div>
   )
 }

@@ -10,7 +10,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
   const router = useRouter()
   const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex,
-      openChapterIndex,setOpenChapterIndex,
+      openChapterIndex,setOpenChapterIndex,strongData,
       isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,displayTitle,setDisplayTitle,
       isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
       startVerse,setStartVerse,theText,setTheText
@@ -35,6 +35,10 @@ const SearchResultItem = ({item,setIsSearch}) => {
       setisLoading(false)
     }, []);
     
+    useEffect(()=>{
+      
+    },[])
+
     if (isLoading){
       return null
     }

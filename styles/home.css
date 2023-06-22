@@ -388,6 +388,22 @@ textarea::placeholder {
     display: inline-flex;
     align-items: center;
 }
+.verse-span-u-h {
+    margin-left: 0.125rem;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--bg-4);
+}
+.verse-span-u-h::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--t-4);
+}
 .verse-span-u::after {
     content: "";
     position: absolute;

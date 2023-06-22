@@ -9,8 +9,8 @@ import { signInWithGoogle,signInWithFacebook,signInWithGithub } from '@/firebase
 import { addDoc, collection, setDoc, deleteDoc, doc, query, onSnapshot,runTransaction } from "firebase/firestore";
 import { firestore } from '@/firebase/firebaseConfig';
 import IconGoogle from '../icons/social/google';
-import IconGithub from '../icons/social/github';
-import IconFacebook from '../icons/social/facebook';
+
+import ResetPasswordButton from './resetButton'
 const inter  = Inter({subsets:["latin"]})
 const LoginForm = () => {
     const [email,setEmail]=useState()
@@ -128,6 +128,7 @@ const LoginForm = () => {
            Don&apos;t have an account?
             <Link href={"/signup"} className='auth-link'>Sign up</Link>
         </span>
+        <div className='reset-password-container'>Need to reset your password? <ResetPasswordButton/></div>
     </div>
   )
 }

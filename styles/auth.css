@@ -115,3 +115,19 @@
     font-size: var(--font-size-14);
     font-weight: 400;
 }
+.reset-password {
+   color: var(--blue2);
+   background-color: transparent;
+   border: none;
+   cursor: pointer;
+    text-decoration: underline;
+    padding: 0rem 0.25rem;
+}
+.reset-password-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:var(--t-1);
+    font-size: var(--font-size-14);
+
+}

@@ -12,7 +12,7 @@
     --t-3:#898E96;
     --t-4:#989EA6;
     
-    --bg-b:#fffffff2;
+    --bg-b:#ffffff75;
   }
   [data-theme='dark'] {
     --invert:0;
@@ -29,7 +29,7 @@
     --t-4:#7c7f82;
     --theme:#7c7f82;
     --theme2:#393939;
-    --bg-b:#1c1c1cf2;
+    --bg-b:#1c1c1c79;
   } 
   [data-theme='rose'] {
     --invert:0;
@@ -46,7 +46,7 @@
     --t-4:#E6D1CE;
     --theme:#E7525B;
     --theme2:#F17881;
-    --bg-b:#1c1c1cf2;
+    --bg-b:#1c1c1c79;
   }
   [data-theme='sepia'] {
     --invert:0;
@@ -55,7 +55,7 @@
     --bg-1:#eadbcb;
     --bg-2:#e3ceb9;
     --bg-3: #dcc1a7;
-    --bg-4: #4b4742;
+    --bg-4: #4b4742b9;
 
     --t-1:#000000;
     --t-2:#38393B;
@@ -63,7 +63,7 @@
     --t-4:#704214;
     --theme:#0C2365;
     --theme2:#315788;
-    --bg-b:#1c1c1cf2;
+    --bg-b:#1c1c1c79;
   }
   *  {
     padding:0px;

@@ -18,13 +18,15 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     // const [searchInput,setSearchInput]=useState("")
     const pathname = usePathname()
     const [search,setSearch]=useState(false)
+    
     const [loading, setLoading] = useState(true);
     const [isFiltered,setIsFiltered]=useState(false)
     const nums = ["1","2","3","4","5","6","7","8","9","0"]
     const {searchTranslation,setSearchTranslation,isSearchChart,setIsSearchChart,searchInput,setSearchInput,setStrongText,setReGetStrongs,reGetStrongs,
       isNote,setIsNote,setIsStrong,setTotalPages,totalPages,page,setPage,isStrong,strongText,setSearchFound,searchFound,reObserve,setReObserve,
-      recentSearches,setRecentSearches,setOpenBookIndex,openBookIndex,setOpenChapterIndex,setDisplayTitle,setTheText,
+      recentSearches,setRecentSearches,setOpenBookIndex,openBookIndex,setOpenChapterIndex,setDisplayTitle,setTheText,strongData,
       openChapterIndex,setScrollChangeNeeded,setStartVerse,setIsChaptersMenuOpen,setIsVersesMenuOpen,
+      isClear,setIsClear,
     }=useContext(BookContext)
     
      
@@ -53,6 +55,17 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
 
       },[loading,reObserve])
  // console.log(recentSearches,"recent")
+ const handleClear = (e)=>{
+  e.preventDefault()
+  setSearchInput((prev)=>"")
+  setIsClear((prev)=>false)
+ }
+ useEffect(()=>{
+  console.log(isClear,searchData?.length)
+  setIsClear((prev)=>false)
+  setIsStrong(false)
+ },[searchInput])
+
    const handleSubmit = (e)=>{
     e.preventDefault()
     setSearch((prev)=> !prev)
@@ -72,6 +85,7 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
       }
      
     }
+    setIsClear((prev)=>true)
    }
    useEffect(()=>{
     let gotSearchesRaw = localStorage.getItem("recentSearches")
@@ -86,7 +100,8 @@ const Search = ({setIsSearch,isSearch,setSearchData,searchData,filteredData,setF
     
    },[isSearch])
    const handleResearch = (item)=>{
-    setSearchInput(item)
+    setSearchInput((prev)=>item)
+    
     setSearch((prev)=> !prev)
    }
 
@@ -205,10 +220,14 @@ if (pathname!=="/"){
             console.log(err)
         }
         
-       
+        
       }
       fetchData(searchInput) 
+     setIsClear((prev)=>true)
     },[search])
+    useEffect(()=>{
+      console.log(searchData)
+    },[searchData])
     useEffect(()=>{
       if (searchData!==null){
          setFilteredData([...searchData])
@@ -298,7 +317,11 @@ if (pathname!=="/"){
       className='search-input'
       onChange={(e)=>setSearchInput(e.target.value)}
       />
-    <button type="submit" onClick={(e)=>handleSubmit(e)} className='search-button'><IconMagnify/></button>
+      <span className='search-strong-word'>{isStrong? searchInput!==""? strongData?.lexeme:"":""}</span>
+    
+    {isClear? <button onClick={(e)=> handleClear(e)} className='clear-search'>✕</button>:
+    <button type="submit" 
+    onClick={(e)=>handleSubmit(e)} className='search-button'><IconMagnify/></button>}
     
     </form>
     <div className='search-results' id="search-results">

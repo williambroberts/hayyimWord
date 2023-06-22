@@ -17,6 +17,7 @@ export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
   const router = useRouter()
+  const [isClear,setIsClear]=useState(false)
     const [openChapterIndex,setOpenChapterIndex]=useState(0)
     const [openBookIndex,setOpenBookIndex]=useState(0)
     const [bollsTranslation,setBollsTranslation]=useState(BollsTranslations[0])
@@ -169,7 +170,8 @@ useEffect(()=>{
     startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,isSettings,setIsSettings,setSearchFound,searchFound,
     isChapter,setIsChapter,isVerse,setIsVerse, recentSearches,setRecentSearches,searchInput,setSearchInput,
     isHistory,setIsHistory,history,setHistory,superStrongData,setSuperStrongData,setTotalPages,totalPages,page,setPage,reObserve,setReObserve,
-    }}>
+    isClear,setIsClear  
+   }}>
     {children}
    </BookContext.Provider>
   )

@@ -149,6 +149,7 @@ const SignUpForm = () => {
             Already have an account?
             <Link href={"/login"} className={`${inter.className} auth-link`}>Login</Link>
         </span>
+        <div className='reset-password-container'>Need to reset your password? <ResetPasswordButton/></div>
     </div>
   )
 }

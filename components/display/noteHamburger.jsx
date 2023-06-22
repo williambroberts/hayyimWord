@@ -21,7 +21,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     const fulldate = theDay+"/"+theMonth+"/"+theYear
     const [message,setMessage]=useState("")
     const {user}=useContext(IsAUserLoggedInContext)
-    const {setOpenBookIndex,openBookIndex,
+    const {setOpenBookIndex,openBookIndex,setIsClear,isClear,
         openChapterIndex,setOpenChapterIndex,scrollChangeNeeded,setScrollChangeNeeded,strongText,isStrong,
         isChaptersMenuOpen,setIsChaptersMenuOpen,setIsStrong,searchData,setSearchData,isSearch,setIsSearch,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
@@ -269,6 +269,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
       }
      
     }
+    setIsClear((prev)=>true)
   }
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
