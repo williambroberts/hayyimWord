@@ -257,7 +257,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     setIsSearch((prev)=>true)
     setSearchInput((prev)=>strongText)
     setIsStrong((prev)=>true)
-    
+    setIsClear((prev)=>true)
     setReObserve((prev)=>!prev)
     setReGetStrongs((prev)=>!prev)
    //setStrongText(searchInput)
@@ -276,7 +276,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
       }
      
     }
-    setIsClear((prev)=>true)
+    
   }
   return (
     <div className={`note-menu ${isNote? "open":""}`}>
