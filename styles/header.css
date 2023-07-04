@@ -774,3 +774,34 @@ input[type="range"]{
     color: var(--t-3);
     padding:1rem 0rem;
 }
+
+.progress-though {
+    z-index: 1;
+    display: flex;
+    width: min(100%,680px);
+    height: 4px;
+    background-color: transparent;
+    position: fixed;
+    top:80px;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: var(--font-size-14);
+    color: var(--t-2);
+    font-weight: 500;
+    box-shadow: var(--box-shadow-1);
+}
+.progress-though>span:first-of-type{
+    background-color: var(--t-3);
+    height:100%;
+    width: var(--width);
+    display: inline-block;
+}
+.progress-though>span:last-of-type{
+    background-color: var(--bg-4);
+    height:100%;
+    width: var(--width);
+    display: inline-block;
+}
+.progress-though>span::after{
+
+}

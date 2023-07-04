@@ -10,7 +10,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
   const router = useRouter()
   const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex,
-      openChapterIndex,setOpenChapterIndex,strongData,
+      openChapterIndex,setOpenChapterIndex,strongData,isStrong,
       isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,displayTitle,setDisplayTitle,
       isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
       startVerse,setStartVerse,theText,setTheText
@@ -36,7 +36,11 @@ const SearchResultItem = ({item,setIsSearch}) => {
     }, []);
     
     useEffect(()=>{
-      
+      if (isStrong){
+        let verseText = formattedStr.slice()
+        console.log(verseText)
+        //get engSTRONG WORD AND BOLD
+      }
     },[])
 
     if (isLoading){

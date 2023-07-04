@@ -11,8 +11,9 @@ import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
-import IconBxsNote from '../icons/note3';
+
 import Loading from '@/app/loading';
+import ProgressBible from '../header/progress';
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -220,7 +221,7 @@ const Display = () => {
           newSelectedWords = clickedElement.id
           setSelectedWords(newSelectedWords)
           setIsStrong(true)
-         
+          console.log("check here will 1")
         }
        
         console.log("exact id same")
@@ -259,7 +260,7 @@ const Display = () => {
           }
           if (clickedElement.title!==""){
             setIsStrong(true)
-           
+           console.log("check here will 2")
           }else {
             setIsStrong(false)
           }
@@ -360,7 +361,7 @@ const Display = () => {
   return (
     <div className='display'>
       <Suspense fallback={<Loading/>}>
-
+    <ProgressBible/>
       
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span key={uuidv4()} className='text-span'
