@@ -155,8 +155,19 @@ const Display = () => {
      
       let parent = document.querySelector(".text-paragraph")
       let strongWords = parent.querySelectorAll(".verse-span-u")
-       console.log(strongText,strongWords)
-
+      if (strongWords!==undefined){
+          console.log(strongText,strongWords,typeof(strongWords))
+          let matches =""
+          for (let item of strongWords){
+            if(item.title===strongText){
+              matches=item.textContent
+              break
+            }
+          }
+          console.log(matches,"matches")
+     
+      }
+     
     },[strongText])
     const handleLeft = async ()=>{
       if (startVerse!==-1){
@@ -224,7 +235,7 @@ const Display = () => {
           console.log("check here will 1")
         }
        
-        console.log("exact id same")
+        console.log("exact id same",selectedWords)
        
         
       }else if (clickedElement.className==="text-span"){
