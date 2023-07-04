@@ -59,7 +59,7 @@
       overflow-x: hidden;
       --hamburger-x-padding:1rem;
       box-shadow: var(--box-shadow-1);
-      z-index: 1;
+      z-index: 2;
 
     }
  .hamburger-hr {
@@ -776,7 +776,7 @@ input[type="range"]{
 }
 
 .progress-though {
-    z-index: 1;
+    z-index: 0;
     display: flex;
     width: min(100%,680px);
     height: 4px;
@@ -801,7 +801,4 @@ input[type="range"]{
     height:100%;
     width: var(--width);
     display: inline-block;
-}
-.progress-though>span::after{
-
 }
