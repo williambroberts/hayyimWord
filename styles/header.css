@@ -802,3 +802,10 @@ input[type="range"]{
     width: var(--width);
     display: inline-block;
 }
+.recent-searches-container {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    flex-flow: column-reverse;
+    gap: 0.5rem;
+}

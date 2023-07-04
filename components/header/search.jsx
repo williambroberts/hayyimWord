@@ -380,8 +380,9 @@ if (pathname!=="/"){
     <abbr className='recent-clear' title="Clear search history" onClick={()=>ClearLocalStorage()}><IconDelete/></abbr>
     </span>
     
-  
+      <div className='recent-searches-container'>
     {recentSearches?.map((item)=> (<span key={uuidv4()} className='recent-search-item' onClick={()=>handleResearch(item)}>{item}</span>))}
+    </div>
     </div>}
     {filteredData?.map((item,index)=> (<SearchResultItem key={uuidv4()} item={item} setIsSearch={setIsSearch}/>) )}
     { filteredData? totalPages>1? <span id="get-more-data" className="get-more-data" onClick={()=>getNextPageStrong()}>View more verses</span> :"" :""}
