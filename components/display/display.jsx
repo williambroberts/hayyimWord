@@ -12,8 +12,9 @@ import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
 
-import Loading from '@/app/loading';
+
 import ProgressBible from '../header/progress';
+import LoadingComponent from '../loading/loading';
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -36,7 +37,8 @@ const Display = () => {
     const {setOpenBookIndex,openBookIndex,setScrollChangeNeeded,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,strongText,setStrongText,
         isChaptersMenuOpen,setIsChaptersMenuOpen,startVerse,setStartVerse,isStrong,setIsStrong,isSearch,
-        isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
+        isVersesMenuOpen,setIsVersesMenuOpen,strongEng,setStrongEng
+        ,bollsTranslation,setBollsTranslation,theText,setTheText,displayTitle,setDisplayTitle
         } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)
         const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
@@ -154,16 +156,18 @@ const Display = () => {
     useEffect(()=>{
      
       let parent = document.querySelector(".text-paragraph")
-      let strongWords = parent.querySelectorAll(".verse-span-u")
+      let strongWords = parent.querySelectorAll(".verse-span-u-h")
       if (strongWords!==undefined){
           console.log(strongText,strongWords,typeof(strongWords))
           let matches =""
           for (let item of strongWords){
             if(item.title===strongText){
+              console.log("match",item)
               matches=item.textContent
               break
             }
           }
+          setStrongEng((prev)=>matches)
           console.log(matches,"matches")
      
       }
@@ -371,7 +375,7 @@ const Display = () => {
   
   return (
     <div className='display'>
-      <Suspense fallback={<Loading/>}>
+      <Suspense fallback={<LoadingComponent/>}>
     <ProgressBible/>
       
       <span className='text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>

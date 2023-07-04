@@ -10,7 +10,7 @@ const SearchResultItem = ({item,setIsSearch}) => {
   const router = useRouter()
   const pathname = usePathname()
     const {setOpenBookIndex,openBookIndex,
-      openChapterIndex,setOpenChapterIndex,strongData,isStrong,
+      openChapterIndex,setOpenChapterIndex,strongData,isStrong,strongEng,
       isChaptersMenuOpen,setIsChaptersMenuOpen,setScrollChangeNeeded,displayTitle,setDisplayTitle,
       isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,
       startVerse,setStartVerse,theText,setTheText
@@ -30,18 +30,15 @@ const SearchResultItem = ({item,setIsSearch}) => {
         span.textContent = mark.textContent;
         mark.replaceWith(span);
       });
-
+      const textContent = div.textContent
+      let pattern = new RegExp(strongEng, "gi");
+      const updatedContent = textContent.replaceAll(pattern,"<strong>$&</strong>")
+      div.innerHTML =updatedContent 
       setFormattedStr(div.innerHTML);
       setisLoading(false)
     }, []);
     
-    useEffect(()=>{
-      if (isStrong){
-        let verseText = formattedStr.slice()
-        console.log(verseText)
-        //get engSTRONG WORD AND BOLD
-      }
-    },[])
+    
 
     if (isLoading){
       return null

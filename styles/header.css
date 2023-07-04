@@ -797,7 +797,7 @@ input[type="range"]{
     display: inline-block;
 }
 .progress-though>span:last-of-type{
-    background-color: var(--bg-4);
+    background-color: var(--black2);
     height:100%;
     width: var(--width);
     display: inline-block;
