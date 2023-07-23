@@ -146,9 +146,13 @@
     border-radius: 4px;
     box-shadow: var(--box-shadow-1);
     width:60px;
+    font-size: 13px;
     cursor: pointer;
     text-align: center;
     position: relative;
+    white-space: nowrap;
+    @apply flex flex-nowrap
+    ;
 }
 .get-item2 {
     background-color: var(--bg-4);

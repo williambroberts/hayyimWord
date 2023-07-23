@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root { 
   --invert:0;
     --bg-1:#FFFFFF; 
@@ -134,7 +138,10 @@
   
   }
   
-  
+  ::selection {
+    background-color: var(--theme);
+    color:white;
+  }
   
   html {
     filter: invert(var(--invert));

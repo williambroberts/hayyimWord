@@ -27,7 +27,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,strongData,
         startVerse,setStartVerse,theText,setTheText,displayTitle,setDisplayTitle,searchFound,setStrongText,
         setRecentSearches,superStrongData,searchInput,setSearchInput,setReObserve,setReGetStrongs,
-        } = useContext(BookContext)
+        selectedWords} = useContext(BookContext)
     const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
     const [color,setColor]=useState(null)
     const [updateHighlight,setUpdateHighlight]=useState(false)
@@ -47,8 +47,11 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         }
     },[isNote])
     const handleHighlight =(color)=>{
+        // let textToHighLight=[...selectedWords]
+        // console.log(selectedWords,"🍔🌮",exactId)
         if (exactId.includes("verse")){
             console.log("returning")
+
             return
         }
         setColor(color)
@@ -65,6 +68,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
+        
         try {
             await updateDoc(userHighlightRef,{ "highlights": arrayUnion({exactId:exactId,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
             console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
@@ -89,15 +93,21 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         if (exactId.includes("verse")){
             return
         }
+       
+        
         const useHighlightsRef = doc(firestore, 'notes', user?.uid);
      try {
           await runTransaction(firestore, async (transaction) => {
             const docSnapshot = await transaction.get(useHighlightsRef);
            const highlights = [...docSnapshot.data().highlights]
             console.log(highlights,"pre delete notes")
-         
-          let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
-          updatedHighlights.push({exactId:exactId,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})
+         let updatedHighlights = [...highlights]
+          //let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
+          updatedHighlights.push({exactId:exactId
+            ,color:color,verse:verse+1,book:book,
+            chapter:chapter,text:text,bookid:openBookIndex+1,
+            ids:[...selectedWords],
+            date:fulldate})
           transaction.update(useHighlightsRef, { highlights: updatedHighlights })
           console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
           })

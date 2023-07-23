@@ -17,6 +17,8 @@ export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
   const router = useRouter()
+  const [wordsHighlighted,setWordsHighlighted]=useState([])
+  const [selectedWords,setSelectedWords]=useState([])
   const [strongEng,setStrongEng]=useState("")
   const [isClear,setIsClear]=useState(false)
     const [openChapterIndex,setOpenChapterIndex]=useState(0)
@@ -167,7 +169,9 @@ useEffect(()=>{
   },[strongText,reGetStrongs])
 
   return (
-   <BookContext.Provider value={{setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
+   <BookContext.Provider value={{
+    selectedWords,setSelectedWords,wordsHighlighted,setWordsHighlighted,
+    setOpenBookIndex,openBookIndex,scrollChangeNeeded,setScrollChangeNeeded,
     openChapterIndex,setOpenChapterIndex,searchTranslation,setSearchTranslation,globalLineHeight,setGlobalLineHeight,
     isChaptersMenuOpen,setIsChaptersMenuOpen,globalFontSize,setGlobalFontSize,isNote,setIsNote,searchFound,
     isVersesMenuOpen,setIsVersesMenuOpen,bollsTranslation,setBollsTranslation,isStrong,setIsStrong,strongData,
