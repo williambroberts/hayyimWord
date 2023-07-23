@@ -556,6 +556,7 @@ const Display = () => {
       Please <Link href={"/login"}>log in</Link> to {alertText}
    </div>
    </Suspense>
+   
     </div>
   )
 }

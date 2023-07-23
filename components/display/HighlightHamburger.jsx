@@ -3,12 +3,15 @@ import IconDelete from '../icons/action/delete'
 import IconCrossCircled from '../icons/action/cross'
 import { BookContext } from '@/contexts/books'
 import { doc, runTransaction } from 'firebase/firestore'
-import { firestore } from '@/firebase/firebaseConfig'
+import { auth, firestore } from '@/firebase/firebaseConfig'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
+import { useNotification } from '@/contexts/notificationContext'
+import NotificationPortal from '../notificationPortal'
 
 const HighlightHamburger = ({handleClose,open,data}) => {
   const {setWordsHighlighted}=useContext(BookContext)
   const {user}=useContext(IsAUserLoggedInContext)
+  const {setNotification,notification}=useNotification()
     function closeMenu(e){
         let highlightMenu = document.querySelector("[data-highlight-menu]")
         let Rect = highlightMenu.getBoundingClientRect()
@@ -30,6 +33,13 @@ const HighlightHamburger = ({handleClose,open,data}) => {
     },[open])
   
     const handleHighlight=async (color) => {
+      console.log("cliekd")
+      if (auth.currentUser===null || auth.currentUser===undefined){
+        setNotification({open:true,message:"Please sign in to highlight",
+      time:3000,type:"alert"
+      })
+        return
+      }
         //🍏run transaction
         let newData = {...data,color:color}
         if (newData.exactId.includes("NaN") || newData.ids.length===0){
@@ -78,7 +88,7 @@ const HighlightHamburger = ({handleClose,open,data}) => {
          onClick={handleClose}
          ><IconCrossCircled/></span>
          </div>
-        
+        {notification.open && <NotificationPortal/>}
     </div>
   )
 }

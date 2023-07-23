@@ -548,6 +548,6 @@ body{
 
 .text__title {
     @apply flex flex-row 
-    items-center
+    items-center px-4 underline
     ;
 }

@@ -20,6 +20,7 @@ import FireBooksProvider from "@/contexts/fireBooks"
 const inter = Inter({ subsets: ['latin'] })
 import CloudsImg from "../public/images/clouds.jpg"
 import Image from "next/image"
+import NotificationProvider from "@/contexts/notificationContext"
 export const metadata = {
   title: 'HayyimWord',
   description: 'A bible read and study web app.',
@@ -40,7 +41,7 @@ export default function RootLayout({ children }) {
         <IsAUserLoggedInProvider>
           <FireBooksProvider>
 
-         
+         <NotificationProvider>        
           <DataProvider>
           <BookProvider>
 
@@ -56,7 +57,7 @@ export default function RootLayout({ children }) {
           
           </BookProvider>
           </DataProvider>
-          
+          </NotificationProvider>
           </FireBooksProvider>
         </IsAUserLoggedInProvider>
       </ProviderForTheme>

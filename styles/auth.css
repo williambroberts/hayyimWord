@@ -176,3 +176,9 @@
     transform: translate(-50%,0%);
     background-color: var(--bg-1);
 }
+
+#highlight__portal {
+    z-index: 9999;
+    box-sizing: border-box;
+    transform: translate(-50%,0%);
+}
