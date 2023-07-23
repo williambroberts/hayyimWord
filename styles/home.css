@@ -388,6 +388,9 @@ textarea::placeholder {
 .verse-span {
     position: relative;
     margin-left: 0.125rem;
+    @apply inline-flex items-center
+    gap-0.5
+    ;
 }
 .verse-span-u {
     position: relative;
@@ -541,4 +544,10 @@ body{
 .highlight__menu.open{
     height: 40px;
 
+}
+
+.text__title {
+    @apply flex flex-row 
+    items-center
+    ;
 }

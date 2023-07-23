@@ -439,7 +439,7 @@ const Display = () => {
         newHighlightnumbers.push(Allnumbers[i])
       }
     }
-    let newVerse = Math.floor(newStart)
+    let newVerse = Math.floor(newStart)/10
     let newExactId = "V"+newVerse+"V"+Math.round((newStart %1)*100)
     const thedate = new Date()
     const theDay=thedate.getDate()
@@ -451,7 +451,7 @@ const Display = () => {
     bookid:openBookIndex+1,exactId:newExactId,
     color:"",verse:newVerse,text:pureText[newVerse-1],
     ids:[...newHighlightIds],
-    date:fulldate,
+    date:fulldate,chapter:displayTitle[1]+1,
   }
   setWordsHighlighted(newHighlightIds)
 
@@ -495,18 +495,18 @@ const Display = () => {
       </div> */}
       <span className='text__title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p 
-        data-HMclose
+       
         data-id="paragraph"
         // onMouseMove={handleDrag}
         onMouseUp={handleSelection}
         className='text-paragraph' style={{fontSize:`${globalFontSize}px`,lineHeight:`${globalLineHeight}`}}>{theText?.map((item,index)=> <span 
-          data-HMclose
+         
           key={uuidv4()} className='text-span'
         onClick={(e)=>handleClick(e,index)} style={{color:index+1===startVerse?"var(--red)":"", 
           fontSize:`${globalFontSize}px`,backgroundColor:selectedWords.includes(`verse${theText[index].id}-0`)? "var(--theme2)": highlights!==null? `${highlights[index]}`:""}}
       id={`text-span${index}`} > 
       <span 
-       data-HMclose
+      
       className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
