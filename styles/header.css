@@ -127,6 +127,7 @@
     font-size: var(--font-size-16);
     font-weight: 500;
     position: absolute;
+   
     left: 50%;
     transform: translate(-50%,0);
     cursor: pointer;
@@ -135,10 +136,17 @@
     cursor: pointer;
     color: var(--theme);
     font-weight: 600;
-    font-size: var(--font-size-24);
+   
+    font-size: 16px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+@media(pointer:coarse){
+    .header-search{
+        font-size: 32px;
+    }
 }
 .search {
     position: absolute;

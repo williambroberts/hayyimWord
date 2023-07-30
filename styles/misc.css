@@ -79,11 +79,11 @@
   .react-theme-button {
     background-color:transparent;
     color: var(--t-1);
-    font-size: var(--font-size-16);
+    font-size: 16px;
     padding: 4px;
     border-radius: 50%;
     aspect-ratio: 1/1;
-    height: 30px;
+    height: 44px;
     transition: var(--transition-1);
     cursor: pointer;
     border: none;
@@ -92,6 +92,12 @@
     justify-content: center;
     margin: 0 0.5rem;
 
+  }
+
+  @media(pointer:coarse){
+    .react-theme-button{
+        font-size: 22px;
+    }
   }
   .react-theme-button:hover {
     background-color: var(--bg-3);

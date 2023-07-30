@@ -163,8 +163,8 @@ const Display = () => {
 
     useEffect(()=>{
      
-      let parent = document.querySelector(".text-paragraph")
-      let strongWords = parent.querySelectorAll(".verse-span-u-h")
+      let parent = document?.querySelector(".text-paragraph")
+      let strongWords = parent?.querySelectorAll(".verse-span-u-h")
       if (strongWords!==undefined){
           //console.log(strongText,strongWords,typeof(strongWords))
           let matches =""
@@ -473,7 +473,10 @@ const Display = () => {
     setIsHighlightMenu(false)
   },[isHighlightMenu])
   
-  
+  if (theText===null){
+    return <div>Loading...</div>
+  }
+ 
   
   return (
     <div className='display'>

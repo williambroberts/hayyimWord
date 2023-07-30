@@ -195,7 +195,9 @@
     border: none;
   }
   
-  
+  input[type="text"]{
+    color: var(--t-2);
+  }
   
   /* media for phone CHECK! */
   @media (width < 736px) {

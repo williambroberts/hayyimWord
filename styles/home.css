@@ -1,5 +1,5 @@
 .home-main {
-  background-color: transparent;  
+  background-color: var(--bg-3);  
 }
 .display {
     position: relative;
@@ -43,7 +43,7 @@
     cursor:pointer;
     color:var(--t-1);
     aspect-ratio: 1/1;
-    width: 40px;
+    width: 44px;
     border-radius: 50%;
     box-shadow: var(--box-shadow-1);
     background-color: var(--bg-1);
@@ -68,7 +68,7 @@
     cursor:pointer;
     color:var(--t-1);
     aspect-ratio: 1/1;
-    width: 40px;
+    width: 44px;
     border-radius: 50%;
     box-shadow: var(--box-shadow-1);
     background-color: var(--bg-1);
@@ -547,7 +547,8 @@ body{
 }
 
 .text__title {
-    @apply flex flex-row 
+    color: var(--t-2);
+    @apply flex flex-row font-medium
     items-center px-4 underline
     ;
 }

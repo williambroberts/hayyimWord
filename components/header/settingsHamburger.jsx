@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
-import { useTheme } from 'next-themes'
+
 import { BookContext } from '@/contexts/books'
 import FlexRow from '../setup/flexRow'
 import { v4 as uuidv4 } from 'uuid'
@@ -13,8 +13,9 @@ import IconPlusCircle from '../icons/action/plus'
 import IconMinusCircle from '../icons/action/minus'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import ResetPasswordButton from '../auth/resetButton'
+import { ReactThemeContext } from '../theme/themeReact/reactThemeProvider'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
-    const { theme, setTheme } = useTheme()
+    const {theme,switchTheme,setTheme}=useContext(ReactThemeContext)
     const {user}=useContext(IsAUserLoggedInContext)
     const {globalFontSize,setGlobalFontSize,setGlobalLineHeight,globalLineHeight,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
