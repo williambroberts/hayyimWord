@@ -46,7 +46,7 @@
     width: 44px;
     border-radius: 50%;
     box-shadow: var(--box-shadow-1);
-    background-color: var(--bg-1);
+    background-color: var(--bg-3);
     transition: var(--transition-1);
     /* z-index: 1; */
     transform: translate(50%,0);
@@ -71,7 +71,7 @@
     width: 44px;
     border-radius: 50%;
     box-shadow: var(--box-shadow-1);
-    background-color: var(--bg-1);
+    background-color: var(--bg-3);
     transition: var(--transition-1);
     /* z-index: 1; */
     transform: translate(-50%,0);
