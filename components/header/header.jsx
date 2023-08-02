@@ -1,7 +1,6 @@
 "use client"
 import React, {useEffect,useState,useContext} from 'react'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
-import ThemeButton from '../theme/themeButton'
 import chaptersAndVerses from "../../app/api/bible/chaptersAndVerses.json"
 import { usePathname } from 'next/navigation'
 import Hamburger from './hamburger'

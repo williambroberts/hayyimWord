@@ -7,10 +7,7 @@ const Custom404 =  () => {
   
   useEffect(()=>{
     setTimeout(()=>{
-        //router.push("/")
-      window.history.back()
-        //redirect("/")
-       // router.redirect("/")
+      window.location.assign("/")
     },1000)
   },[])
  

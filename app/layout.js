@@ -1,4 +1,3 @@
-import ProviderForTheme from "@/components/theme/themeProvider"
 import "../styles/globals.css"
 import "../styles/home.css"
 import "../styles/auth.css"
@@ -37,7 +36,7 @@ export default function RootLayout({ children }) {
 
        
        
-      {/* <ProviderForTheme> */}
+     
         <IsAUserLoggedInProvider>
           <FireBooksProvider>
 
@@ -64,8 +63,7 @@ export default function RootLayout({ children }) {
           </NotificationProvider>
           </FireBooksProvider>
         </IsAUserLoggedInProvider>
-      {/* </ProviderForTheme> */}
-      
+    
         
         </ReactThemeProvider>
         </body>
