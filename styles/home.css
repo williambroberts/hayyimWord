@@ -14,7 +14,8 @@
     width:min(100%,680px);
     /* color:var(--t-1); */
     height: 100%;
-    background:linear-gradient(to right, #005aa7, #fffde4);
+    transition: var(--transition-1);
+    background:linear-gradient(to right, var(--t-4), var(--bg-4));
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
@@ -26,7 +27,17 @@
     background-color: var(--bg-3);
     box-shadow: var(--box-shadow-1);
 }
+.display__loader>div{
+ display: flex ;
+ align-items: center;
+ flex-direction: column;
 
+}
+.display__loader__pre{
+    font-size: 24px;
+    text-decoration: underline;
+  
+}
 @keyframes load {
     0% {
         opacity: 0;
