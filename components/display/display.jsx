@@ -476,7 +476,7 @@ const Display = () => {
   
   if (theText===null){
     return <div className='display__loader'>
-      <div>
+      <div className=''>
       <pre className='display__loader__pre'>Hayyim Word</pre>
         <pre className='display__loader__pre'>חיים</pre>
       </div>

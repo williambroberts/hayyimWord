@@ -14,7 +14,7 @@
     width:min(100%,680px);
     /* color:var(--t-1); */
     height: 100%;
-    transition: var(--transition-1);
+    transition: all 0.1s ease-in-out 0s;
     background:linear-gradient(to right, var(--t-4), var(--bg-4));
     background-clip: text;
     -webkit-background-clip: text;
