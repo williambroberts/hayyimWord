@@ -2,10 +2,15 @@ import { useEffect,useState } from "react"
 
 export function useLocalStorage(key,initialValue){
     const [value,setValue]=useState(()=>{
-        let JSONvalue = localStorage.getItem(key)
-        console.log(JSONvalue,typeof(JSONvalue))
-        if (JSONvalue===null) {return initialValue}
-        return JSON.parse(JSONvalue)
+        try{
+            let JSONvalue = localStorage.getItem(key)
+            console.log(JSONvalue,typeof(JSONvalue))
+            if (JSONvalue===null) {return initialValue}
+            return JSON.parse(JSONvalue)
+        }catch (err){
+            return initialValue
+        }
+        
     })
 
     useEffect(()=>{
