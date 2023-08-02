@@ -8,7 +8,33 @@
     background-color: var(--bg-1);
     box-shadow: var(--box-shadow-1);
 }
+.display__loader {
+    animation: load 1s ease-in-out 0s 1 normal forwards;
+    position: relative;
+    width:min(100%,680px);
+    /* color:var(--t-1); */
+    height: 100%;
+    background:linear-gradient(to right, #005aa7, #fffde4);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    @apply flex
+    flex-auto opacity-0
+    flex-col items-center
+    justify-center;
+    padding: 1rem 0.0rem;
+    background-color: var(--bg-3);
+    box-shadow: var(--box-shadow-1);
+}
 
+@keyframes load {
+    0% {
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 .text-paragraph {
     max-width: 70ch;
     color: var(--t-1);

@@ -182,7 +182,7 @@ const Display = () => {
      
     },[strongText])
     const handleLeft = async ()=>{
-
+      setTheText(null)
       if (startVerse!==-1){
         setStartVerse(-1)
       }
@@ -202,6 +202,7 @@ const Display = () => {
     }
 
     const handleRight = ()=>{
+      setTheText(null)
       if (startVerse!==-1){
         setStartVerse(-1)
       }
@@ -474,7 +475,10 @@ const Display = () => {
   },[isHighlightMenu])
   
   if (theText===null){
-    return <div>Loading...</div>
+    return <div className='display__loader'>
+        <pre>Hayyim Word...</pre>
+
+    </div>
   }
  
   
