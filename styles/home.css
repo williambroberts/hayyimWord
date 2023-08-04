@@ -38,6 +38,15 @@
     text-decoration: underline;
   
 }
+.display__loader__icon {
+    /* color: var(--t-3); */
+    /* position: relative;
+    background:linear-gradient(to right, var(--t-4), var(--bg-4));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-color: var(--bg-3); */
+}
 @keyframes load {
     0% {
         opacity: 0;

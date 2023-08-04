@@ -52,6 +52,23 @@
     --theme2:#F17881;
     --bg-b:#1c1c1c79;
   }
+  [data-theme='sand'] {
+    --invert:0;
+
+
+    --bg-1:#fffeee;
+    --bg-2:#fbfae5;
+    --bg-3: #f7f5db;
+    --bg-4: #f3f0d1;
+
+    --t-1:#000000;
+    --t-2:#38393B;
+    --t-3:#898E96;
+    --t-4:#989EA6;
+    --theme:#939071;
+    --theme2:#fef8bb;
+    --bg-b:#1c1c1c79;
+  }
   [data-theme='sepia'] {
     --invert:0;
 

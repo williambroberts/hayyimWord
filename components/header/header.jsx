@@ -8,6 +8,7 @@ import Search from './search'
 import { BookContext } from '@/contexts/books'
 import IconMagnify from '../icons/action/mag'
 import ReactThemeButton from '../theme/themeReact/reactThemeButton'
+import IconBxMenuAltLeft from '../icons/menu2'
 const Header = () => {
   const pathname = usePathname()
  // console.log(pathname,"pathname")
@@ -73,7 +74,7 @@ const Header = () => {
   return (
   <header className='header'>
     <nav className='header-nav'>
-    <span className='header-menu' onClick={()=>setIsHamburger((prev)=>true)}>☰</span>  
+    <span className='header-menu' onClick={()=>setIsHamburger((prev)=>true)}><IconBxMenuAltLeft/></span>  
 
    {pathname==="/"? <span className='header-book' onClick={()=>handleOpenToChapter()}
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}

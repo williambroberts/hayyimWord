@@ -17,6 +17,8 @@ import ProgressBible from '../header/progress';
 import LoadingComponent from '../loading/loading';
 import { getRandomNumber } from '@/app/ClientFunctions';
 import HighlightHamburger from './HighlightHamburger';
+import IconCrossCircled from '../icons/action/cross';
+import IconCrossOutline from '../icons/cross';
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -476,9 +478,13 @@ const Display = () => {
   
   if (theText===null){
     return <div className='display__loader'>
-      <div className=''>
+      <div className='display__loader__arc'>
+        <pre
+        className='display__loader__icon'
+        ><IconCrossOutline/></pre>
       <pre className='display__loader__pre'>Hayyim Word</pre>
         <pre className='display__loader__pre'>חיים</pre>
+
       </div>
      
 

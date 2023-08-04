@@ -652,6 +652,24 @@ input[type="range"]{
 .theme-button-rose.checked-light {
     outline: 3px solid #F17881;
 }
+.theme-button-sand {
+    width:50px ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--bg-4);
+    color:#38393B;
+    background-color:#fef8bb;
+    font-size: var(--font-size-14);
+    cursor: pointer;
+    box-shadow: var(--box-shadow-1);
+}
+.theme-button-sand.checked-light {
+    outline: 3px solid var(--palegreen);
+    border-color: var(--t-2);
+}
 .theme-button-light.checked-light {
     outline: 3px solid var(--paleblue);
 }
