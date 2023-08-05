@@ -80,7 +80,7 @@ const Header = () => {
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}
 
     <span className='header-theme'><ReactThemeButton/></span>
-    {/* <span className=''><ReactThemeButton/></span> */}
+   
    
    {pathname==="/"? <span className='header-search'
     onClick={()=>setIsSearch((prev)=>true)}>
