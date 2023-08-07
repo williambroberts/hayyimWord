@@ -20,11 +20,12 @@ import IconSettingsSharp from '../icons/pages/settings';
 import GetText from './getText';
 import IconHistoryTwentyFour from '../icons/pages/history';
 import HistoryHamburger from './historyHamburger';
+import { useReactThemeContext } from '../theme/themeReact/reactThemeProvider';
 
 const Hamburger = ({setIsHamburger,isHamburger}) => {
   const {user} = useContext(IsAUserLoggedInContext)
   const [numOfVersesInOpenChapter,SetNumOfVersesInOpenChapter]=useState(1)
- 
+ const {themeColor}=useReactThemeContext()
   const {setOpenBookIndex,openBookIndex,
     openChapterIndex,setOpenChapterIndex,isNote,setIsNote,
     isChaptersMenuOpen,setIsChaptersMenuOpen,setIsHistory,
@@ -46,10 +47,10 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
     setIsVersesMenuOpen(false)
   }
   return (
-    <div className={`hamburger ${isHamburger? "open":""} `}>
+    <div className={`hamburger ${isHamburger? "open":""} ${themeColor}`}>
       <span className='hamburger-title'>Hayyim Word חיים </span>
      
-        <div className='hamburger-link-div'>
+        <div className={`hamburger-link-div ${themeColor}`}>
        
           <HamburgerItem link={"/"} text={"Home"} icon={<IconHome/>} setIsHamburger={setIsHamburger}/>
           

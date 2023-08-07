@@ -86,6 +86,77 @@
     --theme2:#315788;
     --bg-b:#1c1c1c79;
   }
+
+
+  .red {
+    color: #f2f2f2;
+    background-color:var(--frenchred) ;
+  }
+  .redText {
+    color: var(--frenchred);
+    background-color: transparent;
+  }
+  .orange {
+    color: #f2f2f2;
+    background-color:var(--orange) ;
+  }
+
+  .orangeText {
+    color: var(--orange);
+    background-color: transparent;
+  }
+  .yellow {
+    color: #f2f2f2;
+    background-color:var(--yellow2) ;
+  }
+  .yellowText{
+    color: var(--yellow2);
+    background-color: transparent;
+  }
+  .green {
+    color: #f2f2f2;
+    background-color:var(--palegreen) ;
+  }
+  .greenText {
+    color: var(--green);
+    background-color: transparent;
+  }
+  .blue {
+    color: #f2f2f2;
+    background-color:var(--blue2) ;
+  }
+
+  .blueText {
+    color: var(--blue2);
+    background-color: transparent;
+  }
+  .purple {
+    color: #f2f2f2;
+    background-color:var(--purple) ;
+  }
+  .purpleText {
+    color:var(--purple3);
+    background-color:transparent;
+  }
+  .grey {
+    color: #f2f2f2;
+    background-color: #7c7f82;
+  }
+
+  .greyText {
+    color: #393939;
+    background-color: transparent;
+  }
+
+  .default {
+    color: #f2f2f2;
+    background-color: var(--navy);
+  }
+
+  .defaultText {
+    color: var(--navy);
+    background-color: transparent;
+  }
   *  {
     padding:0px;
     margin:0px;
@@ -293,3 +364,13 @@
     content: "";
     background-color: var(--bg-2);
   }
+.parent > * {
+  transition: var(--transition-1);
+}
+.parent:hover >*{
+  opacity: 0.6;
+}
+
+.parent:hover>*:hover{
+  opacity: 1;
+}

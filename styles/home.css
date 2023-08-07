@@ -68,7 +68,7 @@
     padding-bottom: 200px;
 }
 .text-paragraph-verse-number {
-    color: var(--blue2);
+    
     font-weight: 500;
     font-size: var(--font-size-16);
     white-space: pre-wrap;

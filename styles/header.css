@@ -44,7 +44,7 @@
     position: absolute;
     top: 0px;
     left: 0px;
-    background-color: var(--navy);
+   
       display: flex;
       align-items:center;
       justify-content: flex-start;  
@@ -347,7 +347,7 @@ width: 100%;
     gap:1rem;
     top: 0px;
     /* z-index: 1; */
-    background-color: var(--navy);
+   
     box-shadow: var(--box-shadow-1);
     padding: 0.5rem var(--hamburger-x-padding);
     box-sizing: border-box;
@@ -834,4 +834,13 @@ input[type="range"]{
     flex-direction: column;
     flex-flow: column-reverse;
     gap: 0.5rem;
+}
+
+.color__button {
+    width: 40px;
+    height: 40px;
+    border: 1px solid #38393B;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
 }

@@ -5,7 +5,7 @@ import React, { createContext,useContext,useState } from 'react'
 const ThemeContext = createContext(undefined)
 const ThemeProvider = ({children}) => {
     const [theme,setTheme]=useLocalStorage("theme","light")
-    const [color,setColor]=useLocalStorage("color","blue")
+    const [themeColor,setThemeColor]=useLocalStorage("color","blue")
     
     const handleColor=(value=theme)=>{
         if(value){
@@ -15,7 +15,7 @@ const ThemeProvider = ({children}) => {
     }
     
     const ThemeValues = {
-        color:color,handleColor:handleColor,
+        themeColor:themeColor,setThemeColor:setThemeColor,
         theme:theme,setTheme:setTheme
     }
     

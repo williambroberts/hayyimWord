@@ -11,14 +11,15 @@ import IconBasic_notebook from '../icons/note'
 import Link from 'next/link'
 import getText from '@/app/api/bible/getText'
 import IconNotes from '../icons/note2'
-
+import { useReactThemeContext } from '../theme/themeReact/reactThemeProvider';
 
 import ProgressBible from '../header/progress';
 import LoadingComponent from '../loading/loading';
 import { getRandomNumber } from '@/app/ClientFunctions';
 import HighlightHamburger from './HighlightHamburger';
-import IconCrossCircled from '../icons/action/cross';
+
 import IconCrossOutline from '../icons/cross';
+
 
 const Display = () => {
     //const [chapter,setChapter]=useState(null)
@@ -33,13 +34,14 @@ const Display = () => {
     const [highlights,setHighlights] = useState(null)
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
+    const {themeColor}=useReactThemeContext()
     const [mounted,setMounted]=useState(false)
     const [pureText,setPureText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
     const [title,setTitle]=useState(null)
     const [firebaseHighlightsColors,setFirebaseHighlightsColors]=useState(null)
     const [firebaseHighlightsIds,setFirebaseHighlightsIds]=useState(null)
-   const [isDrag,setIsDrag]=useState(false)
+
     const {setOpenBookIndex,openBookIndex,scrollChangeNeeded,globalLineHeight,
         openChapterIndex,setOpenChapterIndex,globalFontSize,isNote,setIsNote,strongText,setStrongText,
         wordsHighlighted,setWordsHighlighted,isSearch,theText,displayTitle,isStrong,setStrongEng,
@@ -47,7 +49,7 @@ const Display = () => {
        selectedWords,setSelectedWords } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)
         const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
-        const [dragStartAndEnd,setDragStartAndEnd]=useState({start:"",end:""})
+      
         const [noteids,setNoteids]=useState(null)
         useEffect(()=>{
           if (!isSearch){
@@ -524,7 +526,7 @@ const Display = () => {
       id={`text-span${index}`} > 
       <span 
       
-      className='text-paragraph-verse-number' style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
+      className={`text-paragraph-verse-number ${themeColor}Text`} style={{fontSize:`${globalFontSize}px`}} id={`verse${theText[index].id}-0`}>{item.verse}  
       {noteids?.includes(theText[index].exactId)? <abbr className='text-span-notebook' onClick={()=>handleNoteOpen(index)} title='view your note'><IconNotes/></abbr>:" "}</span>
       
      

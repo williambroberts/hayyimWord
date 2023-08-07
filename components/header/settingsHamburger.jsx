@@ -13,9 +13,9 @@ import IconPlusCircle from '../icons/action/plus'
 import IconMinusCircle from '../icons/action/minus'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import ResetPasswordButton from '../auth/resetButton'
-import { ReactThemeContext } from '../theme/themeReact/reactThemeProvider'
+import { ReactThemeContext, useReactThemeContext } from '../theme/themeReact/reactThemeProvider'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
-    const {theme,switchTheme,setTheme}=useContext(ReactThemeContext)
+    const {theme,setTheme,setThemeColor,themeColor}=useReactThemeContext()
     const {user}=useContext(IsAUserLoggedInContext)
     const {globalFontSize,setGlobalFontSize,setGlobalLineHeight,globalLineHeight,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
@@ -113,18 +113,44 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                 </FlexRow>
 
             </div>
-           {/* <div className='translation-container'>
-            <label htmlFor='bolls-select'>Text translation</label>
-                <select className='translation-select' name='bolls-select' onChange={(e)=>setBollsTranslation(e.target.value)}>
-                    {BollsTranslations.map((item)=> (<option value={item} key={uuidv4()} className='translation-option' selected={item===bollsTranslation}>{item}</option>) )}
-                </select>
-           </div> */}
-           {/* <div className='translation-container'>
-            <label htmlFor='search-select'>Search translation</label>
-                <select className='translation-select' name='search-select' onChange={(e)=>setSearchTranslation(e.target.value)}>
-                    {SearchTranslations.map((item)=> (<option value={item[0]} key={uuidv4()} className='translation-option' selected={item[0]===searchTranslation}>{item[1].shortname}</option>) )}
-                </select>
-           </div> */}
+          <div className='flex flex-col w-full gap-2 px-3 py-2'>
+                <div className='grid grid-cols-4 w-full gap-2 parent'>
+                    <button
+                    className='color__button red'
+                    onClick={()=>setThemeColor("red")}
+                    ></button>
+                    <button
+                    className='color__button orange'
+                    onClick={()=>setThemeColor("orange")}
+                    ></button>
+                    <button
+                    className='color__button yellow'
+                    onClick={()=>setThemeColor("yellow")}
+                    ></button>
+                    <button
+                    className='color__button green'
+                    onClick={()=>setThemeColor("green")}
+                    ></button>
+                
+                    <button
+                    className={`color__button blue`}
+                    onClick={()=>setThemeColor("blue")}
+                    ></button>
+                    <button
+                    className='color__button purple'
+                    onClick={()=>setThemeColor("purple")}
+                    ></button>
+                    <button
+                    className='color__button grey'
+                    onClick={()=>setThemeColor("grey")}
+                    ></button>
+                    <button
+                    className='color__button default'
+                    onClick={()=>setThemeColor("default")}
+                    ></button>
+                </div>
+          </div>
+
            {user===null?"":
            <div className='reset-password-container'>
             Need to reset your password? <ResetPasswordButton/></div>
