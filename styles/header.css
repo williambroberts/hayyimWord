@@ -86,14 +86,14 @@
 }
  .hamburger-item-icon {
     font-size: var(--font-size-16);
-    color: var(--white);
+    /* color: var(--white); */
     display: flex;
     align-items: center;
 
 }
 .hamburger-item-text {
     font-size: var(--font-size-16);
-    color: var(--white);
+    /* color: var(--white); */
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--grey2);
@@ -123,7 +123,7 @@
     font-weight: 400;
 }
 .header-book {
-    color: var(--theme);
+   
     font-size: var(--font-size-16);
     font-weight: 500;
     position: absolute;
@@ -145,7 +145,7 @@
 
 @media(pointer:coarse){
     .header-search{
-        font-size: 24px;
+        font-size: 18px;
     }
 }
 .search {
@@ -458,7 +458,7 @@ width: 100%;
 }
 
 .settings-name {
-    color: var(--white);
+    /* color: var(--white); */
     font-size: var(--font-size-16);
     font-weight: 400;
     cursor: pointer;
@@ -721,7 +721,7 @@ input[type="range"]{
     
     width: 100%;
     font-size: var(--font-size-16);
-    padding: 0.125rem;
+    padding: 0.125rem 1.6rem;
     color: var(--t-3);
 }
 
@@ -837,10 +837,14 @@ input[type="range"]{
 }
 
 .color__button {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #38393B;
+    margin: 0 auto;
+    width: 32px;
+    height: 32px;
+    border: 1px solid whitesmoke;
     border-radius: 6px;
     cursor: pointer;
     position: relative;
+}
+.color__button.selected {
+    outline: 3px solid #998B89;
 }

@@ -104,7 +104,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                <button className='line-height-plus'  onClick={()=>handlePlusLineHeight()}><IconPlusCircle/></button>
            </div>
             <div className='color-theme-container'>
-                <span>Color Theme</span>
+                <div className='w-full'>Theme</div>
                 <FlexRow gap={"1rem"}>
                     <span className={`theme-button-light ${theme==="light"? "checked-light":""}`} onClick={()=>setTheme("light")}>Light</span>
                     <span className={`theme-button-dark  ${theme==="dark"? "checked-dark":""}`} onClick={()=>setTheme("dark")}>Dark</span>
@@ -113,39 +113,45 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                 </FlexRow>
 
             </div>
-          <div className='flex flex-col w-full gap-2 px-3 py-2'>
-                <div className='grid grid-cols-4 w-full gap-2 parent'>
+
+          <div className='flex flex-col
+           bg-[#2b2b2b] 
+          w-full gap-2 px-3 py-2'>
+            <span>Color Theme</span>
+                <div className='grid 
+               items-center
+                grid-cols-8 w-full gap-1 parent'>
                     <button
-                    className='color__button red'
+                     className={`color__button red ${themeColor==="red"?"selected":""}`}
                     onClick={()=>setThemeColor("red")}
                     ></button>
                     <button
-                    className='color__button orange'
+                    className={`color__button orange ${themeColor==="orange"?"selected":""}`}
                     onClick={()=>setThemeColor("orange")}
                     ></button>
                     <button
-                    className='color__button yellow'
+                     className={`color__button yellow ${themeColor==="yellow"?"selected":""}`}
                     onClick={()=>setThemeColor("yellow")}
                     ></button>
                     <button
-                    className='color__button green'
+                     className={`color__button green ${themeColor==="green"?"selected":""}`}
                     onClick={()=>setThemeColor("green")}
                     ></button>
                 
                     <button
-                    className={`color__button blue`}
+                    className={`color__button blue ${themeColor==="blue"?"selected":""}`}
                     onClick={()=>setThemeColor("blue")}
                     ></button>
                     <button
-                    className='color__button purple'
+                     className={`color__button purple ${themeColor==="purple"?"selected":""}`}
                     onClick={()=>setThemeColor("purple")}
                     ></button>
                     <button
-                    className='color__button grey'
+                    className={`color__button grey ${themeColor==="grey"?"selected":""}`}
                     onClick={()=>setThemeColor("grey")}
                     ></button>
                     <button
-                    className='color__button default'
+                     className={`color__button default ${themeColor==="default"?"selected":""}`}
                     onClick={()=>setThemeColor("default")}
                     ></button>
                 </div>

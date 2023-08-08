@@ -90,40 +90,40 @@
 
   .red {
     color: #f2f2f2;
-    background-color:var(--frenchred) ;
+    background-color:var(--red-2) ;
   }
   .redText {
-    color: var(--frenchred);
+    color: var(--red);
     background-color: transparent;
   }
   .orange {
     color: #f2f2f2;
-    background-color:var(--orange) ;
+    background-color:var(--sunset) ;
   }
 
   .orangeText {
-    color: var(--orange);
+    color: var(--sunset);
     background-color: transparent;
   }
   .yellow {
-    color: #f2f2f2;
+    color: #1c1c1c;
     background-color:var(--yellow2) ;
   }
   .yellowText{
-    color: var(--yellow2);
+    color: var(--yellow);
     background-color: transparent;
   }
   .green {
-    color: #f2f2f2;
+    color: #1c1c1c;
     background-color:var(--palegreen) ;
   }
   .greenText {
-    color: var(--green);
+    color: var(--darkgreen);
     background-color: transparent;
   }
   .blue {
-    color: #f2f2f2;
-    background-color:var(--blue2) ;
+    color: #1c1c1c;
+    background-color:var(--paleblue) ;
   }
 
   .blueText {
@@ -190,7 +190,7 @@
     --red:#ff7842; 
     --verypalered: #ff78424b;
     --red-2:#dc2626;
-   --yellow:#ffd908;
+   --yellow:#e0be00;
    --yellow2:#FFF36D;
    --verypaleyellow2:#fff36d44;
     --bg-dt:#1c1c1cf2;

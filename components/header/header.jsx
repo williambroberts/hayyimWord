@@ -9,6 +9,7 @@ import { BookContext } from '@/contexts/books'
 import IconMagnify from '../icons/action/mag'
 import ReactThemeButton from '../theme/themeReact/reactThemeButton'
 import IconBxMenuAltLeft from '../icons/menu2'
+import { useReactThemeContext } from '../theme/themeReact/reactThemeProvider'
 const Header = () => {
   const pathname = usePathname()
  // console.log(pathname,"pathname")
@@ -21,7 +22,7 @@ const Header = () => {
     } = useContext(BookContext)
     const {user}=useContext(IsAUserLoggedInContext)
   const [isHamburger,setIsHamburger]=useState(false)
-  
+  const {themeColor}=useReactThemeContext()
   const [filteredData,setFilteredData]=useState(null)
   const handleMenu = ()=>{
     setIsHamburger(false)
@@ -76,7 +77,7 @@ const Header = () => {
     <nav className='header-nav'>
     <span className='header-menu' onClick={()=>setIsHamburger((prev)=>true)}><IconBxMenuAltLeft/></span>  
 
-   {pathname==="/"? <span className='header-book' onClick={()=>handleOpenToChapter()}
+   {pathname==="/"? <span className={`header-book ${themeColor}Text`} onClick={()=>handleOpenToChapter()}
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}
 
     <span className='header-theme'><ReactThemeButton/></span>

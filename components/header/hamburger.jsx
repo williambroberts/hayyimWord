@@ -60,8 +60,8 @@ const Hamburger = ({setIsHamburger,isHamburger}) => {
        {user!==null? <HamburgerItem link={"/highlights"} text={"Highlights"} icon={<IconHighlight/>} setIsHamburger={setIsHamburger}/>
         :<HamburgerItem link={"/signup"} text={"Sign up"} icon={<IconCreate/>} setIsHamburger={setIsHamburger}/> }
          
-          <div className='settings-name' onClick={()=>setIsSettings(true)}> <IconSettingsSharp/> Settings</div>
-          <div className='settings-name' onClick={()=>setIsHistory(true)}> <IconHistoryTwentyFour/> History</div>
+          <div className={`settings-name ${themeColor}`} onClick={()=>setIsSettings(true)}> <IconSettingsSharp/> Settings</div>
+          <div className={`settings-name ${themeColor}`} onClick={()=>setIsHistory(true)}> <IconHistoryTwentyFour/> History</div>
         </div>
         <span className='hamburger-title'>Books of the bible</span>
         <hr className='hamburger-hr'/>

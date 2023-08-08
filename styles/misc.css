@@ -96,7 +96,7 @@
 
   @media(pointer:coarse){
     .react-theme-button{
-        font-size: 22px;
+        font-size: 18px;
     }
   }
   .react-theme-button:hover {
