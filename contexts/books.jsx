@@ -54,27 +54,13 @@ const BookProvider = ({children}) => {
     const [totalPages,setTotalPages]=useState(null)
     const [reObserve,setReObserve]=useState(false)
     const [reGetStrongs,setReGetStrongs]=useState(false)
-  useEffect(()=>{
-    console.log("new search translation will be",searchTranslation)
-  },[searchTranslation])
-// useEffect(()=>{
-//   const fetchText =async ()=>{
-//     let reference = chaptersAndVerses[openBookIndex].shortname+parseInt(openChapterIndex+1)
-//     let data = await getText("kjv_strongs",reference)
-//     setScrollChangeNeeded((prev)=>!prev)
-//     setIsChaptersMenuOpen(false)
-//      setIsVersesMenuOpen(false)
-//      //🦧 history component WIll!
-//   setTheText(data.results.kjv_strongs)
-//    console.log(data.results.kjv_strongs)
-//   }
-//   fetchText()
-// },[])
+
+
 useEffect(()=>{
   const fetchVerse = async (reference) =>{
     const data = await getVerse("kjv",reference)
     const toAdd = data?.results.kjv[0]
-    console.log(toAdd,"toAdd",data)
+    //console.log(toAdd,"toAdd",data)
       try {
       let histroyRaw = localStorage.getItem("history")
       let history = JSON.parse(histroyRaw)
@@ -100,20 +86,16 @@ useEffect(()=>{
 
 
   }
-  console.log(startVerse,"startVerse")
+  //console.log(startVerse,"startVerse")
   if (startVerse!==-1 && startVerse!==undefined){
     //add current to history
     let reference = chaptersAndVerses[openBookIndex].shortname+(openChapterIndex+1)+":"+(startVerse)
-    console.log(reference,"verse ref",openBookIndex,openChapterIndex,startVerse)
+    //console.log(reference,"verse ref",openBookIndex,openChapterIndex,startVerse)
     fetchVerse(reference)
   
   }
 },[openBookIndex,openChapterIndex,startVerse])
-  useEffect(()=>{
-      console.log("isNote",isNote,isStrong)
-      
-      
-  },[isSearch])
+ 
   useEffect(()=>{
     setIsSearchChart(false)
     //get new strong data
@@ -122,11 +104,11 @@ useEffect(()=>{
         const data = await getStrong(strongText)
         const superData = await superGetStrong(strongText)
         if (superData!==undefined){
-          console.log("strnong super",superData.results[0].entry)
+          //console.log("strnong super",superData.results[0].entry)
           setSuperStrongData((prev)=>superData.results[0])
         }
         if (data!==undefined){
-          console.log("strong data",data[0].lexeme)
+         // console.log("strong data",data[0].lexeme)
           setStrongData((prev)=> data[0])
         }
       }catch(err){
@@ -144,7 +126,7 @@ useEffect(()=>{
         setSearchData((prev)=> {return Object.values(data?.results)[0]} )
         setSearchFound(data.paging.total)
         setTotalPages(data.paging.last_page)
-        console.log(data.paging.total,data.paging.last_page)
+        //console.log(data.paging.total,data.paging.last_page)
         setPage(1)
         setReObserve((prev)=>prev)
         setIsStrong(true)

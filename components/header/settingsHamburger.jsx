@@ -117,7 +117,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
           <div className='flex flex-col
            bg-[#2b2b2b] 
           w-full gap-2 px-3 py-2'>
-            <span>Color Theme</span>
+            <span className='text-white'>Color Theme</span>
                 <div className='grid 
                items-center
                 grid-cols-8 w-full gap-1 parent'>

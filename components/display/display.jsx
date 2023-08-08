@@ -34,7 +34,7 @@ const Display = () => {
     const [highlights,setHighlights] = useState(null)
     const [noUserALert,setNoUserAlert]=useState(false)
     const [alertText,setAlertText]=useState(null)
-    const {themeColor}=useReactThemeContext()
+   
     const [mounted,setMounted]=useState(false)
     const [pureText,setPureText]=useState(null)
     const [textArrays,setTextArrays]=useState(null)
@@ -49,7 +49,7 @@ const Display = () => {
        selectedWords,setSelectedWords } = useContext(BookContext)
         const {user}=useContext(IsAUserLoggedInContext)
         const {firebaseHighlights,setFirebaseHighlights,firebaseNotes,setFirebaseNotes} = useContext(DataContext)
-      
+        const {themeColor}=useReactThemeContext()
         const [noteids,setNoteids]=useState(null)
         useEffect(()=>{
           if (!isSearch){
@@ -556,10 +556,10 @@ const Display = () => {
         )}</p>
        
         <div className='turner-container'>
-           <span className='turner-left' onClick={()=>handleLeft()} 
-        style={{display:` ${openBookIndex+openChapterIndex===0? "none":"flex"}  `}}>❮</span>
-        <span className='turner-right'onClick={()=>handleRight()} 
-        style={{display:` ${openBookIndex===65 && openChapterIndex===21? "none":"flex"}  `}}>❯</span>
+           <button className='turner-left' onClick={()=>handleLeft()} 
+        style={{display:` ${openBookIndex+openChapterIndex===0? "none":"flex"}  `}}>❮</button>
+        <button className='turner-right'onClick={()=>handleRight()} 
+        style={{display:` ${openBookIndex===65 && openChapterIndex===21? "none":"flex"}  `}}>❯</button>
         </div>
        
     
