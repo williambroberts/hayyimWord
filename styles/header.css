@@ -848,3 +848,49 @@ input[type="range"]{
 .color__button.selected {
     outline: 3px solid #998B89;
 }
+
+.reset__settings {
+    color: var(--t-1);
+    font-size: var(--font-size-14);
+    border-bottom:1px solid var(--bg-4) ;
+    @apply flex flex-row items-center
+    p-2 w-full gap-2
+}
+
+.reset__settings > button {
+    border: 1px solid var(--bg-4);
+    font-size: 18px;
+    cursor: pointer;
+    @apply flex flex-row flex-nowrap
+    gap-2 items-center shadow
+    w-10 h-10 rounded-full justify-center
+
+}
+.reset__settings>div {
+    border: 3px solid var(--paleblue);
+    outline: 2px solid var(--palegreen);
+    /* filter: grayscale(1); */
+    animation: spin;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-fill-mode: none;
+    font-size: 18px;
+    cursor: pointer;
+    @apply flex flex-row flex-nowrap
+    gap-2 items-center shadow
+    w-10 h-10 rounded-full justify-center
+}
+@keyframes spin {
+    0%{
+       
+    }
+    50%{
+       
+    }
+    100%{
+    
+    }
+}

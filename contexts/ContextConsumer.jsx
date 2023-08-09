@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import { useTheme } from './ThemeContext'
+import { useReactThemeContext } from '@/components/theme/themeReact/reactThemeProvider'
 
 const ContextConsumer = ({children}) => {
-    const {theme,color}=useTheme()
+    const {theme,color}=useReactThemeContext()
   return (
     <section
     data-color={color}

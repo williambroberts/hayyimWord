@@ -332,14 +332,7 @@
     border-top-right-radius:4px ;
 
 }
-.text-title {
-    padding: 0.25rem 0.5rem;
-    color: var(--bg-1);
-    @apply rounded-md ml-3
-    ;
-    background-color: var(--theme);
-    font-size: var(--font-size-16);
-}
+
 .note-note-title {
     color: var(--white);
     font-size: var(--font-size-16);
@@ -593,8 +586,8 @@ body{
 }
 
 .text__title {
-    color: var(--t-2);
+    /* color: var(--t-2); */
     @apply flex flex-row font-medium
-    items-center px-4 underline
+    items-center px-4 
     ;
 }

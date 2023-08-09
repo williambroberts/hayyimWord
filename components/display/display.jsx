@@ -512,7 +512,7 @@ const Display = () => {
       text-title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
 
       </div> */}
-      <span className='text__title'>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
+      <span className={`text__title ${themeColor}Text`}>{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span>
         <p 
        
         data-id="paragraph"

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import IconArrowLeft from '../icons/navigation/arrowLeft'
 
 import { BookContext } from '@/contexts/books'
@@ -14,12 +14,29 @@ import IconMinusCircle from '../icons/action/minus'
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import ResetPasswordButton from '../auth/resetButton'
 import { ReactThemeContext, useReactThemeContext } from '../theme/themeReact/reactThemeProvider'
+import IconSettingsSharp from '../icons/pages/settings'
 const SettingsHamburger = ({isSettings,setIsSettings}) => {
     const {theme,setTheme,setThemeColor,themeColor}=useReactThemeContext()
     const {user}=useContext(IsAUserLoggedInContext)
     const {globalFontSize,setGlobalFontSize,setGlobalLineHeight,globalLineHeight,
         bollsTranslation,setBollsTranslation,searchTranslation,setSearchTranslation} = useContext(BookContext)
         const roundedLineHeight = globalLineHeight.toFixed(1)
+        const [isReset,setIsReset]=useState(false)
+        const handleReset = ()=>{
+            setIsReset(true)
+            setTheme("light")
+            setThemeColor("navy")
+            setGlobalFontSize(16)
+            setGlobalLineHeight(1.5)
+            
+        }
+        useEffect(()=>{
+            if (isReset){
+                setTimeout(() => {
+                    setIsReset(false)
+                }, 300);
+            }
+        },[isReset])
         useEffect(()=>{
             console.log(searchTranslation,"s trans")
         },[searchTranslation])
@@ -103,7 +120,9 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
               
                <button className='line-height-plus'  onClick={()=>handlePlusLineHeight()}><IconPlusCircle/></button>
            </div>
-            <div className='color-theme-container'>
+            <div 
+            aria-label="theme settings"
+            className='color-theme-container'>
                 <div className='w-full'>Theme</div>
                 <FlexRow gap={"1rem"}>
                     <span className={`theme-button-light ${theme==="light"? "checked-light":""}`} onClick={()=>setTheme("light")}>Light</span>
@@ -156,7 +175,12 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
                     ></button>
                 </div>
           </div>
-
+            <div className='reset__settings'>
+            Reset {isReset?<div><IconSettingsSharp/></div>:<button
+                onClick={()=>handleReset()}
+                aria-label='reset all'
+                > <IconSettingsSharp/></button>} 
+            </div>
            {user===null?"":
            <div className='reset-password-container'>
             Need to reset your password? <ResetPasswordButton/></div>
