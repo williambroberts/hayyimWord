@@ -13,6 +13,7 @@ import getVerse from '@/app/api/bible/getVerse'
 import { SearchStrong } from '@/app/api/bible/searchStrong'
 import { superGetStrong } from '@/app/api/bible/superGetStrong'
 import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation'
+import { useLocalStorage } from '@/hooks/hooks'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
   const pathname = usePathname()
@@ -21,13 +22,13 @@ const BookProvider = ({children}) => {
   const [selectedWords,setSelectedWords]=useState([])
   const [strongEng,setStrongEng]=useState("")
   const [isClear,setIsClear]=useState(false)
-    const [openChapterIndex,setOpenChapterIndex]=useState(0)
-    const [openBookIndex,setOpenBookIndex]=useState(0)
+    const [openChapterIndex,setOpenChapterIndex]=useLocalStorage("openChapterIndex",0)
+    const [openBookIndex,setOpenBookIndex]=useLocalStorage("openBookIndex",0)
     const [bollsTranslation,setBollsTranslation]=useState(BollsTranslations[0])
     const [searchTranslation,setSearchTranslation]=useState(SearchTranslations[0][0])
     const [isChaptersMenuOpen,setIsChaptersMenuOpen]=useState(false)
     const [isVersesMenuOpen,setIsVersesMenuOpen]=useState(false)
-   const [startVerse,setStartVerse]=useState(-1)
+   const [startVerse,setStartVerse]=useLocalStorage("startVerse",-1)
     const [theText,setTheText]=useState(null)
     const [isSettings,setIsSettings]=useState(false)
    const [displayTitle,setDisplayTitle]=useState([0,0])
