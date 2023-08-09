@@ -25,7 +25,7 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
         const handleReset = ()=>{
             setIsReset(true)
             setTheme("light")
-            setThemeColor("navy")
+            setThemeColor("default")
             setGlobalFontSize(16)
             setGlobalLineHeight(1.5)
             

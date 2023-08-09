@@ -16,8 +16,7 @@ import { SearchStrongPagnation } from '@/app/api/bible/searchStrongPagnation'
 import { useLocalStorage } from '@/hooks/hooks'
 export const BookContext = createContext()
 const BookProvider = ({children}) => {
-  const pathname = usePathname()
-  const router = useRouter()
+  
   const [wordsHighlighted,setWordsHighlighted]=useState([])
   const [selectedWords,setSelectedWords]=useState([])
   const [strongEng,setStrongEng]=useState("")

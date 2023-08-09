@@ -19,7 +19,7 @@ const SignUpForm = () => {
     const [email,setEmail]=useState()
     const [password,setPassword]=useState()
     const [confirmPassword,setConfirmPassword]=useState()
-    const router = useRouter()
+    
     const {notification,setNotification,setOpenNotification,openNotification}=useContext(IsAUserLoggedInContext)
     const handleSubmit = async(e)=>{
         e.preventDefault()
@@ -47,7 +47,7 @@ const SignUpForm = () => {
                 console.log(err,"err")
               }
 
-            router.push("/")
+              window.location.assign("/")
             return
         }
     }
@@ -87,7 +87,7 @@ const SignUpForm = () => {
 
         
 
-         router.push("/")
+   window.location.assign("/")
          
    }
  }
@@ -106,7 +106,7 @@ const SignUpForm = () => {
                 console.log(err,"err")
               }
 
-            router.push("/")
+              window.location.assign("/")
         }
         
     }
@@ -125,7 +125,7 @@ const SignUpForm = () => {
                 console.log(err,"err")
               }
 
-            router.push("/")
+              window.location.assign("/")
         }
         
     }
@@ -135,13 +135,19 @@ const SignUpForm = () => {
         <form onSubmit={(e)=>handleSubmit(e)} className='auth-form'>
 
         <label  htmlFor='sign-up-email' className='auth-label'>Email</label>
-            <input type='email' name="sign-up-email" placeholder='E-mail address' className='auth-input'
+            <input 
+            id="sign-up-email"
+            type='email' name="sign-up-email" placeholder='E-mail address' className='auth-input'
              required onChange={(e)=>setEmail(e.target.value)}/>
            <label  htmlFor='sign-up-password' className='auth-label'>Password</label>
-            <input type='password' name="sign-up-password" className='auth-input'
+            <input type='password'
+            id="sign-up-password"
+            name="sign-up-password" className='auth-input'
              placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
              <label  htmlFor='sign-up-confirm-password' className='auth-label'>Confirm password</label>
-            <input type='password' name="sign-up-confirm-password" className='auth-input'
+            <input 
+            id='sign-up-confirm-password'
+            type='password' name="sign-up-confirm-password" className='auth-input'
              placeholder='Confirm password'  required onChange={(e)=>setConfirmPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Sign up</span></button>
         </form>

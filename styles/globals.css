@@ -93,7 +93,7 @@
     background-color:var(--red-2) ;
   }
   .redText {
-    color: var(--red);
+    color: var(--red) !important;
     background-color: transparent;
   }
   .orange {
@@ -102,7 +102,7 @@
   }
 
   .orangeText {
-    color: var(--sunset);
+    color: var(--sunset) !important;
     background-color: transparent;
   }
   .yellow {
@@ -110,7 +110,7 @@
     background-color:var(--yellow2) ;
   }
   .yellowText{
-    color: var(--yellow);
+    color: var(--yellow) !important;
     background-color: transparent;
   }
   .green {
@@ -118,7 +118,7 @@
     background-color:var(--palegreen) ;
   }
   .greenText {
-    color: var(--darkgreen);
+    color: var(--darkgreen) !important;
     background-color: transparent;
   }
   .blue {
@@ -127,7 +127,7 @@
   }
 
   .blueText {
-    color: var(--blue2);
+    color: var(--blue2) !important;
     background-color: transparent;
   }
   .purple {
@@ -135,7 +135,7 @@
     background-color:var(--purple) ;
   }
   .purpleText {
-    color:var(--purple3);
+    color:var(--purple3) !important;
     background-color:transparent;
   }
   .grey {
@@ -144,7 +144,7 @@
   }
 
   .greyText {
-    color: #393939;
+    color: #393939 !important;
     background-color: transparent;
   }
 
@@ -154,7 +154,7 @@
   }
 
   .defaultText {
-    color: var(--navy);
+    color: var(--navy) !important;
     background-color: transparent;
   }
   *  {

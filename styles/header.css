@@ -123,7 +123,7 @@
     font-weight: 400;
 }
 .header-book {
-   
+    color: var(--t-1);
     font-size: var(--font-size-16);
     font-weight: 500;
     position: absolute;

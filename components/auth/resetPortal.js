@@ -2,12 +2,13 @@
 import { IsAUserLoggedInContext } from '@/contexts/authContext'
 import { resetPassword } from '@/firebase/auth/reset'
 import { useRouter } from 'next/navigation'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ReactDom from 'react-dom'
 const ResetPortal = () => {
     const {setOpenModal,setNotification}=useContext(IsAUserLoggedInContext)
-
+   
     const [email,setEmail]=useState("")
+    useEffect(()=>setDomReady(true),[])
     const handleBack = ()=>{
         setOpenModal((prev)=>false)
         //window.navigator
@@ -39,6 +40,7 @@ const ResetPortal = () => {
     </div>, 
      document.getElementById('portal')
   )
+ 
 }
 
 export default ResetPortal

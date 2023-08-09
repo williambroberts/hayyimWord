@@ -29,7 +29,7 @@ const Header = () => {
     setIsSearch(false)
     setIsSettings(false)
     if (isStrong && strongText!==null){
-      console.log(strongText,isStrong)
+      //console.log(strongText,isStrong)
       setIsNote(true)
       setIsStrong((prev)=>true)
       const myElem = document.querySelector(".note-dict")
@@ -40,7 +40,7 @@ const Header = () => {
       }
       
     }
-    console.log(isNote,isStrong,"handleMEnu",strongText)
+    //console.log(isNote,isStrong,"handleMEnu",strongText)
   }
 
  
@@ -77,7 +77,7 @@ const Header = () => {
     <nav className='header-nav'>
     <span className='header-menu' onClick={()=>setIsHamburger((prev)=>true)}><IconBxMenuAltLeft/></span>  
 
-   {pathname==="/"? <span className={`header-book ${themeColor}Text`} onClick={()=>handleOpenToChapter()}
+   {pathname==="/"? <span className={` ${themeColor}Text header-book `} onClick={()=>handleOpenToChapter()}
     >{chaptersAndVerses[displayTitle[0]].name} {displayTitle[1]+1}</span> : <span className='header-book'> {pathname.slice(1,2).toUpperCase()}{pathname.slice(2).toLowerCase()}</span>}
 
     <span className='header-theme'><ReactThemeButton/></span>

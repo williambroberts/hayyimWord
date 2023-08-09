@@ -119,10 +119,14 @@ const LoginForm = () => {
         <form onSubmit={(e)=>handleSubmit(e)} className='auth-form'>
 
             <label  htmlFor='login-email' className='auth-label'>Email <span className='auth-demo'>demo: hayyim@email.com</span></label>
-            <input type='email' name="login-email" placeholder='Email' className='auth-input'
+            <input 
+            id="login-email"
+            type='email' name="login-email" placeholder='Email' className='auth-input'
             required onChange={(e)=>setEmail(e.target.value)}/>
             <label  htmlFor='login-password' className='auth-label'>Password <span className='auth-demo'>demo: hayyim</span></label>
-            <input type='password' name="login-password" className='auth-input'
+            <input 
+            id="login-password"
+            type='password' name="login-password" className='auth-input'
             placeholder='Password'  required onChange={(e)=>setPassword(e.target.value)}/>
             <button type='submit' className='auth-button'><span className={inter.className}>Login</span></button>
         </form>
