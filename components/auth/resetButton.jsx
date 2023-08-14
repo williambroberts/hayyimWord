@@ -6,7 +6,7 @@ import ResetPortal from './resetPortal'
 const ResetPasswordButton = () => {
     const {setOpenModal,openModal}=useContext(IsAUserLoggedInContext)
     const handleClick = ()=>{
-      console.log("reset password clicked")
+     // console.log("reset password clicked")
       //open modal
       if (openModal){
         return

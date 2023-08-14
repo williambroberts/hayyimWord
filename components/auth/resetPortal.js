@@ -8,7 +8,7 @@ const ResetPortal = () => {
     const {setOpenModal,setNotification}=useContext(IsAUserLoggedInContext)
    
     const [email,setEmail]=useState("")
-    useEffect(()=>setDomReady(true),[])
+    
     const handleBack = ()=>{
         setOpenModal((prev)=>false)
         //window.navigator
