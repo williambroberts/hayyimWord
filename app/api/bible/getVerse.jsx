@@ -1,5 +1,5 @@
 export default async function getVerse(bible="kjv",reference="",whole_words=true,page_all=true,highlight=true) {
-    console.log(reference,"verse ref")
+    //console.log(reference,"verse ref")
     if (reference===""){
         return
     }
@@ -12,13 +12,13 @@ export default async function getVerse(bible="kjv",reference="",whole_words=true
       
       
     };
-      console.log("refereceing...fetching")
-    console.log(url)
+      //console.log("refereceing...fetching")
+    //console.log(url)
      const res = await fetch(url,options);
    // console.log(res,"res")
      if (!res.ok) {
-       
-       throw new Error('Failed to fetch data');
+       console.log(res)
+       //throw new Error('Failed to fetch data');
      }
      
      return res.json();
