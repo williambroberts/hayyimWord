@@ -50,7 +50,7 @@ const HighlightHamburger = ({handleClose,open,data}) => {
           await runTransaction(firestore, async (transaction) => {
             const docSnapshot = await transaction.get(useHighlightsRef);
            const highlights = [...docSnapshot.data().highlights]
-            console.log(highlights,"pre delete notes")
+            console.log(highlights,"pre delete notes",newData)
          let updatedHighlights = [...highlights]
          
           updatedHighlights.push(newData)

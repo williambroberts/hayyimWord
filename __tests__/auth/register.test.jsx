@@ -68,6 +68,8 @@ describe("reset password",()=>{
                 name: /back/i
               })
             expect(backButtonAfter).toBeInTheDocument()
+            await user.click(backButtonAfter)
+            expect(backButtonAfter).not.toBeInTheDocument()
         })
     })
     

@@ -452,15 +452,20 @@ const Display = () => {
     const theMonth=thedate.getMonth()+1
     const fulldate = theDay+"/"+theMonth+"/"+theYear
    
+    
+    let sibling = document.getElementById(newExactId)
+
+    //console.log(sibling,sibling.parentElement.id.split("text-span")[1]) 
     let newHighlightObj = {book:chaptersAndVerses[displayTitle[0]].name,
     bookid:openBookIndex+1,exactId:newExactId,
-    color:"",verse:newVerse,text:pureText[newVerse-1],
+    color:"",verse:newVerse,text:pureText[sibling?.parentElement?.id.split("text-span")[1]],
     ids:[...newHighlightIds],
     date:fulldate,chapter:displayTitle[1]+1,
   }
   setWordsHighlighted(newHighlightIds)
 
   console.log(newHighlightObj)
+ 
   setHighlightObject(newHighlightObj)
     // for (let i=0;i<pureText.length;i++){
     //   for (let j=0;j<sentences.length;j++){

@@ -1,4 +1,4 @@
-.logout-button {
+.reset-pas {
     color: var(--white);
     font-size: var(--font-size-16);
     font-weight: inheret;
@@ -182,4 +182,10 @@
     z-index: 9999;
     box-sizing: border-box;
     transform: translate(-50%,0%);
+}
+
+.logout-button {
+    font-size: var(--font-size-16);
+    @apply flex flex-row flex-nowrap gap-1
+    items-center
 }
