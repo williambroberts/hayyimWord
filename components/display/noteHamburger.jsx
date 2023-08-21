@@ -50,7 +50,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         // let textToHighLight=[...selectedWords]
         // console.log(selectedWords,"🍔🌮",exactId)
         if (exactId.includes("verse")){
-            console.log("returning")
+            //console.log("returning")
 
             return
         }
@@ -62,7 +62,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     const highlightVerse = async()=>{
            
         if (user===null){
-            console.log("no user, log in alert")
+           // console.log("no user, log in alert")
             setNoUserAlert((prev)=>true)
 
             return
@@ -71,7 +71,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         
         try {
             await updateDoc(userHighlightRef,{ "highlights": arrayUnion({exactId:exactId,color:color,verse:verse+1,book:book,chapter:chapter,text:text,bookid:openBookIndex+1,date:fulldate})})
-            console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
+            //console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
                 
             }catch (err){
             console.log(err)
@@ -82,7 +82,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
         //runtransaction  
       
         if (user===null){
-            console.log("no user, log in alert")
+           // console.log("no user, log in alert")
             setNoUserAlert((prev)=>true)
             setAlertText("highlight a verse.")
             return
@@ -100,7 +100,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
           await runTransaction(firestore, async (transaction) => {
             const docSnapshot = await transaction.get(useHighlightsRef);
            const highlights = [...docSnapshot.data().highlights]
-            console.log(highlights,"pre delete notes")
+            //console.log(highlights,"pre delete notes")
          let updatedHighlights = [...highlights]
           //let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
           updatedHighlights.push({exactId:exactId
@@ -109,12 +109,12 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             ids:[...selectedWords],
             date:fulldate})
           transaction.update(useHighlightsRef, { highlights: updatedHighlights })
-          console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
+         // console.log("added highlight ",color, `book${book} chapter ${chapter}, verse ${verse+1}, text ${text} ${fulldate}`)
           })
       
           
         } catch (error) {
-          console.error('Error rehighlightig/highlighting : ', error);
+          //console.error('Error rehighlightig/highlighting : ', error);
         } 
     }
     useEffect(()=>{
@@ -128,7 +128,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
 
     const handleSubmit =async ()=>{
         if (user===null){   
-            console.log("no user, log in alert")
+            //console.log("no user, log in alert")
            
             setNoUserAlert((prev)=>true)
              setAlertText("to take a note.")
@@ -141,7 +141,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             let myElem = document.querySelector(`#${exactId}`)
             myElem.classList.add("noted")
 
-            console.log("added note ",message,myElem)
+            //console.log("added note ",message,myElem)
             }catch (err){
             console.log(err)
             }
@@ -175,7 +175,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
 
      const handleDelete2 = async ()=>{
         if (user===null){
-            console.log("no user, log in alert")
+            //console.log("no user, log in alert")
             setNoUserAlert((prev)=>true)
             setAlertText("to delete a note.")
             return
@@ -185,17 +185,17 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
           await runTransaction(firestore, async (transaction) => {
             const docSnapshot = await transaction.get(userNoteRef);
            const notes = [...docSnapshot.data().notes]
-            console.log(notes,"pre delete notes")
+           // console.log(notes,"pre delete notes")
          
           let updatedNotes = notes.filter((item,index)=>item.exactId!==exactId)
           transaction.update(userNoteRef, { notes: updatedNotes })
-           console.log("deleted that note",message) 
+           //console.log("deleted that note",message) 
           })
           let myElem = document.querySelector(`#${exactId}`)
           myElem.classList.remove("noted")
           
         } catch (error) {
-          console.error('Error deleting note: ', error);
+          //console.error('Error deleting note: ', error);
         }
         setIsWrite(false)
         setMessage("")
@@ -203,14 +203,14 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
 
     const handleDelete = async ()=>{
         if (user===null){
-            console.log("no user, log in alert")
+            //console.log("no user, log in alert")
             setNoUserAlert((prev)=>true)
             return
         }
         const userHighlightRef = doc(firestore, 'notes', user?.uid);
         try {
             await updateDoc(userHighlightRef,{ "notes": arrayUnion({exactId:exactId,message:""})})
-            console.log("delted note ",message)
+           // console.log("delted note ",message)
                 
             }catch (err){
             console.log(err)
@@ -220,7 +220,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     }
     const handleDeleteHighlight =async ()=>{
         if (user===null){
-            console.log("no user, log in alert")
+            //console.log("no user, log in alert")
             setNoUserAlert((prev)=>true)
             setAlertText("to delete a highlight.")
             return
@@ -232,16 +232,16 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             const docSnapshot = await transaction.get(userNoteRef);
             //Transaction functions should not directly modify application state.
            const highlights = [...docSnapshot.data().highlights]
-            console.log(highlights,"pre delete highlights")
+            //console.log(highlights,"pre delete highlights")
          
           let updatedHighlights = highlights.filter((item,index)=>item.exactId!==exactId)
           transaction.update(userNoteRef, { highlights: updatedHighlights })
-           console.log("deleted that highlight",exactId,color) 
+           //console.log("deleted that highlight",exactId,color) 
           })
       
           
         } catch (error) {
-          console.error('Error deleting highlight: ', error);
+          //console.error('Error deleting highlight: ', error);
         }
     }
     const handleCopy = ()=>{
@@ -251,7 +251,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
             setIsCopied(false)
         },1000)
         
-        console.log(text,"copied")
+       // console.log(text,"copied")
 
     }
     useEffect(()=>{
@@ -263,7 +263,7 @@ const NoteHamburger = ({isNote,setIsNote,id,exactId,chapter,book,verse,isWrite,
     },[isWrite])
   const handleFoundToSearch = ()=>{
     
-    console.log(searchData?.length,"handleFOundTOsearch")
+    //console.log(searchData?.length,"handleFOundTOsearch")
     setIsSearch((prev)=>true)
     setSearchInput((prev)=>strongText)
     setIsStrong((prev)=>true)
