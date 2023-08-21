@@ -13,10 +13,7 @@ const HighlightsPage = () => {
     const {user,setUser}=useContext(IsAUserLoggedInContext)
     const [start,setStart]=useState(0)
     const pagnation = 10
-   // console.log(filteredData?.length)
-    const num = Math.floor((filteredData?.length)/pagnation)+1
-   // console.log(num)
-    //const pages = Array(num===NaN? 1:num).fill(0)
+   
     const theItems = filteredData?.slice(start,start+pagnation)
   const router=useRouter()
   useEffect(()=>{
