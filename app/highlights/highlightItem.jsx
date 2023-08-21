@@ -54,7 +54,7 @@ const HightlightItem = ({item}) => {
     <div className='note-wrapper'>
 
     
-    <div className='note-delete' onClick={()=>handleDeleteHighlight()}><IconDelete/></div>
+    <div className='note-delete ' onClick={()=>handleDeleteHighlight()}><IconDelete/></div>
     <div className='highlight-item' onClick={()=>handleGoto()}>
     <span className='note-title'>{item.book} {item.chapter}:{item.verse}
     <span className='highlight-indicator' style={{backgroundColor:item.color}}></span>

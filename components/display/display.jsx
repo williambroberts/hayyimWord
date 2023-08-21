@@ -454,11 +454,11 @@ const Display = () => {
    
     
     let sibling = document.getElementById(newExactId)
-
+    let theVerseNumber = Number(sibling?.parentElement?.id.split("text-span")[1])
     //console.log(sibling,sibling.parentElement.id.split("text-span")[1]) 
     let newHighlightObj = {book:chaptersAndVerses[displayTitle[0]].name,
     bookid:openBookIndex+1,exactId:newExactId,
-    color:"",verse:newVerse,text:pureText[sibling?.parentElement?.id.split("text-span")[1]],
+    color:"",verse:theVerseNumber+1,text:pureText[theVerseNumber],
     ids:[...newHighlightIds],
     date:fulldate,chapter:displayTitle[1]+1,
   }

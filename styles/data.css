@@ -59,7 +59,7 @@
     position: relative;
     flex: 1 1 auto;
     height: 96px;
-   
+    max-width: 32px;
     margin: 0.2rem 0.2rem 0.2rem 0rem;
 
 }
@@ -174,4 +174,18 @@
     top: 0px;
     right: 0px;
     padding: 0.125rem;
+}
+
+.pagnation__ {
+    width: min(100vw,400px);
+
+    @apply 
+    px-3 md:px-4 py-4
+    flex flex-nowrap items-center gap-4
+}
+
+.pagnation__page {
+    background-color: var(--bg-3);
+    color: var(--t-1);
+    @apply w-9 h-9 rounded-md 
 }

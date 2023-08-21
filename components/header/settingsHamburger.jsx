@@ -96,7 +96,9 @@ const SettingsHamburger = ({isSettings,setIsSettings}) => {
             console.log(globalLineHeight,"line heihgt")
         }
   return (
-    <div className={`settings ${isSettings? "open" : ""}`}>
+    <div 
+    data-theme={theme}
+    className={`settings ${isSettings? "open" : ""}`}>
         <nav className='settings-header'>
             <span className='settings-back' onClick={()=>setIsSettings(false)}><IconArrowLeft/></span>
            <span className='settings-title'>Settings</span>
