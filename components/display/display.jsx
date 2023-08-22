@@ -486,9 +486,9 @@ const Display = () => {
   if (theText===null){
     return <div className='display__loader'>
       <div className='display__loader__arc'>
-        <pre
+        {/* <pre
         className='display__loader__icon'
-        ><IconCrossOutline/></pre>
+        ><IconCrossOutline/></pre> */}
       <pre className='display__loader__pre'>Hayyim Word</pre>
         <pre className='display__loader__pre'>חיים</pre>
 
