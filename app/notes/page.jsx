@@ -32,7 +32,7 @@ const NotesPage = () => {
    <main>
     <NotesChart  setFilteredData={setFilteredData} setIsFiltered={setIsFiltered} isFiltered={isFiltered}/>
     <span className='page-stats'>Showing {theItems?.length} {firebaseNotes?.length!==1? "notes":"note"} of {firebaseNotes?.length}</span>
-    <div classNmae="page-flex">
+    <div classNmae="px-3  grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
  {theItems?.map((item)=><NoteItem key={uuidv4()} item={item}/>)}
     </div>
     <div className='pagnation__'>

@@ -53,7 +53,7 @@
     background:linear-gradient(to right, var(--t-2), var(--t-4));
     background-clip: text;
     -webkit-background-clip: text;
-    text-shadow: ;
+    /* text-shadow: ; */
   
 }
 .display__loader__icon {

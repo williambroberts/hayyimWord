@@ -54,7 +54,7 @@ const Display = () => {
         useEffect(()=>{
           if (!isSearch){
             
-            console.log("strongText,isNote,isStrong",strongText,isNote,isStrong,)
+            //console.log("strongText,isNote,isStrong",strongText,isNote,isStrong,)
           }
         },[isSearch])
         useEffect(()=>{
@@ -71,7 +71,7 @@ const Display = () => {
 
           }
           setNoteids(newids)
-          console.log(newids,"new ids")
+          //console.log(newids,"new ids")
           }else {
             setNoteids((prev)=>null)
           }
@@ -113,7 +113,7 @@ const Display = () => {
             }
             let newColors = [...firebaseColors].reverse()
             let newIDs = [...firebaseids].reverse()
-            console.log(newIDs,newColors)
+            //console.log(newIDs,newColors)
             setFirebaseHighlightsColors(newColors)
             setFirebaseHighlightsIds(newIDs)
             // const newHighlights =Array(theText?.length).fill("var(--bg-1)")
@@ -161,7 +161,7 @@ const Display = () => {
     const RemoveHighlight = ()=>{
       
         setStartVerse(-1)
-        console.log("removed highlight")
+        //console.log("removed highlight")
         
     }
 
@@ -464,7 +464,7 @@ const Display = () => {
   }
   setWordsHighlighted(newHighlightIds)
 
-  console.log(newHighlightObj)
+  //console.log(newHighlightObj)
  
   setHighlightObject(newHighlightObj)
     // for (let i=0;i<pureText.length;i++){
