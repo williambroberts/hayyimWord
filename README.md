@@ -1,5 +1,7 @@
 # Hayyim Word
 
+![Hayyim word](https://i.ibb.co/HGdpnRR/mw9-KHWWza-Bq-10.png)
+
 ### ABOUT
 
 - This `full-stack` web application allows for easy and effective study and reading of the Bible. I built this as a clone of the ***Literal word NASB Bible app*** which is an android mobile app use personally.
