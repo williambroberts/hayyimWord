@@ -1,36 +1,39 @@
-<a name="readme-top"></a>
-
 # Hayyim Word
 
-## Site link 
-  [https://hayyim-word.vercel.app/](https://hayyim-word.vercel.app/)
+### ABOUT
 
- ### Date made 🗓: 05/2023
- 
- [![hay3.png](https://i.postimg.cc/Nf17bsk2/hay3.png)](https://postimg.cc/HVkykCKT)
- 
-  ## Description 👨‍💻
-<!--   This is a Bible study and search App. It is a full stack site that offers note taking and highlight functions for users and allows for searching for keywords and phrases. It uses 2 APIs and offers different bible translations. It is fully responsive, with variable text sizes and color themes available.  -->
- This is a Bible study and search App. The app provides a comprehensive Bible study experience, enabling users to search, read, highlight, take notes, and access different translations of the Bible. 
-   <p align="right"><a href="#readme-top">back to top ☝🏼</a></p>
-<!-- Built with -->
-
-## Built With 🏗️
-
-  <p align='left'>
- <img src="https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white" />
-    <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white" />
-   <img src="https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" />
-  </p>
-  <p align="right"><a href="#readme-top">back to top ☝🏼</a></p>
-<!-- QUESTIONS -->
+- This `full-stack` web application allows for easy and effective study and reading of the Bible. I built this as a clone of the ***Literal word NASB Bible app*** which is an android mobile app use personally.
   
-## Questions ❔
+### Key features:
+- KJV Bible text with integrated Greek and Hebrew Lexicons, fetched using 2 APIs.
+- Tap on an underlined word to view Hebrew or Greek lexicon information. The application fetches all verses containing this word automatically.
+- A user can add `notes` to each word of the Bible as they study.
+- A user can `highlight` the text in multitple colors using the mouse selection.
+- The application has separate user highlights and notes pages that display an authenticated user's notes and highlights in `pagnated` grid format.
+- The highlight and note taking features have create, read, update and delete options, with `realtime updates` from `Google firebase`.
+  
+-  A user can select a passage by book, chapter and verse.
+-  Light, dark, sepia and sand `color` themes
+-  custom `text size` and `line spacing`.
+-  `Auto scrolling` to the selected verse for enhanced user experience
+-  The application saves the users passage selection history and search history for later using `local storage`
+-  The search menu allows a user to search the Bible by `keyword`, e.g. "red", by `Strong’s number`, e.g. "H8141"  or by `reference`, e.g. "1 John 3:13". The search results have `visual search filtering` using a bar chart and is uses basic pagnation.
+-  `Responsive` design for desktop, tablet and mobile devices. 
+-  The API used to fetch the english text can be found 
+[here](https://api.biblesupersearch.com/)
+here. The API used to fetch the Hebrew and Greek lexicons can be found [here](https://bolls.life/api/).
 
-If you have any questions, please reach out to me via socials or by sending an email to <a href="mailto:3williamroberts@gmail.com">3williamroberts@gmail.com</a>
+## Build 
+- **Front-end** `React`, `JavaScript` & `Next.Js` (*Framework*) & `css` & `html`
+- **Back-end** `Google Firebase`- Firebase Authentication, and database
+- **Deployment-stack** `Vercel`
+- **Testing** `React Testing Library`, `Jest`
 
-<a href="https://www.linkedin.com/in/williambroberts/" target="_blank">LinkedIn</a> | <a href="https://github.com/williambroberts" target="_blank">GitHub</a>
 
-Project Link: [https://github.com/williambroberts/hayyimWord](https://github.com/williambroberts/hayyimWord)
+### LIMITATIONS
+- the search API used limits the results to 500 at a time, so for words that occur more than this eg "God" the visual search filter data is incomplete. One solution would be to have the application fetch all the verses in multiple requests in the background and store them but not display them to avoid slowing the site down. I may implement this in the future
+### FUTURE FEATURES
+The following are some features I may add subject to time:
+- A bookmark feature to allow the user to bookmark a passage. 
 
-  <p align="right"><a href="#readme-top">back to top ☝🏼</a></p>
+
